@@ -65,27 +65,31 @@ li:first-child {
 }
 
 li:hover>.insideList {
-    display: block;
+   visibility: visible;
+   transition: 0.5s;
+   height: 500%;
 }
 
 .insideList {
-    display: none;
+    transition: 0.5s;
+    visibility: hidden;
     position: absolute;
     top: 100%;
     left: 0;
     margin-top: 5px;
     border-radius: 10px;
     background-color: #FFF;
-}
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    height: 0px;
+    overflow: hidden;
 
+}
 .insideList li {
-    border: 1px solid black;
     border-bottom: none;
     padding: 5px;
     /* width: 140px; */
-}
-.insideList li:last-child {
-    border-bottom: 1px solid black;
 }
 
 @media (max-width: 850px) {
@@ -124,7 +128,7 @@ li:hover>.insideList {
 
 @media (max-width: 480px) {
     nav {
-        justify-content: space-between;
+        justify-content: space-around;
         align-items: center;
     }
 
