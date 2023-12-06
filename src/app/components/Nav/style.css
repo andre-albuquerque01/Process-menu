@@ -45,7 +45,7 @@ nav {
 }
 
 
-ul {
+.list ul {
     list-style: none;
     display: flex;
     justify-content: space-around;
@@ -54,11 +54,11 @@ ul {
     height: 100px;
 }
 
-li {
+.list li {
     position: relative;
 }
 
-li:first-child {
+.list li:first-child {
     display: flex;
     align-items: center;
     gap: 5px;
@@ -67,7 +67,7 @@ li:first-child {
 li:hover>.insideList {
    visibility: visible;
    transition: 0.5s;
-   height: 500%;
+   height: 400%;
 }
 
 .insideList {
@@ -89,7 +89,6 @@ li:hover>.insideList {
 .insideList li {
     border-bottom: none;
     padding: 5px;
-    /* width: 140px; */
 }
 
 @media (max-width: 850px) {
@@ -149,11 +148,11 @@ li:hover>.insideList {
         display: none;
     }
 
-    ul {
+    .list ul {
         width: 100px;
     }
 
-    li:first-child {
+    .list li:first-child {
         gap: 1px;
     }
 }

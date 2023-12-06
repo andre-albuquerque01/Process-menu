@@ -1,12 +1,19 @@
+'use-client'
 import Image from "next/image"
 import logoTake from "../../../../public/takethephone.svg"
 import iconUser from "../../../../public/userPerson.png"
 import iconCar from "../../../../public/carrinho.png"
+import menu from "../../../../public/menu.png"
 import iconArrowDown from "../../../../public/arrowDown.png"
 import Link from "next/link"
 import "./style.css"
+import { useState } from "react"
 
 export const Index = () => {
+    const [active, setActive] = useState<boolean>(false);
+    const toggleMenu = () => {
+        setActive(!active);
+    }
     return (
         <div className="header">
             <nav>
@@ -22,6 +29,15 @@ export const Index = () => {
                     <input type="text" name="search" id="search" />
                 </div>
                 <div className="list">
+                    <div className="menu">
+                        <Image
+                            src={menu}
+                            alt="Icone menu"
+                            onClick={toggleMenu}
+                        />
+                    </div>
+                    <div className={active ? "hamburgueActive" : "hamburgueInactive"}>
+                    </div>
                     <ul>
                         <li>
                             <Image
