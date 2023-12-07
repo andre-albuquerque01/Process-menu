@@ -13,13 +13,16 @@ export const Index = () => {
     const [active, setActive] = useState<boolean>(false);
     const toggleCloseMenuIcon = () => setActive(!active);
     const toggleMenu = () => setActive(!active);
-    const { innerWidth: newWidth } = window;
 
     useEffect(() => {
-        if (newWidth >= 480) {
+        function handleResize() {
+          if (window.innerWidth > 468 && active) {
             setActive(false);
+          }
         }
-    }, [newWidth])
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+      }, [active]);
     return (
         <div className="header">
             <nav>
