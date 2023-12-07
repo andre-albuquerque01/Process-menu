@@ -4,6 +4,7 @@ import instagram from "../../../../public/instagram.png"
 import facebook from "../../../../public/facebook.png"
 import youtube from "../../../../public/youtube.png"
 import "./style.css"
+import Link from "next/link"
 
 export const Footer = () => {
     return (
@@ -12,9 +13,9 @@ export const Footer = () => {
                 <div className="help">
                     <h3>Ajuda</h3>
                     <ul>
-                        <li>Minha conta</li>
-                        <li>Meus pedidos</li>
-                        <li>Outros</li>
+                        <li><Link href="/">Sobre minha conta</Link></li>
+                        <li><Link href="/">Suporte</Link></li>
+                        <li><Link href="/">Outros</Link></li>
                     </ul>
                 </div>
                 <div className="midiasSocial">

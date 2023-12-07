@@ -1,18 +1,25 @@
 'use client'
 import Image from "next/image"
 import logoTake from "../../../../public/takethephone.svg"
-import menu from "../../../../public/menu.png"
-
+import iconMenu from "../../../../public/menu.png"
+import iconClose from "../../../../public/closeX.png"
 import Link from "next/link"
 import "./style.css"
-import { useState } from "react"
-import { List } from "./List"
+import { useEffect, useState } from "react"
+import { Menu } from "./Menu"
+import { MenuMobile } from "./MenuMobile"
 
 export const Index = () => {
-    const { active, setActive } = useState<boolean>(false);
-    const toggleMenu = () => {
-        setActive(!active);
-    }
+    const [active, setActive] = useState<boolean>(false);
+    const toggleCloseMenuIcon = () => setActive(!active);
+    const toggleMenu = () => setActive(!active);
+    const { innerWidth: newWidth } = window;
+
+    useEffect(() => {
+        if (newWidth >= 480) {
+            setActive(false);
+        }
+    }, [newWidth])
     return (
         <div className="header">
             <nav>
@@ -28,10 +35,26 @@ export const Index = () => {
                     <input type="text" name="search" id="search" />
                 </div>
                 <div className="list">
-
-                    <div className={active ? "hamburgueActive" : "hamburgueInactive"}>
+                    <div className="menuHamburgue">
+                        {active === false ?
+                            <Image
+                                src={iconMenu}
+                                width={28}
+                                height={28}
+                                alt="icone menu"
+                                onClick={toggleMenu}
+                            />
+                            :
+                            <Image
+                                src={iconClose}
+                                className="closeMenu"
+                                width={28}
+                                height={28}
+                                alt="icone menu"
+                                onClick={toggleCloseMenuIcon}
+                            />}
                     </div>
-                    <List />
+                    {active ? <MenuMobile /> : <Menu />}
                 </div>
             </nav>
         </div>

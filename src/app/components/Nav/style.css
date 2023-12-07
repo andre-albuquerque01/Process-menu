@@ -65,9 +65,9 @@ nav {
 }
 
 li:hover>.insideList {
-   visibility: visible;
-   transition: 0.5s;
-   height: 400%;
+    visibility: visible;
+    transition: 0.5s;
+    height: 400%;
 }
 
 .insideList {
@@ -84,11 +84,19 @@ li:hover>.insideList {
     align-items: start;
     height: 0px;
     overflow: hidden;
-
 }
+
 .insideList li {
     border-bottom: none;
     padding: 5px;
+}
+
+.menuHamburgue {
+    display: none;
+}
+
+.menuMobile {
+    visibility: hidden;
 }
 
 @media (max-width: 850px) {
@@ -155,4 +163,92 @@ li:hover>.insideList {
     .list li:first-child {
         gap: 1px;
     }
+
+    .menuHamburgue {
+        display: block;
+    }
+
+    .menuMobile {
+        visibility: visible;
+        position: absolute;
+        z-index: 4;
+        background-color: #fefefe;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 80%;
+        transition: top 0.7s ease-in;
+        height: 100%;
+        border-right: 4px solid rgba(217, 217, 217, 0.10);
+    }
+
+    .menuMobile ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+        color: #000;
+        height: 150px;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .menuMobile li {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 8px 15px;
+        gap: 13px;
+    }
+
+    .menuMobile input {
+        width: 262px;
+        border-radius: 10px;
+        background: #FFF;
+        border: 1px solid rgba(0, 0, 0, 0.45);
+        height: 30px;
+        padding-left: 10px;
+        outline: none;
+    }
+
+    .menuMobile button {
+        position: absolute;
+        right: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .menuMobile a {
+        text-decoration: underline;
+        color: #000;
+    }
+
+    .menuMobile a:hover {
+        text-decoration: none;
+    }
+
+    .menuMobile h1 {
+        text-align: center;
+        margin-top: 25px;
+    }
+
+    .logoMenu {
+        width: 80%;
+        flex-shrink: 0;
+        bottom: 0;
+        position: fixed;
+        text-align: center;
+    }
+
+    .categoria {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+    }
+
 }

@@ -1,13 +1,14 @@
-import Image from 'next/image'
-import React from 'react'
+import Image from "next/image"
 import iconUser from "../../../../public/userPerson.png"
 import iconCar from "../../../../public/carrinho.png"
 import iconArrowDown from "../../../../public/arrowDown.png"
+import Link from "next/link"
+import "./style.css"
 
-export const List = () => {
+export const Menu = () => {
     return (
-        <div>
-            <ul>
+        <div className="menu">
+            <ul className="menu">
                 <li>
                     <Image
                         src={iconUser}
@@ -25,9 +26,9 @@ export const List = () => {
                         title="Perfil" />
 
                     <ul className="insideList">
-                        <li>Login</li>
-                        <li>Meus pedidos</li>
-                        <li>Configuração</li>
+                        <li><Link href="/">Login</Link></li>
+                        <li><Link href="/">Meus pedidos</Link></li>
+                        <li><Link href="/">Configuração</Link></li>
                     </ul>
                 </li>
                 <li>
