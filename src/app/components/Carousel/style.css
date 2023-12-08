@@ -1,0 +1,9 @@
+.carroseul{
+    width: 40%;
+    margin: 0 auto;
+    margin-top: 35px;
+    text-align: center;
+}
+.carroseul img{
+    margin: auto;
+}

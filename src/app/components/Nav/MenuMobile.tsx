@@ -5,17 +5,33 @@ import iconOrder from "../../../../public/order.png"
 import iconSettings from "../../../../public/settings.png"
 import logoTake from "../../../../public/takethephone.svg"
 import search from "../../../../public/search.png"
+import cardapio from "../../../../public/cardapio.png"
+import iconArrowDown from "../../../../public/arrowDown.png"
+import logout from "../../../../public/logout.png"
 import Link from "next/link"
 import "./style.css"
-import { Categories } from "../Categories/Categories"
+import { useState } from "react"
 
 export const MenuMobile = () => {
+    const [isSubMenuVisible, setSubMenuVisibility] = useState<boolean>(false);
+
+    const toggleSubMenu = () => {
+        setSubMenuVisibility(!isSubMenuVisible);
+    };
     return (
         <div className="menuMobile">
+            <div className="menuStart">
             <h1>Menu</h1>
-            <ul>
+                <Image
+                    src={logout}
+                    width={28}
+                    height={28}
+                    alt="Icone logout"
+                    title="Logout" />
+            </div>
+            <ul className="test">
                 <li>
-                    <input type="text" name="search" id="search" placeholder="Pesquisar produto"/>
+                    <input type="text" name="search" id="search" placeholder="Pesquisar produto" />
                     <button>
                         <Image
                             src={search}
@@ -57,6 +73,34 @@ export const MenuMobile = () => {
                         title="Carrinho" />
                     <Link href="/">Carrinho</Link>
                 </li>
+                <li onClick={toggleSubMenu}>
+                    <Image
+                        src={cardapio}
+                        width={28}
+                        height={28}
+                        alt="icone do carrinho"
+                        title="Carrinho" />
+                    <Link href="/">Cardapio</Link>
+                    <Image
+                        src={iconArrowDown}
+                        width={30}
+                        height={30}
+                        alt="icone da setinha"
+                        title="Perfil"
+                        onClick={toggleSubMenu}
+                    />
+                </li>
+                <ul
+                    className={`menuCategories ${isSubMenuVisible ? 'active' : ''}`}
+                >
+                    <li><Link href="/">Promoções</Link></li>
+                    <li><Link href="/">Pizza</Link></li>
+                    <li><Link href="/">Sobremesas</Link></li>
+                    <li><Link href="/">Bebidas</Link></li>
+                    <li><Link href="/">Lanches</Link></li>
+                    <li><Link href="/">Jantas</Link></li>
+                    <li><Link href="/">Outros</Link></li>
+                </ul>
             </ul>
             <div className="logoMenu">
                 <Image
@@ -66,9 +110,7 @@ export const MenuMobile = () => {
                     alt="Logomarca"
                 />
             </div>
-            <div className="categoria">
-                <Categories />
-            </div>
+
         </div>
     )
 }

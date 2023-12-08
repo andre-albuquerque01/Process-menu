@@ -231,9 +231,22 @@ li:hover>.insideList {
         text-decoration: none;
     }
 
-    .menuMobile h1 {
-        text-align: center;
+    .menuStart {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
         margin-top: 25px;
+    }
+
+    .menuStart h1 {
+        width: 80%;
+        text-align: start;
+        margin-left: 19px;
+    }
+
+    .menuStart img {
+        margin: auto;
     }
 
     .logoMenu {
@@ -251,4 +264,19 @@ li:hover>.insideList {
         align-items: start;
     }
 
+    .menuCategories {
+        opacity: 0;
+        position: absolute;
+        left: 40px;
+        transition: opacity 0.5s;
+        height: auto;
+        overflow: hidden;
+        cursor: pointer;
+        top: 320px;
+    }
+
+    .menuCategories.active {
+        opacity: 1;
+        height: auto;
+    }
 }
