@@ -1,18 +1,46 @@
 'use client'
-import pao from '../../../../public/pao.jpg'
-import like from '../../../../public/like.png'
-import dislike from '../../../../public/dislike.png'
+import pao from '../../../public/pao.jpg'
+import like from '../../../public/like.png'
+import dislike from '../../../public/dislike.png'
+// import arrowLeft from '../../../public/arrowLeft.png'
 import Image from "next/image"
 import Head from 'next/head'
+import "./style.css"
+import { useState } from 'react'
 
-export const Car = () => {
+export default function Itens() {
+    const [qtd, setQtd] = useState<number>(0);
+    const [liked, setLiked] = useState<number>(0);
+    const [disliked, setDisliked] = useState<number>(0);
+    const togglePlus = () => {
+        if (qtd < 10) setQtd(qtd + 1);
+    }
+    const toggleLess = () => {
+        if (qtd > 0) setQtd(qtd - 1);
+    }
+
+    const toggleLike = () => {
+        setLiked(liked + 1);
+    }
+    const toggleDislike = () => {
+        setDisliked(disliked + 1);
+    }
     return (
-        <div>
+        <div className='itens'>
             <Head>
-                <title>Carrinho</title>
+                <title>Items</title>
             </Head>
-            <div className="littleCar">
-                <div className="image">
+            <div className="littleItens">
+                {/* <div className="back">
+                    <Image
+                        src={arrowLeft}
+                        alt='icone de voltar'
+                        width={20}
+                        height={20}
+                    />
+                    Voltar
+                </div> */}
+                <div className="imageItem">
                     <Image
                         src={pao}
                         alt='imagem do item'
@@ -25,9 +53,17 @@ export const Car = () => {
                     <div className="price">
                         R$ 5
                     </div>
+                    <div className="description">
+                        <div className="title">
+                            Descrição
+                        </div>
+                        <div className="textDesc">
+                            Contém proteina animal, gluten, lactose;
+                        </div>
+                    </div>
                     <div className="rate">
                         <div className="title">
-                            Avalição
+                            Avaliação
                         </div>
                         <div className="avaliation">
                             <div className="good">
@@ -37,7 +73,9 @@ export const Car = () => {
                                     title='Gostou?'
                                     width={28}
                                     height={28}
+                                    onClick={toggleLike}
                                 />
+                                {liked}
                             </div>
                             <div className="bad">
                                 <Image
@@ -46,7 +84,9 @@ export const Car = () => {
                                     title='Não gostou?'
                                     width={28}
                                     height={28}
+                                    onClick={toggleDislike}
                                 />
+                                {disliked}
                             </div>
                         </div>
                     </div>
@@ -55,19 +95,19 @@ export const Car = () => {
                             Observação
                         </div>
                         <div className="field">
-                            <input type="text" name="obs" id="obs" placeholder='Coloque a obeservação' />
+                            <textarea name="obs" id="obs" placeholder='Sem trigo'></textarea>
                         </div>
                     </div>
                     <div className="finish">
                         <div className="qtd">
                             <div className="less">
-                                -
+                                <button onClick={toggleLess}>-</button>
                             </div>
                             <div className="number">
-                                2
+                                {qtd}
                             </div>
-                            <div className="plus">
-                                +
+                            <div className="plus" >
+                                <button onClick={togglePlus}>+</button>
                             </div>
                         </div>
                         <div className="btn">

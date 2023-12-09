@@ -53,7 +53,7 @@ export const Footer = () => {
                 </div>
             </div>
             <div className="copy">
-                <p><b>Take the Phone © </b>- Todos os direitos reservados. O conteúdo deste site, incluindo texto, imagens, gráficos e outros materiais, é protegido por direitos autorais e outras leis de propriedade intelectual. A reprodução, distribuição ou uso não autorizado de qualquer material deste site sem a permissão prévia por escrito do Take the Phone é estritamente proibida.</p>
+                <p><b>Take the Phone © </b>- Todos os direitos reservados.</p>
             </div>
         </footer>
     )

@@ -137,6 +137,7 @@ li:hover>.insideList {
     nav {
         justify-content: space-around;
         align-items: center;
+        gap: 55px;
     }
 
     .imageTakeThePhone {
@@ -176,7 +177,7 @@ li:hover>.insideList {
         top: 0;
         left: 0;
         right: 0;
-        width: 80%;
+        width: 85%;
         transition: top 0.7s ease-in;
         height: 100%;
         border-right: 4px solid rgba(217, 217, 217, 0.10);

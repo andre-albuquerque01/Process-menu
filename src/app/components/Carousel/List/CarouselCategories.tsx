@@ -60,7 +60,7 @@ export const CarouselCategories = () => {
                         slidesPerView={qtdCarousel}
                     >
                         <SwiperSlide>
-                            <Link href="/">
+                            <Link href="/Itens">
                                 <Image
                                     src={pao}
                                     alt='Img 1'
