@@ -6,4 +6,11 @@
 }
 .carroseul img{
     margin: auto;
+    object-fit: contain;
+}
+
+@media (max-width: 480px) {
+    .carroseul{
+        width: 90%;
+    }
 }

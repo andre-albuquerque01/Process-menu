@@ -1,8 +1,9 @@
 'use-client'
 import { Carousel } from "@/app/components/Carousel/Carousel";
-import { Categories } from  "@/app/components/Categories/Categories";
-import { Index } from  "@/app/components/Nav/Index";
+import { Categories } from "@/app/components/Categories/Categories";
+import { Index } from "@/app/components/Nav/Index";
 import { Footer } from "@/app/components/Footer/Footer";
+import { CarouselCategories } from "./components/Carousel/List/CarouselCategories";
 
 
 export default function Home() {
@@ -11,7 +12,8 @@ export default function Home() {
       <Index />
       <Categories />
       <Carousel />
-      <Footer/>
+      <CarouselCategories />
+      <Footer />
     </>
   )
 }
