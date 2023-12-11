@@ -1,4 +1,5 @@
-'use client'
+"use client";
+import React, { useEffect } from "react";
 import pao from '../../../public/pao.jpg'
 import like from '../../../public/like.png'
 import dislike from '../../../public/dislike.png'
@@ -7,11 +8,13 @@ import Image from "next/image"
 import Head from 'next/head'
 import "./style.css"
 import { useState } from 'react'
+import { useCar } from '../context/CarContext'
 
 export default function Itens() {
     const [qtd, setQtd] = useState<number>(0);
     const [liked, setLiked] = useState<number>(0);
     const [disliked, setDisliked] = useState<number>(0);
+    const { car, setCar } = useCar();
     const togglePlus = () => {
         if (qtd < 10) setQtd(qtd + 1);
     }
@@ -25,6 +28,21 @@ export default function Itens() {
     const toggleDislike = () => {
         setDisliked(disliked + 1);
     }
+    useEffect(() => {
+        setCar([
+            {
+                id: "14555",
+                title: "Pao",
+                description: "Your description here",
+                observation: "Your observation here",
+                preco: "10.00",
+                tempo_espera: "15 minutes",
+                file_name: "paopicture.jpg",
+                categoria: "Bakery",
+            }
+        ])
+    }, []);
+
     return (
         <div className='itens'>
             <Head>
@@ -59,6 +77,14 @@ export default function Itens() {
                         </div>
                         <div className="textDesc">
                             Contém proteina animal, gluten, lactose;
+                        </div>
+                    </div>
+                    <div className="timeWait">
+                        <div className="title">
+                            Tempo de espera:
+                        </div>
+                        <div className="time">
+                            5 min
                         </div>
                     </div>
                     <div className="rate">
