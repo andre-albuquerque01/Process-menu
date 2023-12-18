@@ -32,14 +32,16 @@ export const Menu = () => {
                     </ul>
                 </li>
                 <li>
-                    <Image
-                        src={iconCar}
-                        width={28}
-                        height={28}
-                        alt="icone do carrinho"
-                        title="Carrinho" />
+                    <Link href="/Car">
+                        <Image
+                            src={iconCar}
+                            width={28}
+                            height={28}
+                            alt="icone do carrinho"
+                            title="Carrinho" />
+                    </Link>
                 </li>
             </ul>
-        </div>
+        </div >
     )
 }

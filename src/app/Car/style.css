@@ -1,0 +1,160 @@
+.FirsTitle {
+    width: 66%;
+    margin: 0 auto;
+    padding: 10px 0;
+}
+
+.itens {
+    display: flex;
+    justify-content: space-around;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.imageItem img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+}
+
+.textItem {
+    max-height: 120px;
+    min-height: 120px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title,
+.price,
+.qtd {
+    padding: 4px 0px;
+    margin-left: 8px;
+}
+
+.trashItem button {
+    background-color: transparent;
+    border: none;
+    margin-bottom: 51px;
+    cursor: pointer;
+}
+
+.totalPay,
+.tablePay,
+.gorjeta,
+.titlePay,
+.titleCard {
+    color: #000;
+    font-size: 22px;
+    padding: 8px 0;
+}
+
+.pay input[type="number"] {
+    border: none;
+    border-bottom: 1px solid #000;
+    width: 60px;
+    height: 22px;
+    font-size: 18px;
+}
+
+.pay input[type="number"]:focus {
+    outline: none;
+}
+
+.pay input[type="number"]::-webkit-inner-spin-button,
+.pay input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.pay input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.metodos {
+    margin-left: 15px;
+}
+
+.pix,
+.cardDeb,
+.cardCred {
+    margin-bottom: 5px;
+}
+
+.payBtn button {
+    margin-top: 15px;
+    width: 200px;
+    height: 39px;
+    flex-shrink: 0;
+    border-radius: 25px;
+    background: #F00;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.payBtn button:hover {
+    background-color: rgb(190, 0, 13);
+}
+
+.card span {
+    color: #F00;
+}
+
+.nameCard,
+.numberCard,
+.dateCard,
+.cvcCard {
+    margin-bottom: 5px;
+}
+
+.card input[type="text"],
+input[type="date"] {
+    border: none;
+    border-bottom: 1px solid #000;
+    width: 100%;
+    height: 22px;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.card input[type="text"],
+input[type="date"]:focus {
+    outline: none;
+}
+
+.card input[type="text"],
+input[type="date"]::-webkit-inner-spin-button,
+.card input[type="text"],
+input[type="date"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.card input[type="text"],
+input[type="date"] {
+    -moz-appearance: textfield;
+}
+
+@media (max-width: 480px) {
+    .FirsTitle {
+        width: 87%;
+    }
+
+    .itens {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .pay {
+        align-self: self-start;
+        margin-bottom: 25px;
+        margin-left: 25px;
+    }
+}

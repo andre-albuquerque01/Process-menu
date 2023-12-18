@@ -80,8 +80,8 @@ li:hover>.insideList {
     border-radius: 10px;
     background-color: #FFF;
     flex-direction: column;
-    justify-content: start;
-    align-items: start;
+    justify-content: flex-start;
+    align-items: flex-start;
     height: 0px;
     overflow: hidden;
 }
@@ -186,8 +186,8 @@ li:hover>.insideList {
     .menuMobile ul {
         display: flex;
         flex-direction: column;
-        justify-content: start;
-        align-items: start;
+        justify-content: flex-start;
+        align-items: flex-start;
         color: #000;
         height: 150px;
         width: 100%;
@@ -261,8 +261,8 @@ li:hover>.insideList {
     .categoria {
         display: flex;
         flex-direction: column;
-        justify-content: start;
-        align-items: start;
+        justify-content: flex-start;
+        align-items: flex-start;
     }
 
     .menuCategories {
