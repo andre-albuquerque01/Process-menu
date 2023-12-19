@@ -1,12 +1,18 @@
+.dadCar{
+    height: 53.4vw;
+}
+
 .FirsTitle {
     width: 66%;
     margin: 0 auto;
     padding: 10px 0;
 }
 
-.itens {
+.itensCar {
     display: flex;
     justify-content: space-around;
+    align-items: flex-start;
+
 }
 
 .item {
@@ -15,7 +21,7 @@
     margin-bottom: 10px;
 }
 
-.imageItem img {
+.imageCarItem img {
     width: 120px;
     height: 120px;
     object-fit: contain;
@@ -30,8 +36,8 @@
     justify-content: center;
 }
 
-.title,
-.price,
+.titleItemCar,
+.priceCar,
 .qtd {
     padding: 4px 0px;
     margin-left: 8px;
@@ -50,7 +56,13 @@
 .titlePay,
 .titleCard {
     color: #000;
-    font-size: 22px;
+    font-size: 18px;
+    padding: 8px 0;
+}
+
+.qtdItensPay {
+    color: #000;
+    font-size: 18px;
     padding: 8px 0;
 }
 
@@ -141,12 +153,37 @@ input[type="date"] {
     -moz-appearance: textfield;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 800px) {
+    .dadCar {
+        height: 100%;
+    }
+
     .FirsTitle {
         width: 87%;
     }
 
-    .itens {
+    .itensCar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .pay {
+        margin-bottom: 25px;
+        margin-left: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dadCar {
+        height: 100%;
+    }
+
+    .FirsTitle {
+        width: 87%;
+    }
+
+    .itensCar {
         display: flex;
         flex-direction: column;
         align-items: center;

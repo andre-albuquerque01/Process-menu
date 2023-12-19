@@ -3,17 +3,16 @@ import React, { createContext, useContext, useState, ReactNode, Dispatch, SetSta
 interface Product {
     id: string;
     title: string;
-    description: string;
     observation: string;
-    preco: string;
+    preco: number;
     tempo_espera: string;
     file_name: string;
-    categoria: string;
+    qtd_itens: number;
 }
 
 interface ProductContextType {
-    car: Product[]
-    setCar: Dispatch<SetStateAction<Product[]>>
+    car: Product[];
+    setCar: Dispatch<SetStateAction<Product[]>>;
 }
 
 const CarContext = createContext<ProductContextType | undefined>(undefined);
@@ -25,15 +24,16 @@ interface CarProviderProps {
 export const CarProvider: React.FC<CarProviderProps> = ({ children }) => {
     const [car, setCar] = useState<Product[]>([]);
 
+
     return (
-        <CarContext.Provider value={{ car, setCar }} >
+        <CarContext.Provider value={{ car, setCar}} >
             {children}
         </ CarContext.Provider>
     );
 };
 
-export const useCar = () => {
+export const useCarContext = () => {
     const context = useContext(CarContext);
-    if (context == null) throw new Error("useCar deve ser usado dentro de um CarProvider.")
+    if (context == null) throw new Error("useCarContext deve ser usado dentro de um CarProvider.")
     return context;
 }

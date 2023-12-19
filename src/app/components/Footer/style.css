@@ -4,7 +4,7 @@ footer {
     background: rgba(217, 217, 217, 0.10);
     border-top: 1px solid rgba(0, 0, 0, 0.45);
     bottom: 0;
-    position: fixed;
+    position: relative;
 }
 
 .first {
@@ -45,14 +45,16 @@ ul {
         padding: 5px 0;
         width: 150px;
     }
+
     .first {
         display: block;
         margin-left: 25px;
     }
-    
+
     .midiasSocial {
         margin-top: 5px;
     }
+
     .midiasSocial ul {
         margin-left: 10px;
         justify-content: flex-start;
@@ -73,13 +75,15 @@ ul {
         padding: 5px 0;
         width: 150px;
     }
+
     .first {
         display: block;
     }
-    
+
     .midiasSocial {
         margin-top: 5px;
     }
+
     .midiasSocial ul {
         margin-left: 10px;
         justify-content: flex-start;

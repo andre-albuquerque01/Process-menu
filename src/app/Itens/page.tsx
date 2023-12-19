@@ -1,20 +1,21 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 import pao from '../../../public/pao.jpg'
 import like from '../../../public/like.png'
 import dislike from '../../../public/dislike.png'
-// import arrowLeft from '../../../public/arrowLeft.png'
 import Image from "next/image"
 import Head from 'next/head'
 import "./style.css"
 import { useState } from 'react'
-import { useCar } from '../context/CarContext'
+import { useCarContext } from '../context/CarContext'
 
 export default function Itens() {
     const [qtd, setQtd] = useState<number>(0);
     const [liked, setLiked] = useState<number>(0);
     const [disliked, setDisliked] = useState<number>(0);
-    const { car, setCar } = useCar();
+    const { car, setCar } = useCarContext();
+    console.log(car);
+
     const togglePlus = () => {
         if (qtd < 10) setQtd(qtd + 1);
     }
@@ -28,20 +29,19 @@ export default function Itens() {
     const toggleDislike = () => {
         setDisliked(disliked + 1);
     }
-    useEffect(() => {
-        setCar([
-            {
-                id: "14555",
-                title: "Pao",
-                description: "Your description here",
-                observation: "Your observation here",
-                preco: "10.00",
-                tempo_espera: "15 minutes",
-                file_name: "paopicture.jpg",
-                categoria: "Bakery",
-            }
-        ])
-    }, []);
+    const handleAddItens = (novoItem: typeof car[0]) => {
+        const carIndex = car.findIndex(car => car.id === novoItem.id);
+        if (carIndex !== -1) {
+            const newCar = [...car];
+            newCar[carIndex].qtd_itens = qtd;
+            setCar(newCar);
+            alert("Item inserido ao carrinho")
+        } else {
+            setCar(prevCar => [...prevCar, { ...novoItem, qtd_itens: qtd }]);
+            alert("Item inserido ao carrinho")
+        }
+
+    };
 
     return (
         <div className='itens'>
@@ -49,15 +49,6 @@ export default function Itens() {
                 <title>Items</title>
             </Head>
             <div className="littleItens">
-                {/* <div className="back">
-                    <Image
-                        src={arrowLeft}
-                        alt='icone de voltar'
-                        width={20}
-                        height={20}
-                    />
-                    Voltar
-                </div> */}
                 <div className="imageItem">
                     <Image
                         src={pao}
@@ -137,7 +128,15 @@ export default function Itens() {
                             </div>
                         </div>
                         <div className="btn">
-                            <input type="submit" value="Adicionar" />
+                            <input type="submit" value="Adicionar" onClick={() => handleAddItens({
+                                id: String(qtd),
+                                title: "string",
+                                observation: "string",
+                                preco: 10.5,
+                                tempo_espera: "string",
+                                file_name: "string",
+                                qtd_itens: qtd,
+                            })} />
                         </div>
                     </div>
                 </div>

@@ -3,11 +3,41 @@ import pao from '../../../public/pao.jpg'
 import trash from '../../../public/trash.png'
 import Image from "next/image";
 import "./style.css";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import Head from 'next/head';
+import { useCarContext } from '../context/CarContext';
+
 
 export default function Car() {
     const [cardCredOpen, setCardCredOpen] = useState<boolean>(false);
     const [cardDebOpen, setCardDebOpen] = useState<boolean>(false);
+    const { car, setCar } = useCarContext();
+    const [valueTotal, setValueTotal] = useState<number>(0);
+    const [qtd, setQtd] = useState<number>(0);
+    console.log(car);
+
+    const calcularTotal = () => {
+        let valorTotal: number = 0;
+        let qtd: number = 0;
+
+        car.forEach(car => {
+            valorTotal += parseFloat(car.preco.toString()) * (car.qtd_itens);
+            qtd += car.qtd_itens;
+        });
+
+        setValueTotal(valorTotal);
+        setQtd(qtd);
+    }
+
+    useEffect(() => {
+        calcularTotal();
+    }, [])
+
+    const handleRemoveItem = (id: string) => {
+        const newCar = car.filter(car => car.id !== id);
+        setCar(newCar);
+    }
+
     const handleCarCred = () => {
         setCardCredOpen(!cardCredOpen);
         setCardDebOpen(false);
@@ -21,94 +51,47 @@ export default function Car() {
         setCardCredOpen(false);
     }
     return (
-        <div>
+        <div className='dadCar'>
+            <Head>
+                <title>Items</title>
+            </Head>
             <div className="FirsTitle">
                 <h2>Carrinho</h2>
             </div>
-            <div className="itens">
+            <div className="itensCar">
                 <div className="agrupItem">
-                    <div className="item">
-                        <div className="imageItem">
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            /></div>
-                        <div className="textItem">
-                            <div className="title">
-                                Pão
-                            </div>
-                            <div className="price">
-                                R$ <span className='valuePrice'>5</span>
-                            </div>
-                            <div className="qtd">
-                                Quantidade: 2
-                            </div>
-                        </div>
-                        <div className="trashItem">
-                            <button>
+                    {car.map((itens, index) => (
+                        <div className="item" key={index}>
+                            <div className="imageCarItem">
                                 <Image
-                                    src={trash}
-                                    alt='icone lixeira'
+                                    src={pao}
+                                    alt={`Img ${index + 1}`}
                                 />
-                            </button>
-                        </div>
-                    </div>
-                    <div className="item">
-                        <div className="imageItem">
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            /></div>
-                        <div className="textItem">
-                            <div className="title">
-                                Pão
                             </div>
-                            <div className="price">
-                                R$ <span className='valuePrice'>5</span>
+                            <div className="textItem">
+                                <div className="titleItemCar">{itens.title}</div>
+                                <div className="priceCar">
+                                    R$ <span className='valuePrice'>{itens.preco}</span>
+                                </div>
+                                <div className="qtd">Quantidade: {itens.qtd_itens}</div>
                             </div>
-                            <div className="qtd">
-                                Quantidade: 2
+                            <div className="trashItem">
+                                <button onClick={() => handleRemoveItem(itens.id)}>
+                                    <Image
+                                        src={trash}
+                                        alt='icone lixeira'
+                                    />
+                                </button>
                             </div>
                         </div>
-                        <div className="trashItem">
-                            <button>
-                                <Image
-                                    src={trash}
-                                    alt='icone lixeira'
-                                />
-                            </button>
-                        </div>
-                    </div>
-                    <div className="item">
-                        <div className="imageItem">
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            /></div>
-                        <div className="textItem">
-                            <div className="title">
-                                Pão
-                            </div>
-                            <div className="price">
-                                R$ <span className='valuePrice'>5</span>
-                            </div>
-                            <div className="qtd">
-                                Quantidade: 2
-                            </div>
-                        </div>
-                        <div className="trashItem">
-                            <button>
-                                <Image
-                                    src={trash}
-                                    alt='icone lixeira'
-                                />
-                            </button>
-                        </div>
-                    </div>
+                    ))}
                 </div>
                 <div className="pay">
                     <div className="totalPay">
-                        Total: R$ 25
+                        Total: R$ {valueTotal}
+                    </div>
+                    <div className="qtdItensPay">
+                        Quantidade de itens: {qtd}
                     </div>
                     <div className="tablePay">
                         Mesa: <input type="number" min="0" />
