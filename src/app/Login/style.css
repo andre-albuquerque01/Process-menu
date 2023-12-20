@@ -1,0 +1,117 @@
+.loginUser {
+    height: calc(100vh - 265px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.titleLogin {
+    font-family: cursive;
+}
+
+.formLogin input {
+    width: 500px;
+    height: 35px;
+    border-radius: 3px;
+    padding: 0.5rem 0.5rem;
+    font-size: 16px;
+    border: 0.5px solid;
+}
+
+.formLogin input:focus {
+    outline: none;
+}
+
+.formLogin span {
+    color: #f00;
+}
+
+.email,
+.password,
+.forgetPass {
+    margin: 10px 0;
+}
+
+.forgetPass a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #585858;
+}
+
+.forgetPass a:hover {
+    text-decoration: underline;
+}
+
+.btnLogin {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.btnLogin input[type="submit"] {
+    background-color: #f00;
+    margin: 25px 0 20px 0;
+    width: 175px;
+    height: 35px;
+    color: #fff;
+    border: 1px solid #f00;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+.formLogin input[type="submit"]:hover {
+    background-color: rgb(190, 0, 13);
+}
+
+.dontAccount {
+    text-align: center;
+    margin-top: 5px;
+}
+
+.dontAccount a {
+    text-decoration: none;
+    font-size: 16px;
+    color: #585858;
+}
+
+.dontAccount a:hover {
+    text-decoration: underline;
+}
+
+.dontAccount hr {
+    width: 400px;
+    margin-bottom: 15px;
+}
+
+
+
+@media (max-width: 600px) {
+    .formLogin input {
+        width: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    .loginUser {
+        height: calc(100vh - 335px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .formLogin input {
+        width: 300px;
+        height: 35px;
+        border-radius: 3px;
+        padding: 0.5rem 0.5rem;
+        font-size: 16px;
+        border: 0.5px solid;
+    }
+
+    .dontAccount hr {
+        width: 200px;
+    }
+
+}

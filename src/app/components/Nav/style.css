@@ -133,6 +133,24 @@ li:hover>.insideList {
     }
 }
 
+@media (max-width: 664px) {
+    .search input {
+        width: 220px;
+    }
+}
+
+@media (max-width: 600px) {
+    .search input {
+        width: 180px;
+    }
+}
+
+@media (max-width: 561px) {
+    .search input {
+        width: 120px;
+    }
+}
+
 @media (max-width: 480px) {
     nav {
         justify-content: space-around;

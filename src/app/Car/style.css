@@ -1,5 +1,5 @@
 .dadCar{
-    height: 53.4vw;
+    min-height: calc(100vh - 265px);;
 }
 
 .FirsTitle {

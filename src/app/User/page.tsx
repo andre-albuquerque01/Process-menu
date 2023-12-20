@@ -1,3 +1,4 @@
+import Link from "next/link"
 import "./style.css"
 
 export default function User() {
@@ -154,6 +155,9 @@ export default function User() {
                         </div>
                     </div>
                 </div>
+                    <div className="termAceite">
+                        <input type="checkbox" name="termAceite" id="termAceite" required /><Link href="/">Termo de Adesão</Link>
+                    </div>
                 <div className="btnUser">
                     <input type="submit" value="Salvar" />
                 </div>
