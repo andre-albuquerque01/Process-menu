@@ -1,0 +1,95 @@
+.userCad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formUser {
+    display: flex;
+    gap: 4rem;
+    justify-content: center;
+}
+
+.titleCad {
+    margin: 25px 0;
+    font-family: cursive;
+}
+
+.labelUser {
+    width: 260px;
+    margin-top: 15px;
+}
+
+.formUser span {
+    color: #f00;
+}
+
+.formUser input,
+select {
+    width: 500px;
+    height: 35px;
+    border-radius: 3px;
+    padding: 0.5rem 0.5rem;
+    font-size: 16px;
+    border: 0.5px solid;
+}
+
+.formUser input,
+select:focus {
+    outline: none;
+}
+
+.btnUser {
+    display: flex;
+    width: 100%;
+}
+
+.btnUser input[type="submit"] {
+    background-color: #f00;
+    margin: 25px 0 40px 0;
+    width: 175px;
+    height: 35px;
+    color: #fff;
+    border: 1px solid #f00;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+.formUser input[type="submit"]:hover {
+    background-color: rgb(190, 0, 13);
+}
+
+@media (max-width: 1050px) {
+    .formUser {
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .formUser {
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+    }
+
+    .formUser input,
+    select {
+        width: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .formUser {
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+    }
+
+    .formUser input,
+    select {
+        width: 300px;
+    }
+}

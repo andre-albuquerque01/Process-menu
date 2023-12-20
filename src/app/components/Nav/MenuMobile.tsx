@@ -46,7 +46,7 @@ export const MenuMobile = () => {
                         width={30}
                         height={30}
                         alt="icone de user" />
-                    <Link href="/">Login</Link>
+                    <Link href="/Login">Login</Link>
                 </li>
                 <li>
                     <Image
@@ -71,7 +71,7 @@ export const MenuMobile = () => {
                         height={28}
                         alt="icone do carrinho"
                         title="Carrinho" />
-                    <Link href="/">Carrinho</Link>
+                    <Link href="/Car">Carrinho</Link>
                 </li>
                 <li onClick={toggleSubMenu}>
                     <Image
