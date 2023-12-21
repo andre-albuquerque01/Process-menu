@@ -1,7 +1,7 @@
 import Link from "next/link"
 import "./style.css"
 
-export default function User() {
+export default function CadUser() {
     return (
         <div className="userCad">
             <div className="titleCad">

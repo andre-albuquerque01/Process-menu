@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { Suspense } from "react";
 // import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
@@ -24,7 +24,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <CarProvider>
           <Index />
-          {children}
+          <Suspense fallback={<p>Loading...</p>}>
+            {children}
+          </Suspense>
           <Footer />
         </CarProvider>
       </body>

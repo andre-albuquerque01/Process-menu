@@ -1,0 +1,110 @@
+.product {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.titleproduct {
+    font-family: cursive;
+    margin: 25px 0;
+}
+
+.formProduct input[type="text"],
+input[type="number"],
+select {
+    width: 500px;
+    height: 35px;
+    border-radius: 3px;
+    padding: 0.5rem 0.5rem;
+    font-size: 16px;
+    border: 0.5px solid;
+    margin-top: 3px;
+}
+
+.formProduct input,
+select:focus {
+    outline: none;
+}
+
+.formProduct span {
+    color: #f00;
+}
+
+.labelTitle {
+    margin-top: 12px;
+}
+
+.btnProduct {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.btnProduct input[type="submit"] {
+    background-color: #f00;
+    margin: 25px 0 20px 0;
+    width: 175px;
+    height: 35px;
+    color: #fff;
+    border: 1px solid #f00;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+.formProduct input[type="submit"]:hover {
+    background-color: rgb(190, 0, 13);
+}
+
+.inputDescription textarea,
+.inputObservation textarea {
+    min-width: 500px;
+    max-width: 500px;
+    min-height: 81px;
+    max-height: 81px;
+    border-radius: 3px;
+    padding: 0.5rem 0.5rem;
+    font-size: 16px;
+    border: 0.5px solid;
+    outline: none;
+}
+
+@media (max-width: 600px) {
+
+    .formProduct input[type="text"],
+    input[type="number"],
+    input[type="file"],
+    select {
+        width: 350px;
+        height: 35px;
+    }
+
+    .inputDescription textarea,
+    .inputObservation textarea {
+        min-width: 350px;
+        max-width: 160px;
+    }
+}
+
+@media (max-width: 480px) {
+    .formProduct {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .formProduct input[type="text"],
+    input[type="number"],
+    input[type="file"],
+    select {
+        width: 300px;
+        height: 35px;
+    }
+
+    .inputDescription textarea,
+    .inputObservation textarea {
+        min-width: 300px;
+        max-width: 160px;
+    }
+}

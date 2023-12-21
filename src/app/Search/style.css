@@ -1,0 +1,52 @@
+.searchTitle {
+    display: flex;
+    width: 50%;
+    justify-content: center;
+    margin: 12px 0 0 0;
+}
+
+.cardProduct {
+    display: flex;
+    flex-wrap: wrap;
+    width: 50%;
+    gap: 0 1rem;
+    margin: 0 auto;
+}
+
+.card {
+    height: 180px;
+    max-width: 500px;
+    border: 1px solid #585858;
+    display: flex;
+    align-items: center;
+    margin: 20px auto;
+    border-radius: 3px;
+    flex: 1;
+}
+
+.imageSearch img {
+    object-fit: contain;
+    width: 200px;
+    height: 200px;
+    margin-left: 15px;
+}
+
+.corpCard {
+    padding: 20px;
+    font-size: 18px;
+}
+
+.titleCar,
+.priceCar,
+.temp {
+    padding: 5px;
+}
+
+@media (max-width: 480px) {
+    .cardProduct {
+        width: 90%;
+    }
+    .searchTitle {
+        width: 42%;
+    }
+}

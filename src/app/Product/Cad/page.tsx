@@ -1,6 +1,6 @@
 import "./style.css"
 
-export default function Product() {
+export default function CadProduct() {
     return (
         <div className="product">
             <div className="titleproduct">
