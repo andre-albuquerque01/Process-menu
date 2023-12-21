@@ -1,0 +1,84 @@
+.recoverUser {
+    height: calc(100vh - 265px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.titleRecover {
+    font-family: cursive;
+}
+.descriptionRecover{
+    width: 50%;
+    text-align: center;
+    margin: 12px 0;
+    font-size: 13px;
+}
+.formRecover input {
+    width: 500px;
+    height: 35px;
+    border-radius: 3px;
+    padding: 0.5rem 0.5rem;
+    font-size: 16px;
+    border: 0.5px solid;
+}
+
+.formRecover input:focus {
+    outline: none;
+}
+
+.formRecover span {
+    color: #f00;
+}
+
+.email{
+    margin: 10px 0;
+}
+
+
+.btnRecover {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.btnRecover input[type="submit"] {
+    background-color: #f00;
+    margin: 25px 0 20px 0;
+    width: 175px;
+    height: 35px;
+    color: #fff;
+    border: 1px solid #f00;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+.formRecover input[type="submit"]:hover {
+    background-color: rgb(190, 0, 13);
+}
+
+@media (max-width: 600px) {
+    .formRecover input {
+        width: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    .RecoverUser {
+        height: calc(100vh - 335px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .formRecover input {
+        width: 300px;
+        height: 35px;
+        border-radius: 3px;
+        padding: 0.5rem 0.5rem;
+        font-size: 16px;
+        border: 0.5px solid;
+    }
+}
