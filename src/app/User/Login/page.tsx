@@ -1,9 +1,13 @@
 import Link from "next/link";
 import "./style.css";
+import Head from "next/head";
 
 export default function Login() {
     return (
         <div className="loginUser">
+            <Head>
+                <title>Login</title>
+            </Head>
             <div className="titleLogin">
                 <h2>Login</h2>
             </div>

@@ -26,9 +26,10 @@ export const Menu = () => {
                         title="Perfil" />
 
                     <ul className="insideList">
-                        <li><Link href="/Login">Login</Link></li>
-                        <li><Link href="/">Meus pedidos</Link></li>
-                        <li><Link href="/Cad/User">Configuração</Link></li>
+                        <li><Link href="/">Inicio</Link></li>
+                        <li><Link href="/User/Login">Login</Link></li>
+                        <li><Link href="/Orders">Meus pedidos</Link></li>
+                        <li><Link href="/User/Edit">Configuração</Link></li>
                     </ul>
                 </li>
                 <li>

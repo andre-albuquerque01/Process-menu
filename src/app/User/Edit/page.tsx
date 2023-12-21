@@ -1,9 +1,13 @@
 import Link from "next/link"
 import "./style.css"
+import Head from "next/head"
 
 export default function EditUser() {
     return (
         <div className="userCad">
+            <Head>
+                <title>Editar do perfil</title>
+            </Head>
             <div className="titleCad">
                 <h2>Cadastro de perfil</h2>
             </div>

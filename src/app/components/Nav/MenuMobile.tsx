@@ -46,7 +46,7 @@ export const MenuMobile = () => {
                         width={30}
                         height={30}
                         alt="icone de user" />
-                    <Link href="/Login">Login</Link>
+                    <Link href="/User/Login">Login</Link>
                 </li>
                 <li>
                     <Image
@@ -54,7 +54,7 @@ export const MenuMobile = () => {
                         width={30}
                         height={30}
                         alt="icone de pedido" />
-                    <Link href="/">Meus pedidos</Link>
+                    <Link href="/Orders">Meus pedidos</Link>
                 </li>
                 <li>
                     <Image
@@ -62,7 +62,7 @@ export const MenuMobile = () => {
                         width={30}
                         height={30}
                         alt="icone de configuração" />
-                    <Link href="/">Configuração</Link>
+                    <Link href="/User/Edit">Configuração</Link>
                 </li>
                 <li>
                     <Image

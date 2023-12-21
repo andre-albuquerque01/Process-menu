@@ -53,7 +53,7 @@ export default function Car() {
     return (
         <div className='dadCar'>
             <Head>
-                <title>Items</title>
+                <title>Carrinho</title>
             </Head>
             <div className="FirsTitle">
                 <h2>Carrinho</h2>

@@ -1,0 +1,46 @@
+.ordersEnd {
+    width: 50%;
+    border: 1px solid #585858;
+    margin: 15px auto;
+}
+
+.orderCard {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.orderInfo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.informationOrder {
+    width: 50%;
+}
+
+.informationOrder img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    margin-right: 15px;
+}
+
+.segPart {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 50%;
+    text-align: center;
+}
+
+@media (max-width: 480px) {
+    .ordersEnd {
+        width: 95%;
+    }
+    .segPart {
+        width: 30%;
+    }
+}

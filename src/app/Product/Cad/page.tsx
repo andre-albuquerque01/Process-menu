@@ -1,10 +1,14 @@
+import Head from "next/head"
 import "./style.css"
 
 export default function CadProduct() {
     return (
         <div className="product">
+            <Head>
+                <title>Cadastro do produto</title>
+            </Head>
             <div className="titleproduct">
-                <h2>Produto</h2>
+                <h2>Cadastrar produto</h2>
             </div>
             <form encType="multipart/form-data">
                 <div className="formProduct">
