@@ -20,9 +20,10 @@ export const Order = () => {
     const baseUrl = "https://localhost:8080/";
     const token = "";
 
+    // Para mostrar todos os pedidos
     const fetchGetAllOrders = async () => {
         try {
-            const requisicao = await fetch(`${baseUrl}/orders`, {
+            const requisicao = await fetch(`${baseUrl}/order/orders`, {
                 method: "GET",
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -35,9 +36,10 @@ export const Order = () => {
         }
     }
 
+    // Para mostrar o pedido pelo id
     const fetchGetOrderById = async ({ id }: Order) => {
         try {
-            const requisicao = await fetch(`${baseUrl}/orders/${id}`, {
+            const requisicao = await fetch(`${baseUrl}/order/${id}`, {
                 method: "GET",
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -50,9 +52,10 @@ export const Order = () => {
         }
     }
 
+     // Para mostrar o pedido pelo numero
     const fetchGetBySearchOrder = async ({ numberOrder }: Order) => {
         try {
-            const requisicao = await fetch(`${baseUrl}/searchOrder/${numberOrder}`, {
+            const requisicao = await fetch(`${baseUrl}/order/searchOrder/${numberOrder}`, {
                 method: "GET",
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -65,9 +68,10 @@ export const Order = () => {
         }
     }
 
+    // 
     const fetchCreateOrder = async (body: Order) => {
         try {
-            const req = await fetch(`${baseUrl}/insert`, {
+            const req = await fetch(`${baseUrl}/order/register`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -88,7 +92,7 @@ export const Order = () => {
 
     const fetchUpdateOrder = async ({ id, body }: Order) => {
         try {
-            const req = await fetch(`${baseUrl}/update/${id}`, {
+            const req = await fetch(`${baseUrl}/order/update/${id}`, {
                 method: "PUT",
                 headers: {
                     'Content-Type': 'application/json',
@@ -109,7 +113,7 @@ export const Order = () => {
 
     const fetchUpdateStatus = async ({ id, status }: Order) => {
         try {
-            const req = await fetch(`${baseUrl}/updateStatus/${id}`, {
+            const req = await fetch(`${baseUrl}/order/updateStatus/${id}`, {
                 method: "PATCH",
                 headers: {
                     'Content-Type': 'application/json',
@@ -130,7 +134,7 @@ export const Order = () => {
 
     const fetchDeleteOrder = async (id: Order) => {
         try {
-            const req = await fetch(`${baseUrl}/del/${id}`, {
+            const req = await fetch(`${baseUrl}/order/del/${id}`, {
                 method: "DELETE",
                 headers: {
                     'Authorization': `Bearer ${token}`,
