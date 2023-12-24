@@ -6,7 +6,7 @@ type Product = {
 }
 
 export const Product = () => {
-    const baseUrl = "https://localhost:8080/";
+    const baseUrl = "http://localhost:8080/product";
     const token = "";
 
     // Para mostrar todos os produtos
@@ -24,7 +24,7 @@ export const Product = () => {
     // Para mostrar o produto de acordo com o nome
     const fetchSearchProduct = async (name: Product) => {
         try {
-            const requisicao = await fetch(`${baseUrl}/product/searchProduct/${name}`);
+            const requisicao = await fetch(`${baseUrl}/searchProduct/${name}`);
             const reqJson = await requisicao.json();
             return reqJson;
         } catch (err) {
@@ -36,7 +36,7 @@ export const Product = () => {
     // Para mostrar os produtos de acordo com a categoria
     const fetchSearchCategory = async (category: Product) => {
         try {
-            const requisicao = await fetch(`${baseUrl}/product/searchCategory/${category}`);
+            const requisicao = await fetch(`${baseUrl}/searchCategory/${category}`);
             const reqJson = await requisicao.json();
             return reqJson;
         } catch (err) {
@@ -49,7 +49,7 @@ export const Product = () => {
     // Para registra o produto separado e depois a imagem, passa primeiro o fetchRegisterImage
     const fetchRegisterProduct = async (body: Product) => {
         try {
-            const req = await fetch(`${baseUrl}/product/register`, {
+            const req = await fetch(`${baseUrl}/register`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ export const Product = () => {
     const fetchRegisterImage = async (body: Product) => {
         try {
             // Cadastro da imagem
-            const req = await fetch(`${baseUrl}/product/register/image`, {
+            const req = await fetch(`${baseUrl}/register/image`, {
                 method: "POST",
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -93,7 +93,7 @@ export const Product = () => {
     // Para alterar o produto
     const fetchAlt = async ({ id, body }: Product) => {
         try {
-            const req = await fetch(`${baseUrl}/product/update/${id}`, {
+            const req = await fetch(`${baseUrl}/update/${id}`, {
                 method: "PUT",
                 headers: {
                     'Content-Type': 'application/json',
@@ -115,7 +115,7 @@ export const Product = () => {
     // Passar junto com fetchAlt, para alterar a imagem
     const fetchAltImage = async ({ id, body }: Product) => {
         try {
-            const req = await fetch(`${baseUrl}/product/update/image/${id}`, {
+            const req = await fetch(`${baseUrl}/update/image/${id}`, {
                 method: "PUT",
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -136,7 +136,7 @@ export const Product = () => {
     // Para deletar o produto
     const fetchDelete = async (id: Product) => {
         try {
-            const req = await fetch(`${baseUrl}/product/del/${id}`, {
+            const req = await fetch(`${baseUrl}/del/${id}`, {
                 method: "DELETE",
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -156,7 +156,7 @@ export const Product = () => {
     // Para dar like
     const fetchLike = async ({ id, body }: Product) => {
         try {
-            const req = await fetch(`${baseUrl}/product/like/${id}`, {
+            const req = await fetch(`${baseUrl}/like/${id}`, {
                 method: "PATCH",
                 headers: {
                     'Content-Type': 'application/json',
@@ -178,7 +178,7 @@ export const Product = () => {
     // Para diminuir a quantidade de itens no produto
     const fetchProductQtd = async ({ id, body }: Product) => {
         try {
-            const req = await fetch(`${baseUrl}/product/update/qtd/${id}`, {
+            const req = await fetch(`${baseUrl}/update/qtd/${id}`, {
                 method: "PATCH",
                 headers: {
                     'Content-Type': 'application/json',

@@ -1,31 +1,34 @@
 type User = {
     id: string,
-    body: object,
-    email: string
+    body: {
+        email: string,
+        password: string
+    },
+    email: string,
 }
 
 export const User = () => {
-    const baseUrl = "https://localhost:8080/";
+    const baseUrl = "http://localhost:8080/auth";
     const token = "";
 
     const fetchGetOneUser = async (id: User) => {
         try {
-            const requisicao = await fetch(`${baseUrl}/auth/users/${id}`, {
+            const requisicao = await fetch(`${baseUrl}/users/${id}`, {
                 method: "GET",
                 headers: {
                     'Authorization': `Bearer ${token}`,
                 }
             });
-            const reqJson = await requisicao.json();
-            return reqJson;
+            const data = await requisicao.json();
+            return data;
         } catch (err) {
             console.error(err);
         }
     }
 
-    const fetchLogin = async (body: User) => {
+    const fetchLogin = async (body: object) => {
         try {
-            const req = await fetch(`${baseUrl}/auth/login`, {
+            const req = await fetch(`${baseUrl}/login`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -34,20 +37,21 @@ export const User = () => {
             });
             if (req.ok) {
                 console.log("Sucess");
-                const reqJson = await req.json();
-                return reqJson;
+                const data = await req.json();
+                console.log(data);
+                return data;
             } else {
                 console.log("Error");
+                
             }
         } catch (error) {
             console.error(error);
-
         }
     }
 
     const fetchRegister = async (body: User) => {
         try {
-            const req = await fetch(`${baseUrl}/auth/register`, {
+            const req = await fetch(`${baseUrl}/register`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -67,7 +71,7 @@ export const User = () => {
 
     const fetchRecover = async (email: User) => {
         try {
-            const req = await fetch(`${baseUrl}/auth/recover`, {
+            const req = await fetch(`${baseUrl}/recover`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -87,7 +91,7 @@ export const User = () => {
 
     const fetchUsers = async ({ id, body }: User) => {
         try {
-            const req = await fetch(`${baseUrl}/auth/update/${id}`, {
+            const req = await fetch(`${baseUrl}/update/${id}`, {
                 method: "PUT",
                 headers: {
                     'Content-Type': 'application/json',
@@ -108,7 +112,7 @@ export const User = () => {
 
     const fetchUsersPass = async ({ id, body }: User) => {
         try {
-            const req = await fetch(`${baseUrl}/auth/usersPass/${id}`, {
+            const req = await fetch(`${baseUrl}/usersPass/${id}`, {
                 method: "PATCH",
                 headers: {
                     'Content-Type': 'application/json',
