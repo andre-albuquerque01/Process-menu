@@ -1,15 +1,33 @@
+import { useCookies } from 'react-cookie';
+
 type User = {
-    id: string,
-    body: {
-        email: string,
-        password: string
-    },
-    email: string,
-}
+    id: string;
+    email: string;
+    password: string;
+    confirmpassword: string;
+    cpf: string;
+    birthday: string;
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+    ddd: string;
+    addressUser: {
+        cep: string;
+        logradouro: string;
+        bairro: string;
+        uf: string;
+        complemento: string;
+    };
+    termsService: string;
+    body: object;
+};
+
 
 export const User = () => {
+    const [cookies, setCookie] = useCookies(['token', 'userId']);
+
     const baseUrl = "http://localhost:8080/auth";
-    const token = "";
+    const token = cookies.token;
 
     const fetchGetOneUser = async (id: User) => {
         try {
@@ -36,20 +54,26 @@ export const User = () => {
                 body: JSON.stringify(body),
             });
             if (req.ok) {
-                console.log("Sucess");
                 const data = await req.json();
-                console.log(data);
-                return data;
+                setCookie('token', data.token, {
+                    // expires: new Date(Date.now() + 3600),
+                    // secure: true,
+                    // path: "/"
+                });
+                setCookie('userId', data.id, {
+                    // expires: new Date(Date.now() + 3600),
+                    // secure: true,
+                    // path: "/"
+                });
             } else {
-                console.log("Error");
-                
+                window.alert("E-mail ou senha inválido");
             }
         } catch (error) {
             console.error(error);
         }
     }
 
-    const fetchRegister = async (body: User) => {
+    const fetchRegister = async (body: object) => {
         try {
             const req = await fetch(`${baseUrl}/register`, {
                 method: "POST",
@@ -60,11 +84,12 @@ export const User = () => {
             });
             if (req.ok) {
                 console.log("Sucess");
+                alert("Usuário cadastrado!")
             } else {
                 console.log("Error");
             }
         } catch (error) {
-            console.error(error);
+            console.log("Error");
 
         }
     }
@@ -80,6 +105,7 @@ export const User = () => {
             });
             if (req.ok) {
                 console.log("Sucess");
+                alert("E-mail enviado")
             } else {
                 console.log("Error");
             }
@@ -91,7 +117,7 @@ export const User = () => {
 
     const fetchUsers = async ({ id, body }: User) => {
         try {
-            const req = await fetch(`${baseUrl}/update/${id}`, {
+            const req = await fetch(`${baseUrl}/updateUser/${id}`, {
                 method: "PUT",
                 headers: {
                     'Content-Type': 'application/json',
@@ -106,7 +132,6 @@ export const User = () => {
             }
         } catch (error) {
             console.error(error);
-
         }
     }
 

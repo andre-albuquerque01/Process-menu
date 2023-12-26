@@ -6,6 +6,7 @@ import './globals.css'
 import { Index } from './components/Nav/Index'
 import { Footer } from './components/Footer/Footer'
 import { CarProvider } from './context/CarContext'
+import { CookiesProvider } from 'react-cookie';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,13 +23,15 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={inter.className}>
-        <CarProvider>
-          <Index />
-          <Suspense fallback={<p>Loading...</p>}>
-            {children}
-          </Suspense>
-          <Footer />
-        </CarProvider>
+        <CookiesProvider defaultSetOptions={{ path: '/' }}>
+          <CarProvider>
+            <Index />
+            <Suspense fallback={<p>Loading...</p>}>
+              {children}
+            </Suspense>
+            <Footer />
+          </CarProvider>
+        </CookiesProvider>
       </body>
     </html>
   )

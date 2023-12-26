@@ -20,10 +20,9 @@ export default function Login() {
         }));
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const fetchLogin = await log.fetchLogin(data);
+        await log.fetchLogin(data);
     }
 
     return (
@@ -46,7 +45,7 @@ export default function Login() {
                                 name="email"
                                 id="email"
                                 value={data.email}
-                                onChange={ handleChange} required />
+                                onChange={handleChange} required />
                         </div>
                     </div>
                     <div className="password">
