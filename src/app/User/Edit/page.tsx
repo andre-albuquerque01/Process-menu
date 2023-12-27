@@ -6,7 +6,7 @@ import { User } from "@/app/lib/User";
 import { useCookies } from 'react-cookie';
 
 export default function EditUser() {
-    const [cookies, setCookie] = useCookies(['token', 'userId']);
+    const [cookies] = useCookies(['token', 'userId']);
     const user = User();
     const id = cookies.userId;
     const [data, setData] = useState({
@@ -24,7 +24,8 @@ export default function EditUser() {
             bairro: "",
             uf: "",
             complemento: ""
-        }
+        },
+        toke: cookies.token
     });
     const fetchUser = async () => {
         const value = await user.fetchGetOneUser(id);

@@ -11,6 +11,8 @@ type User = {
 
 export default function CadUser() {
     const user = User();
+
+    const [isChecked, setIsChecked] = useState<boolean>(false);
     const [data, setData] = useState({
         email: '',
         password: '',
@@ -28,8 +30,12 @@ export default function CadUser() {
             uf: "",
             complemento: ""
         },
-        termsService: ''
+        termsService: isChecked
     });
+
+    const handleOnChange = () => {
+        setIsChecked(!isChecked);
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -55,8 +61,8 @@ export default function CadUser() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (data.password === data.confirmpassword)
-           await user.fetchRegister(data);
+        if (data.password === data.confirmpassword && isChecked)
+            await user.fetchRegister(data);
     }
 
     return (
@@ -217,7 +223,7 @@ export default function CadUser() {
                     </div>
                 </div>
                 <div className="termAceite">
-                    <input type="checkbox" name="termsService" id="termsService" onChange={handleChange} value={data.termsService} required /><Link href="/">Termo de Adesão</Link>
+                    <input type="checkbox" name="termsService" id="termsService" onChange={handleOnChange} checked={isChecked} value={data.termsService} required /><Link href="/">Termo de Adesão</Link>
                 </div>
                 <div className="btnUser">
                     <input type="submit" value="Salvar" />

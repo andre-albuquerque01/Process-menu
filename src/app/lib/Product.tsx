@@ -1,13 +1,17 @@
+import { useCookies } from "react-cookie";
+
 type Product = {
     id: string,
     body: object,
     name: string,
     category: string,
+    file_name: string,
 }
 
 export const Product = () => {
+    const [cookies] = useCookies(['token', 'userId']);
     const baseUrl = "http://localhost:8080/product";
-    const token = "";
+    const token = cookies.token;
 
     // Para mostrar todos os produtos
     const fetchProduct = async () => {
@@ -45,7 +49,6 @@ export const Product = () => {
         }
     }
 
-
     // Para registra o produto separado e depois a imagem, passa primeiro o fetchRegisterImage
     const fetchRegisterProduct = async (body: Product) => {
         try {
@@ -69,7 +72,7 @@ export const Product = () => {
     }
 
     // Para registrar imagem, para passar junto com o fetchRegisterProduct
-    const fetchRegisterImage = async (body: Product) => {
+    const fetchRegisterImage = async (file_name: Product) => {
         try {
             // Cadastro da imagem
             const req = await fetch(`${baseUrl}/register/image`, {
@@ -77,7 +80,7 @@ export const Product = () => {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                 },
-                body: JSON.stringify(body),
+                body: JSON.stringify(file_name),
             });
             if (req.ok) {
                 console.log("Sucess");
