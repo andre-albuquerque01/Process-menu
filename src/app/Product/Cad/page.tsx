@@ -1,3 +1,4 @@
+'use client';
 import Head from "next/head"
 import "./style.css"
 import { useState } from "react";
@@ -7,42 +8,29 @@ export default function CadProduct() {
     const product = Product();
     const [data, setData] = useState({
         title: '',
+        subTitle: '',
         description: '',
         qtd_itens: '',
         observation: '',
-        preco: '',
-        tempo_espera: '',
-        status: '',
+        price: '',
+        waitTime: '',
         categorie: '',
         position: '',
-    });
-
-    const [dataImg, setDataImg] = useState({
         file_name: ''
     });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setData((prevUser) => ({
-            ...prevUser,
+        setData((prevProduct) => ({
+            ...prevProduct,
             [name]: value,
         }));
     };
 
-    const handleChangeImg = (e) => {
-        const { name, value } = e.target;
-        setDataImg((prevUser) => ({
-            ...prevUser,
-            [name]: value,
-        }));
-    };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        await product.fetchRegisterImage(file_name: dataImg);
-        setTimeout(() => {
-            await product.fetchRegisterProduct(body: data);
-        }, 200);
+        await product.fetchRegisterProduct(data);
     }
 
     return (
@@ -53,9 +41,9 @@ export default function CadProduct() {
             <div className="titleproduct">
                 <h2>Cadastrar produto</h2>
             </div>
-            <form encType="multipart/form-data">
+            <form onSubmit={handleSubmit}>
                 <div className="formProduct">
-                    <div className="productTitle">
+                    <div className="Sub">
                         <div className="labelTitle">
                             <label htmlFor="title">Título: <span>*</span></label>
                         </div>
@@ -63,20 +51,28 @@ export default function CadProduct() {
                             <input type="text" name="title" id="title" value={data.title} onChange={handleChange} placeholder="Pão" required />
                         </div>
                     </div>
+                    <div className="productSubTitle">
+                        <div className="labelTitle">
+                            <label htmlFor="subtitle">Subtítulo: <span>*</span></label>
+                        </div>
+                        <div className="inputSubTitle">
+                            <input type="text" name="subTitle" id="subTitle" value={data.subTitle} onChange={handleChange} placeholder="Pão" required />
+                        </div>
+                    </div>
                     <div className="productDescription">
                         <div className="labelTitle">
                             <label htmlFor="description">Descrição: <span>*</span></label>
                         </div>
                         <div className="inputDescription">
-                            <textarea name="description" id="description" placeholder="Modo de preparo" value={data.description} onChange={handleChange} required></textarea>
+                            <textarea name="description" id="description" placeholder="Descrição dos ingredientes" value={data.description} onChange={handleChange} required></textarea>
                         </div>
                     </div>
                     <div className="productQtd">
                         <div className="labelTitle">
-                            <label htmlFor="Qtd">Quantidade de itens: <span>*</span></label>
+                            <label htmlFor="qtd_itens">Quantidade de itens: <span>*</span></label>
                         </div>
                         <div className="inputQtd">
-                            <input type="number" name="Qtd" id="Qtd" min="0" placeholder="Quantos itens têm disponível" value={data.qtd_itens} onChange={handleChange} required />
+                            <input type="number" name="qtd_itens" id="qtd_itens" min="0" placeholder="Quantos itens têm disponível" value={data.qtd_itens} onChange={handleChange} required />
                         </div>
                     </div>
                     <div className="productObservation">
@@ -89,18 +85,18 @@ export default function CadProduct() {
                     </div>
                     <div className="productPrice">
                         <div className="labelTitle">
-                            <label htmlFor="Price">Preço: <span>*</span></label>
+                            <label htmlFor="preco">Preço: <span>*</span></label>
                         </div>
                         <div className="inputPrice">
-                            <input type="number" name="Price" id="Price" step="0.1" placeholder="5.5" min="0" value={data.title} onChange={handleChange} required />
+                            <input type="number" name="price" id="price" step="0.1" placeholder="R$ 5.5" min="0" value={data.price} onChange={handleChange} required />
                         </div>
                     </div>
                     <div className="productTime">
                         <div className="labelTitle">
-                            <label htmlFor="Time">Tempo de espera: <span>*</span></label>
+                            <label htmlFor="tempo_espera">Tempo de espera: <span>*</span></label>
                         </div>
                         <div className="inputTime">
-                            <input type="text" name="Time" id="Time" min="0" placeholder="5 minutos" value={data.tempo_espera} onChange={handleChange} required />
+                            <input type="text" name="waitTime" id="waitTime" min="0" placeholder="5 minutos" value={data.waitTime} onChange={handleChange} required />
                         </div>
                     </div>
                     <div className="productCategorie">
@@ -115,6 +111,7 @@ export default function CadProduct() {
                                 <option value="sobremesas">Sobremesas</option>
                                 <option value="bebidas">Bebidas</option>
                                 <option value="lanches">Lanches</option>
+                                <option value="almocos">Almoço</option>
                                 <option value="jantas">Jantas</option>
                                 <option value="outros">Outros</option>
                             </select>
@@ -122,10 +119,10 @@ export default function CadProduct() {
                     </div>
                     <div className="productPosition">
                         <div className="labelTitle">
-                            <label htmlFor="Position">Posição: <span>*</span></label>
+                            <label htmlFor="position">Posição: <span>*</span></label>
                         </div>
                         <div className="inputPosition">
-                            <select id="Position" name="Position" value={data.position} onChange={handleChange} required>
+                            <select id="position" name="position" value={data.position} onChange={handleChange} required>
                                 <option defaultValue={0}>Selecione a posição</option>
                                 <option value="carrossel">Carrossel</option>
                                 <option value="entrada">Entrada</option>
@@ -135,10 +132,10 @@ export default function CadProduct() {
                     </div>
                     <div className="productFile">
                         <div className="labelTitle">
-                            <label htmlFor="File">Imagem: <span>*</span></label>
+                            <label htmlFor="file_name">Imagem: <span>*</span></label>
                         </div>
                         <div className="inputFile">
-                            <input type="file" name="File" id="File" value={dataImg.file_name} onChange={handleChangeImg} required />
+                            <input type="text" name="file_name" id="file_name" value={data.file_name} onChange={handleChange} required />
                         </div>
                     </div>
                     <div className="btnProduct">

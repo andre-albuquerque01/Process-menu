@@ -13,6 +13,9 @@
 
 .title {
     font-weight: bold;
+}
+
+.subTitle {
     margin-bottom: 8px;
 }
 
@@ -102,6 +105,13 @@
 .btn input:hover {
     background-color: rgb(212, 0, 0);
     border: 1px solid rgb(222, 0, 0);
+}
+
+.imageItem img {
+    margin: auto;
+    object-fit: contain;
+    width: 370px;
+    height: 300px;
 }
 
 @media (max-width: 480px) {

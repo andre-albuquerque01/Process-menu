@@ -48,6 +48,11 @@
     text-decoration: none;
 }
 
+.paragraph p{
+    margin-top: -8px;
+    padding: 5px 0;
+}
+
 .carousel a:hover {
     text-decoration: underline;
     color: rgb(58, 58, 58);

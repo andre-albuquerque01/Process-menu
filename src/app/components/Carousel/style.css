@@ -1,16 +1,29 @@
-.carroseul{
+.carroseul {
     width: 40%;
     margin: 0 auto;
-    margin-top: 35px;
+    margin-top: 25px;
     text-align: center;
 }
-.carroseul img{
+
+.carroseul a {
+    text-decoration: none;
+}
+
+.carroseul img {
     margin: auto;
     object-fit: contain;
 }
 
+.paragraphPrincipal {
+    color: #000;
+    display: flex;
+    justify-content: center;
+    gap: 0 10px;
+    margin-bottom: 32px;
+}
+
 @media (max-width: 480px) {
-    .carroseul{
+    .carroseul {
         width: 90%;
     }
 }

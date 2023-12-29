@@ -16,7 +16,7 @@ export const Product = () => {
     // Para mostrar todos os produtos
     const fetchProduct = async () => {
         try {
-            const requisicao = await fetch(`${baseUrl}/product`);
+            const requisicao = await fetch(`${baseUrl}/`);
             const reqJson = await requisicao.json();
             return reqJson;
         } catch (err) {
@@ -49,6 +49,17 @@ export const Product = () => {
         }
     }
 
+    // Para mostrar os produtos de acordo com a id
+    const fetchData = async (id: Product) => {
+        try {
+            const requisicao = await fetch(`${baseUrl}/findProduct/${id}`);
+            const reqJson = await requisicao.json();
+            return reqJson;
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
     // Para registra o produto separado e depois a imagem, passa primeiro o fetchRegisterImage
     const fetchRegisterProduct = async (body: Product) => {
         try {
@@ -78,6 +89,7 @@ export const Product = () => {
             const req = await fetch(`${baseUrl}/register/image`, {
                 method: "POST",
                 headers: {
+                    'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${token}`,
                 },
                 body: JSON.stringify(file_name),
@@ -111,7 +123,6 @@ export const Product = () => {
             }
         } catch (error) {
             console.error(error);
-
         }
     }
 
@@ -121,6 +132,7 @@ export const Product = () => {
             const req = await fetch(`${baseUrl}/update/image/${id}`, {
                 method: "PUT",
                 headers: {
+                    'Content-Type': 'multipart/form-data',
                     'Authorization': `Bearer ${token}`,
                 },
                 body: JSON.stringify(body),
@@ -204,6 +216,7 @@ export const Product = () => {
         fetchProduct,
         fetchSearchProduct,
         fetchSearchCategory,
+        fetchData,
         fetchRegisterProduct,
         fetchRegisterImage,
         fetchAltImage,

@@ -7,13 +7,14 @@ export const Categories = () => {
             <section>
                 <div className="categoriesList">
                     <ul>
-                        <li><Link href="/">Promoções</Link></li>
-                        <li><Link href="/">Pizza</Link></li>
-                        <li><Link href="/">Sobremesas</Link></li>
-                        <li><Link href="/">Bebidas</Link></li>
-                        <li><Link href="/">Lanches</Link></li>
-                        <li><Link href="/">Jantas</Link></li>
-                        <li><Link href="/">Outros</Link></li>
+                        <li><Link href="/Product/Search?promocoes">Promoções</Link></li>
+                        <li><Link href="/Product/Search?pizza">Pizza</Link></li>
+                        <li><Link href="/Product/Search?sobremesas">Sobremesas</Link></li>
+                        <li><Link href="/Product/Search?bebidas">Bebidas</Link></li>
+                        <li><Link href="/Product/Search?lanches">Lanches</Link></li>
+                        <li><Link href="/Product/Search?almocos">Almoço</Link></li>
+                        <li><Link href="/Product/Search?jantas">Jantas</Link></li>
+                        <li><Link href="/Product/Search?outros">Outros</Link></li>
                     </ul>
                 </div>
             </section>

@@ -1,20 +1,53 @@
 "use client";
-import React from "react";
-import pao from '../../../public/pao.jpg'
-import like from '../../../public/like.png'
-import dislike from '../../../public/dislike.png'
-import Image from "next/image"
-import Head from 'next/head'
-import "./style.css"
-import { useState } from 'react'
-import { useCarContext } from '../context/CarContext'
+import React, { useEffect, useRef } from "react";
+import pao from '../../../public/pao.jpg';
+import like from '../../../public/like.png';
+import dislike from '../../../public/dislike.png';
+import Image from "next/image";
+import Head from 'next/head';
+import "./style.css";
+import { useState } from 'react';
+import { useCarContext } from '../context/CarContext';
+import { Product } from "../lib/Product";
 
 export default function Itens() {
     const [qtd, setQtd] = useState<number>(0);
     const [liked, setLiked] = useState<number>(0);
     const [disliked, setDisliked] = useState<number>(0);
     const { car, setCar } = useCarContext();
-    console.log(car);
+    const [productData, setproductData] = useState({
+        id: '',
+        title: '',
+        subTitle: '',
+        description: '',
+        price: '',
+        qtd_itens: '',
+        observation: '',
+        status: '',
+        like: '',
+        file_name: '',
+        categorie: '',
+        position: '',
+        waitTime: '',
+    });
+
+    const product = Product();
+
+    const handleIdUrl = async () => {
+        const params = new URLSearchParams(window.location.search);
+        const idParms = params.get('id');
+        if (idParms === null && idParms === undefined) {
+            window.location.href = "/";
+        } else {
+            const fetchData = await product.fetchData(idParms);
+            setproductData(fetchData);
+        }
+    }
+
+    useEffect(() => {
+        handleIdUrl();
+        console.log(productData);
+    }, []);
 
     const togglePlus = () => {
         if (qtd < 10) setQtd(qtd + 1);
@@ -29,6 +62,7 @@ export default function Itens() {
     const toggleDislike = () => {
         setDisliked(disliked + 1);
     }
+
     const handleAddItens = (novoItem: typeof car[0]) => {
         const carIndex = car.findIndex(car => car.id === novoItem.id);
         if (carIndex !== -1) {
@@ -48,26 +82,37 @@ export default function Itens() {
             <Head>
                 <title>Items</title>
             </Head>
+
             <div className="littleItens">
                 <div className="imageItem">
                     <Image
-                        src={pao}
+                        src={productData.file_name}
                         alt='imagem do item'
+                        width={370}
+                        height={300}
                     />
                 </div>
                 <div className="text">
                     <div className="title">
-                        <h2>Pão caseiro</h2>
+                        <h2>{productData.title}</h2>
+                    </div>
+                    <div className="subTitle">
+                        <p>{productData.subTitle}</p>
                     </div>
                     <div className="price">
-                        R$ 5
+                        <div className="title">
+                            Valor:
+                        </div>
+                        <div className="value">
+                            R$ {productData.price}
+                        </div>
                     </div>
                     <div className="description">
                         <div className="title">
                             Descrição
                         </div>
                         <div className="textDesc">
-                            Contém proteina animal, gluten, lactose;
+                            {productData.description}
                         </div>
                     </div>
                     <div className="timeWait">
@@ -75,7 +120,7 @@ export default function Itens() {
                             Tempo de espera:
                         </div>
                         <div className="time">
-                            5 min
+                            {productData.waitTime}
                         </div>
                     </div>
                     <div className="rate">

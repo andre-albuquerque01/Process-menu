@@ -11,7 +11,19 @@ import "./style.css"
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-export const CarouselCategories = () => {
+import { Product } from '@/app/lib/Product';
+
+type Product = {
+    id: string;
+    title: string;
+    price: number;
+    qtd_itens: number;
+    file_name: string;
+    categorie: string;
+    position: string;
+}
+
+export const CarouselCategories = (props: Product) => {
     const [qtdCarousel, setQtdCarousel] = useState<number>(5);
 
     useEffect(() => {
@@ -44,7 +56,7 @@ export const CarouselCategories = () => {
             <div className="snack">
                 <div className="title">
                     <Link
-                        href="/"
+                        href={`/Product/seacrh?category=lanches`}
                     >
                         Lanches
                         <Image
@@ -59,95 +71,29 @@ export const CarouselCategories = () => {
                         spaceBetween={50}
                         slidesPerView={qtdCarousel}
                     >
-                        <SwiperSlide>
-                            <Link href="/Itens">
-                                <Image
-                                    src={pao}
-                                    alt='Img 1'
-                                />
-                                <p>Pão</p>
-                                <p>R$ 5</p>
-                            </Link>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
+                        {props.data.map((carroseul, index) => ((carroseul.categorie === "lanches" && carroseul.position === 'entrada') ?
+                            <SwiperSlide key={index}>
+                                <Link href={`/Itens?id=${carroseul.id}`}>
+                                    <Image
+                                        src={carroseul.file_name}
+                                        alt='Img 1'
+                                        width={25}
+                                        height={25}
+                                    />
+                                    <div className="paragraph">
+                                        <p>{carroseul.title}</p>
+                                        <p>R$ {carroseul.price}</p>
+                                    </div>
+                                </Link>
+                            </SwiperSlide>
+                            : ''))}
                     </Swiper>
                 </div>
             </div>
             <div className="drinks">
                 <div className="title">
                     <Link
-                        href="/"
+                        href={`/Product/seacrh?category=bebidas`}
                     >
                         Bebidas
                         <Image
@@ -162,77 +108,29 @@ export const CarouselCategories = () => {
                         spaceBetween={50}
                         slidesPerView={qtdCarousel}
                     >
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
+                        {props.data.map((carroseul, index) => ((carroseul.categorie === "bebidas" && carroseul.position === 'entrada') ?
+                            <SwiperSlide key={index}>
+                                <Link href={`/Itens?id=${carroseul.id}`}>
+                                    <Image
+                                        src={carroseul.file_name}
+                                        alt='Img 1'
+                                        width={25}
+                                        height={25}
+                                    />
+                                    <div className="paragraph">
+                                        <p>{carroseul.title}</p>
+                                        <p>R$ {carroseul.price}</p>
+                                    </div>
+                                </Link>
+                            </SwiperSlide>
+                            : ''))}
                     </Swiper>
                 </div>
             </div>
             <div className="lunch">
                 <div className="title">
                     <Link
-                        href="/"
+                        href={`/Product/seacrh?category=almoco`}
                     >
                         Almoço
                         <Image
@@ -247,77 +145,29 @@ export const CarouselCategories = () => {
                         spaceBetween={50}
                         slidesPerView={qtdCarousel}
                     >
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
+                        {props.data.map((carroseul, index) => ((carroseul.categorie === "almocos" && carroseul.position === 'entrada') ?
+                            <SwiperSlide key={index}>
+                                <Link href={`/Itens?id=${carroseul.id}`}>
+                                    <Image
+                                        src={carroseul.file_name}
+                                        alt='Img 1'
+                                        width={25}
+                                        height={25}
+                                    />
+                                    <div className="paragraph">
+                                        <p>{carroseul.title}</p>
+                                        <p>R$ {carroseul.price}</p>
+                                    </div>
+                                </Link>
+                            </SwiperSlide>
+                            : ''))}
                     </Swiper>
                 </div>
             </div>
             <div className="dinner">
                 <div className="title">
                     <Link
-                        href="/"
+                        href={`/Product/seacrh?category=jantas`}
                     >
                         Jantar
                         <Image
@@ -332,80 +182,22 @@ export const CarouselCategories = () => {
                         spaceBetween={50}
                         slidesPerView={qtdCarousel}
                     >
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Image
-                                src={pao}
-                                alt='Img 1'
-                            />
-                            <p>Pão</p>
-                            <p>R$ 5</p>
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <Link href="/">
-                                <Image
-                                    src={pao}
-                                    alt='Img 1'
-                                />
-                                <p>Pão</p>
-                                <p>R$ 5</p>
-                            </Link>
-                        </SwiperSlide>
+                        {props.data.map((carroseul, index) => ((carroseul.categorie === "jantas" && carroseul.position === 'entrada') ?
+                            <SwiperSlide key={index}>
+                                <Link href={`/Itens?id=${carroseul.id}`}>
+                                    <Image
+                                        src={carroseul.file_name}
+                                        alt='Img 1'
+                                        width={25}
+                                        height={25}
+                                    />
+                                    <div className="paragraph">
+                                        <p>{carroseul.title}</p>
+                                        <p>R$ {carroseul.price}</p>
+                                    </div>
+                                </Link>
+                            </SwiperSlide>
+                            : ''))}
                     </Swiper>
                 </div>
             </div>
