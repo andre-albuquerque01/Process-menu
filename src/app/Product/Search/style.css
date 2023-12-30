@@ -5,18 +5,16 @@
     margin: 12px 0 0 0;
 }
 
-.cardProduct a{
+.cardProduct a {
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;
-    width: 50%;
-    gap: 0 1rem;
-    margin: 0 auto;
+    align-items: center;
     text-decoration: none;
 }
 
 .card {
-    height: 180px;
-    max-width: 500px;
+    height: 15%;
+    max-width: 60%;
     border: 1px solid #585858;
     display: flex;
     align-items: center;
@@ -44,16 +42,23 @@
     padding: 5px;
 }
 
-.temp{
+.temp {
     display: flex;
     align-items: center;
     gap: 5px;
 }
 
+.nothingProdcut{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 @media (max-width: 480px) {
     .cardProduct {
-        width: 90%;
+        width: 100%;
     }
+
     .searchTitle {
         width: 42%;
     }

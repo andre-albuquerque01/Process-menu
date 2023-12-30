@@ -15,21 +15,7 @@ export default function Itens() {
     const [liked, setLiked] = useState<number>(0);
     const [disliked, setDisliked] = useState<number>(0);
     const { car, setCar } = useCarContext();
-    const [productData, setproductData] = useState({
-        id: '',
-        title: '',
-        subTitle: '',
-        description: '',
-        price: '',
-        qtd_itens: '',
-        observation: '',
-        status: '',
-        like: '',
-        file_name: '',
-        categorie: '',
-        position: '',
-        waitTime: '',
-    });
+    const [productData, setproductData] = useState({});
 
     const product = Product();
 
@@ -46,7 +32,6 @@ export default function Itens() {
 
     useEffect(() => {
         handleIdUrl();
-        console.log(productData);
     }, []);
 
     const togglePlus = () => {
@@ -74,7 +59,6 @@ export default function Itens() {
             setCar(prevCar => [...prevCar, { ...novoItem, qtd_itens: qtd }]);
             alert("Item inserido ao carrinho")
         }
-
     };
 
     return (

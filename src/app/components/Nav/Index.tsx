@@ -10,24 +10,34 @@ import { Menu } from "./Menu"
 import { MenuMobile } from "./MenuMobile"
 
 export const Index = () => {
+    const [search, setSearch] = useState<string>('');
     const [active, setActive] = useState<boolean>(false);
     const toggleCloseMenuIcon = () => setActive(!active);
     const toggleMenu = () => setActive(!active);
 
+    const handleChange = (e) => {
+        if (e.key === "Enter") {
+            setSearch(e.target.value);
+            window.location.href = `/Product/Search?search=${search}`;
+        }
+        setSearch(e.target.value);
+    };
+
     useEffect(() => {
         function handleResize() {
-          if (window.innerWidth > 468 && active) {
-            setActive(false);
-          }
+            if (window.innerWidth > 468 && active) {
+                setActive(false);
+            }
         }
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
-      }, [active]);
+    }, [active]);
+
     return (
         <div className="header">
             <nav>
                 <div className="image">
-                    <Link href="/">
+                    <Link href='/'>
                         <Image
                             src={logoTake}
                             className="imageTakeThePhone"
@@ -35,7 +45,7 @@ export const Index = () => {
                     </Link>
                 </div>
                 <div className="search">
-                    <input type="text" name="search" id="search" />
+                    <input type="text" name="search" id="search" onKeyDown={handleChange} onChange={handleChange} />
                 </div>
                 <div className="list">
                     <div className="menuHamburgue">
