@@ -25,7 +25,7 @@ export default function EditUser() {
             uf: "",
             complemento: ""
         },
-        toke: cookies.token
+        token: ''
     });
 
     const fetchUser = async () => {
@@ -58,6 +58,7 @@ export default function EditUser() {
                 return {
                     ...prevUser,
                     [name]: value,
+                    token: cookies.token,
                 };
             }
         });

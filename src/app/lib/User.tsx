@@ -107,7 +107,7 @@ export const User = () => {
             });
             if (req.ok) {
                 console.log("Sucess");
-                alert("E-mail enviado");
+                alert("E-mail enviado para seu endereço de e-mail");
                 window.location.href = "/User/Login"
             } else {
                 console.log("Error");
