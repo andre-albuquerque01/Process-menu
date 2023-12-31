@@ -103,7 +103,7 @@ export default function EditProduct() {
                     </div>
                     <div className="productTime">
                         <div className="labelTitle">
-                            <label htmlFor="tempo_espera">Tempo de espera: <span>*</span></label>
+                            <label htmlFor="tempo_espera">Tempo de espera: <span>*</span> (Apenas os minutos)</label>
                         </div>
                         <div className="inputTime">
                             <input type="text" name="waitTime" id="waitTime" min="0" placeholder="5 minutos" value={data.waitTime} onChange={handleChange} required />

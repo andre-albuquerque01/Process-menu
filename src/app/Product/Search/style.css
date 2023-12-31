@@ -52,6 +52,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    height: calc(100vh - 298px);
 }
 
 @media (max-width: 480px) {

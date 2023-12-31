@@ -28,10 +28,11 @@ export const User = () => {
 
     const baseUrl = "http://localhost:8080/auth";
     const token = cookies.token;
+    const user = cookies.userId;
 
-    const fetchGetOneUser = async (id: User) => {
+    const fetchGetOneUser = async () => {
         try {
-            const requisicao = await fetch(`${baseUrl}/users/${id}`, {
+            const requisicao = await fetch(`${baseUrl}/users/${user}`, {
                 method: "GET",
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -65,6 +66,7 @@ export const User = () => {
                     // secure: true,
                     // path: "/"
                 });
+                window.location.href = "/Car";
             } else {
                 window.alert("E-mail ou senha inválido");
             }
@@ -84,7 +86,7 @@ export const User = () => {
             });
             if (req.ok) {
                 console.log("Sucess");
-                alert("Usuário cadastrado!")
+                alert("Cadastrado com sucesso!")
             } else {
                 console.log("Error");
             }
@@ -105,7 +107,8 @@ export const User = () => {
             });
             if (req.ok) {
                 console.log("Sucess");
-                alert("E-mail enviado")
+                alert("E-mail enviado");
+                window.location.href = "/User/Login"
             } else {
                 console.log("Error");
             }
@@ -115,9 +118,11 @@ export const User = () => {
         }
     }
 
-    const fetchUsers = async ({ id, body }: User) => {
+    const fetchUsers = async ({ body }: User) => {
+        console.log(body);
+
         try {
-            const req = await fetch(`${baseUrl}/updateUser/${id}`, {
+            const req = await fetch(`${baseUrl}/updateUser/${user}`, {
                 method: "PUT",
                 headers: {
                     'Content-Type': 'application/json',

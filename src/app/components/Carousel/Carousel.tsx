@@ -32,7 +32,7 @@ export const Carousel = (props: Product) => {
         navigation
         pagination={{ clickable: true }}
       >
-        {props.data.map((carroseul, index) => ((carroseul.categorie === "promocao" && carroseul.position === 'carrossel') ?
+        {props && props.data.map((carroseul, index) => (( carroseul.position === 'carrossel') ?
           <SwiperSlide key={index}>
             <Link href={`/Itens?id=${carroseul.id}`}>
               <Image

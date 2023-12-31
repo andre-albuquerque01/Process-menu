@@ -4,8 +4,8 @@ interface Product {
     id: string;
     title: string;
     observation: string;
-    preco: number;
-    tempo_espera: string;
+    price: number;
+    waitTime: string;
     file_name: string;
     qtd_itens: number;
 }

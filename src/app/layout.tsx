@@ -26,7 +26,7 @@ export default function RootLayout({
         <CookiesProvider defaultSetOptions={{ path: '/' }}>
           <CarProvider>
             <Index />
-            <Suspense fallback={<p>Loading...</p>}>
+            <Suspense fallback={<p className="loading">Loading...</p>}>
               {children}
             </Suspense>
             <Footer />

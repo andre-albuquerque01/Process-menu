@@ -34,7 +34,7 @@ export default function CadUser() {
     });
 
     const handleOnChange = () => {
-        setIsChecked(!isChecked);
+        setIsChecked(true);
     };
 
     const handleChange = (e) => {
@@ -223,7 +223,7 @@ export default function CadUser() {
                     </div>
                 </div>
                 <div className="termAceite">
-                    <input type="checkbox" name="termsService" id="termsService" onChange={handleOnChange} checked={isChecked} value={data.termsService} required /><Link href="/">Termo de Adesão</Link>
+                    <input type="checkbox" name="termsService" id="termsService" onChange={handleOnChange} checked={isChecked} required /><Link href="/">Termo de Adesão</Link>
                 </div>
                 <div className="btnUser">
                     <input type="submit" value="Salvar" />

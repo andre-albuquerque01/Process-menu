@@ -56,7 +56,7 @@ export const CarouselCategories = (props: Product) => {
             <div className="snack">
                 <div className="title">
                     <Link
-                        href={`/Product/seacrh?category=lanches`}
+                        href={`/Product/Search?category=lanches`}
                     >
                         Lanches
                         <Image
@@ -71,7 +71,7 @@ export const CarouselCategories = (props: Product) => {
                         spaceBetween={50}
                         slidesPerView={qtdCarousel}
                     >
-                        {props.data.map((carroseul, index) => ((carroseul.categorie === "lanches" && carroseul.position === 'entrada') ?
+                        {props && props.data.map((carroseul, index) => ((carroseul.categorie === "lanches" && carroseul.position === 'entrada') ?
                             <SwiperSlide key={index}>
                                 <Link href={`/Itens?id=${carroseul.id}`}>
                                     <Image
@@ -93,7 +93,7 @@ export const CarouselCategories = (props: Product) => {
             <div className="drinks">
                 <div className="title">
                     <Link
-                        href={`/Product/seacrh?category=bebidas`}
+                        href={`/Product/Search?category=bebidas`}
                     >
                         Bebidas
                         <Image
@@ -108,7 +108,7 @@ export const CarouselCategories = (props: Product) => {
                         spaceBetween={50}
                         slidesPerView={qtdCarousel}
                     >
-                        {props.data.map((carroseul, index) => ((carroseul.categorie === "bebidas" && carroseul.position === 'entrada') ?
+                        {props && props.data.map((carroseul, index) => ((carroseul.categorie === "bebidas" && carroseul.position === 'entrada') ?
                             <SwiperSlide key={index}>
                                 <Link href={`/Itens?id=${carroseul.id}`}>
                                     <Image
@@ -130,7 +130,7 @@ export const CarouselCategories = (props: Product) => {
             <div className="lunch">
                 <div className="title">
                     <Link
-                        href={`/Product/seacrh?category=almoco`}
+                        href={`/Product/Search?category=almocos`}
                     >
                         Almoço
                         <Image
@@ -145,7 +145,7 @@ export const CarouselCategories = (props: Product) => {
                         spaceBetween={50}
                         slidesPerView={qtdCarousel}
                     >
-                        {props.data.map((carroseul, index) => ((carroseul.categorie === "almocos" && carroseul.position === 'entrada') ?
+                        {props && props.data.map((carroseul, index) => ((carroseul.categorie === "almocos" && carroseul.position === 'entrada') ?
                             <SwiperSlide key={index}>
                                 <Link href={`/Itens?id=${carroseul.id}`}>
                                     <Image
@@ -167,7 +167,7 @@ export const CarouselCategories = (props: Product) => {
             <div className="dinner">
                 <div className="title">
                     <Link
-                        href={`/Product/seacrh?category=jantas`}
+                        href={`/Product/Search?category=jantas`}
                     >
                         Jantar
                         <Image
@@ -182,7 +182,7 @@ export const CarouselCategories = (props: Product) => {
                         spaceBetween={50}
                         slidesPerView={qtdCarousel}
                     >
-                        {props.data.map((carroseul, index) => ((carroseul.categorie === "jantas" && carroseul.position === 'entrada') ?
+                        {props && props.data.map((carroseul, index) => ((carroseul.categorie === "jantas" && carroseul.position === 'entrada') ?
                             <SwiperSlide key={index}>
                                 <Link href={`/Itens?id=${carroseul.id}`}>
                                     <Image

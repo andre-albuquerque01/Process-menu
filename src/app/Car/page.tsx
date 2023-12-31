@@ -1,55 +1,87 @@
 "use client";
-import pao from '../../../public/pao.jpg'
 import trash from '../../../public/trash.png'
 import Image from "next/image";
 import "./style.css";
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useCarContext } from '../context/CarContext';
+import { useCookies } from 'react-cookie';
+import { Order } from '../lib/Order';
 
 
 export default function Car() {
-    const [cardCredOpen, setCardCredOpen] = useState<boolean>(false);
-    const [cardDebOpen, setCardDebOpen] = useState<boolean>(false);
+    const [cookies] = useCookies(['token', 'userId']);
     const { car, setCar } = useCarContext();
     const [valueTotal, setValueTotal] = useState<number>(0);
     const [qtd, setQtd] = useState<number>(0);
-    console.log(car);
+    const [waitTime, setWaitTime] = useState<number>(0);
+    const order = Order();
+    const [data, setData] = useState({
+        products: car,
+        idUser: cookies.userId,
+        formPay: '',
+        qtdItens: 0,
+        table: "",
+        precoTotal: 0,
+        status: "Aberto",
+        impostoTributos: "",
+        nfe: '',
+        tip: '',
+        create_at: '',
+        update_at: '',
+    });
 
-    const calcularTotal = () => {
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setData((prevProduct) => ({
+            ...prevProduct,
+            [name]: value,
+        }));
+    };
+
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        await order.fetchCreateOrder(data);
+        setCar([]);
+    }
+    
+    useEffect(() => {
+        const dateNow = new Date();
+        dateNow.setMinutes(dateNow.getMinutes() - dateNow.getTimezoneOffset());
+        dateNow.setHours(dateNow.getHours());
+        const isoDate = dateNow.toISOString();
+
         let valorTotal: number = 0;
         let qtd: number = 0;
+        let waitTimer: number = 0;
+        let contWaitTime: number = 0;
 
         car.forEach(car => {
-            valorTotal += parseFloat(car.preco.toString()) * (car.qtd_itens);
+            valorTotal += parseFloat(car.price.toString()) * (car.qtd_itens);
             qtd += car.qtd_itens;
+            waitTimer += Number(car.waitTime);
         });
 
+        contWaitTime = (waitTime * qtd) / 1.5;
         setValueTotal(valorTotal);
         setQtd(qtd);
-    }
+        setWaitTime(contWaitTime);
 
-    useEffect(() => {
-        calcularTotal();
-    }, [])
+        setData((prevProduct) => ({
+            ...prevProduct,
+            qtdItens: qtd,
+            precoTotal: valorTotal,
+            create_at: isoDate,
+            update_at: isoDate,
+        }))
+    }, [car])
 
     const handleRemoveItem = (id: string) => {
         const newCar = car.filter(car => car.id !== id);
         setCar(newCar);
     }
 
-    const handleCarCred = () => {
-        setCardCredOpen(!cardCredOpen);
-        setCardDebOpen(false);
-    }
-    const handleCarDeb = () => {
-        setCardDebOpen(!cardDebOpen);
-        setCardCredOpen(false);
-    }
-    const handlePix = () => {
-        setCardDebOpen(false);
-        setCardCredOpen(false);
-    }
     return (
         <div className='dadCar'>
             <Head>
@@ -64,16 +96,19 @@ export default function Car() {
                         <div className="item" key={index}>
                             <div className="imageCarItem">
                                 <Image
-                                    src={pao}
-                                    alt={`Img ${index + 1}`}
+                                    src={itens.file_name}
+                                    alt={`Imagem do ${itens.title}`}
+                                    width={120}
+                                    height={120}
                                 />
                             </div>
                             <div className="textItem">
                                 <div className="titleItemCar">{itens.title}</div>
                                 <div className="priceCar">
-                                    R$ <span className='valuePrice'>{itens.preco}</span>
+                                    R$ <span className='valuePrice'>{itens.price}</span>
                                 </div>
                                 <div className="qtd">Quantidade: {itens.qtd_itens}</div>
+                                <div className="obs">Observação: <span>{itens.observation}</span></div>
                             </div>
                             <div className="trashItem">
                                 <button onClick={() => handleRemoveItem(itens.id)}>
@@ -87,117 +122,38 @@ export default function Car() {
                     ))}
                 </div>
                 <div className="pay">
-                    <div className="totalPay">
-                        Total: R$ {valueTotal}
-                    </div>
-                    <div className="qtdItensPay">
-                        Quantidade de itens: {qtd}
-                    </div>
-                    <div className="tablePay">
-                        Mesa: <input type="number" min="0" />
-                    </div>
-                    <div className="gorjeta">
-                        Extras: <input type="number" step="0.1" min="0" />
-                    </div>
-                    <div className="formPay">
-                        <div className="titlePay">
-                            Forma de pagamento:
+                    <form onSubmit={handleSubmit}>
+                        <div className="totalPay">
+                            Total: R$ {valueTotal}
                         </div>
-                        <div className="metodos">
-                            <div className="pix">
-                                <input type="radio" name="payMethod" id="pix" value="pix" /><label htmlFor="pix" onClick={handlePix}> Pix</label>
-                            </div>
-                            <div className="cardCred">
-                                <input type="radio" name="payMethod" id="cartaoCredito" value="cartaoCredito" /><label htmlFor="cartaoCredito" onClick={handleCarCred}> Cartão de Crédito</label>
-                            </div>
-                            <div className="cardDeb">
-                                <input type="radio" name="payMethod" id="cartaoDebito" value="cartaoDebito" /><label htmlFor="cartaoDebito" onClick={handleCarDeb} > Cartão de Débito</label>
-                            </div>
+                        <div className="qtdItensPay">
+                            Quantidade de itens: {qtd}
                         </div>
-                    </div>
-                    {cardCredOpen ?
-                        <div className="card">
-                            <div className="titleCard">
-                                Cartão de crédito
+                        <div className="qtdItensPay">
+                            Tempo de espera: {waitTime}
+                        </div>
+                        <div className="tablePay">
+                            Mesa: <input type="number" name='table' value={data.table} onChange={handleChange} min="0" required />
+                        </div>
+                        <div className="gorjeta">
+                            Extras: R$<input type="number" name='tip' value={data.tip} onChange={handleChange} step="0.1" min="0" required />
+                        </div>
+                        <div className="formPay">
+                            <div className="titlePay">
+                                Forma de pagamento:
                             </div>
-                            <div className="nameCard">
-                                <div className="lableName">
-                                    <label htmlFor="name">Nome que está no cartão<span>*</span></label>
-                                </div>
-                                <div className="inputName">
-                                    <input type="text" name="" id="name" required />
-                                </div>
-                            </div>
-                            <div className="numberCard">
-                                <div className="lableNumber">
-                                    <label htmlFor="number">Numero do cartão<span>*</span></label>
-                                </div>
-                                <div className="inputNumber">
-                                    <input type="text" name="" id="number" required />
-                                </div>
-                            </div>
-                            <div className="dateCard">
-                                <div className="lableDate">
-                                    <label htmlFor="date">Data de vencimento<span>*</span></label>
-                                </div>
-                                <div className="inputDate">
-                                    <input type="date" name="" id="date" max="2050-12-31" required />
-                                </div>
-                            </div>
-                            <div className="cvcCard">
-                                <div className="lableCVC">
-                                    <label htmlFor="cvc">CVC<span>*</span></label>
-                                </div>
-                                <div className="inputCVC">
-                                    <input type="number" name="" id="cvc" required />
+                            <div className="metodos">
+                                <div className="pix">
+                                    <input type="radio" name="formPay" id="pix" value={data.formPay} onChange={handleChange} required /><label htmlFor="pix"> Pix</label>
                                 </div>
                             </div>
                         </div>
-                        :
-                        ''}
-                    {cardDebOpen ?
-                        <div className="card">
-                            <div className="titleCard">
-                                Cartão de Débito
-                            </div>
-                            <div className="nameCard">
-                                <div className="lableName">
-                                    <label htmlFor="name">Nome que está no cartão<span>*</span></label>
-                                </div>
-                                <div className="inputName">
-                                    <input type="text" name="" id="name" required />
-                                </div>
-                            </div>
-                            <div className="numberCard">
-                                <div className="lableNumber">
-                                    <label htmlFor="number">Numero do cartão<span>*</span></label>
-                                </div>
-                                <div className="inputNumber">
-                                    <input type="text" name="" id="number" required />
-                                </div>
-                            </div>
-                            <div className="dateCard">
-                                <div className="lableDate">
-                                    <label htmlFor="date">Data de vencimento<span>*</span></label>
-                                </div>
-                                <div className="inputDate">
-                                    <input type="date" name="" id="date" max="2050-12-31" required />
-                                </div>
-                            </div>
-                            <div className="cvcCard">
-                                <div className="lableCVC">
-                                    <label htmlFor="cvc">CVC<span>*</span></label>
-                                </div>
-                                <div className="inputCVC">
-                                    <input type="number" name="" id="cvc" required />
-                                </div>
-                            </div>
+                        <div className="payBtn">
+                            {qtd < 0 ?
+                                <button type='submit' disabled>Finalizar</button>
+                                : <button type='submit'>Finalizar</button>}
                         </div>
-                        :
-                        ''}
-                    <div className="payBtn">
-                        <button>Finalizar</button>
-                    </div>
+                    </form>
                 </div>
             </div >
 

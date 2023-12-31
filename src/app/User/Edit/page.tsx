@@ -27,13 +27,15 @@ export default function EditUser() {
         },
         toke: cookies.token
     });
+
     const fetchUser = async () => {
-        const value = await user.fetchGetOneUser(id);
+        const value = await user.fetchGetOneUser();
         if (!value.addressUser || typeof value.addressUser !== 'object') {
             value.addressUser = {};
         }
         setData(value);
     }
+    
 
     useEffect(() => {
         fetchUser();
@@ -64,7 +66,6 @@ export default function EditUser() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         await user.fetchUsers({ id, body: data });
-
     }
 
     return (

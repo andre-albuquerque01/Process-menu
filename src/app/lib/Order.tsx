@@ -1,3 +1,5 @@
+import { useCookies } from "react-cookie";
+
 type Order = {
     id: string,
     body: object,
@@ -17,8 +19,10 @@ type Order = {
 }
 
 export const Order = () => {
+    const [cookies] = useCookies(['token', 'userId']);
     const baseUrl = "http://localhost:8080/order";
-    const token = "";
+    const token = cookies.token;
+    const user = cookies.userId;
 
     // Para mostrar todos os pedidos
     const fetchGetAllOrders = async () => {
@@ -52,7 +56,22 @@ export const Order = () => {
         }
     }
 
-     // Para mostrar o pedido pelo numero
+     // Para mostrar o pedido pelo usuário
+    const fetchGetByUserOrders = async () => {
+        try {
+            const requisicao = await fetch(`${baseUrl}/userId/${user}`, {
+                method: "GET",
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                }
+            });
+            const reqJson = await requisicao.json();
+            return reqJson;
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
     const fetchGetBySearchOrder = async ({ numberOrder }: Order) => {
         try {
             const requisicao = await fetch(`${baseUrl}/searchOrder/${numberOrder}`, {
@@ -68,7 +87,7 @@ export const Order = () => {
         }
     }
 
-    // 
+    
     const fetchCreateOrder = async (body: Order) => {
         try {
             const req = await fetch(`${baseUrl}/register`, {
@@ -154,6 +173,7 @@ export const Order = () => {
     return {
         fetchGetAllOrders,
         fetchGetOrderById,
+        fetchGetByUserOrders,
         fetchGetBySearchOrder,
         fetchCreateOrder,
         fetchUpdateOrder,
