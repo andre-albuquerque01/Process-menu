@@ -1,42 +1,41 @@
-.ordersEnd {
+.ordersEndList {
     width: 50%;
     margin: 15px auto;
     min-height: calc(100vh - 295px);
 }
 
-.titleMyOrders {
+.titleMyOrdersList {
     font-size: 19px;
     margin-bottom: 10px;
     font-weight: bold;
 }
 
-.orderCard {
+.orderCardList {
     display: flex;
     justify-content: space-around;
     border: 1px solid #585858;
     margin: 5px 0;
 }
 
-.orderInfo {
+.orderInfoList {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
 }
 
-.informationOrder {
+.informationOrderList {
     width: 50%;
 }
 
-.informationOrder img {
+.informationOrderList img {
     width: 120px;
     height: 120px;
     object-fit: contain;
     margin-right: 15px;
 }
 
-
-.segPart {
+.segPartList {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -45,16 +44,16 @@
     text-align: center;
 }
 
-.dataNumberOrder{
+.dataNumberOrderList{
     font-size: 13px;
 }
 
 @media (max-width: 480px) {
-    .ordersEnd {
+    .ordersEndList {
         width: 95%;
     }
 
-    .segPart {
+    .segPartList {
         width: 30%;
     }
 }

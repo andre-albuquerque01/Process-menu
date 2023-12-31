@@ -3,8 +3,10 @@ import Head from "next/head";
 import "./style.css"
 import { useEffect, useState } from "react";
 import { Product } from "@/app/lib/Product";
+import { useCookies } from "react-cookie";
 
 export default function EditProduct() {
+    const [cookies] = useCookies(['token', 'userId', 'user']);
     const product = Product();
     const [data, setData] = useState({
         id: '',
@@ -21,12 +23,18 @@ export default function EditProduct() {
         file_name: ''
     });
 
+    const handleLogout = () => {
+        if (cookies.token === undefined)
+            window.location.href = '/User/Login';
+    }
+    
     const fetchData = async () => {
         const fetchData = await product.fetchData();
         setData(fetchData);
     }
-
+    
     useEffect(() => {
+        handleLogout();
         fetchData()
     }, [])
 

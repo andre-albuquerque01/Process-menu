@@ -28,6 +28,11 @@ export default function EditUser() {
         token: ''
     });
 
+    const handleLogout = () => {
+        if (cookies.token === undefined)
+            window.location.href = '/User/Login';
+    }
+
     const fetchUser = async () => {
         const value = await user.fetchGetOneUser();
         if (!value.addressUser || typeof value.addressUser !== 'object') {
@@ -36,8 +41,8 @@ export default function EditUser() {
         setData(value);
     }
     
-
     useEffect(() => {
+        handleLogout();
         fetchUser();
     }, [])
 

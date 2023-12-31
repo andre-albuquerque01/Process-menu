@@ -1,11 +1,29 @@
+"use client";
 import Image from "next/image"
 import iconUser from "../../../../public/userPerson.png"
 import iconCar from "../../../../public/carrinho.png"
 import iconArrowDown from "../../../../public/arrowDown.png"
 import Link from "next/link"
 import "./style.css"
+import { useCookies } from "react-cookie";
+import { useEffect, useState } from "react";
 
 export const Menu = () => {
+    const [cookies, setCookies, removeCookie] = useCookies(['token', 'userId', 'user']);
+
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
+
+    const handleLogout = () => {
+        removeCookie('token');
+        removeCookie('userId');
+        removeCookie('user');
+        window.location.href = '/';
+    }
+
     return (
         <div className="menu">
             <ul className="menu">
@@ -27,9 +45,11 @@ export const Menu = () => {
 
                     <ul className="insideList">
                         <li><Link href="/">Inicio</Link></li>
-                        <li><Link href="/User/Login">Login</Link></li>
-                        <li><Link href="/Orders">Meus pedidos</Link></li>
-                        <li><Link href="/User/Edit">Configuração</Link></li>
+                        {isClient && cookies.token === undefined ? (
+                            <li><Link href="/User/Login">Login</Link></li>
+                        ) :
+                            <><li className="logoutHandle" onClick={handleLogout}><Link href="">Sair</Link></li><li><Link href="/Orders">Meus pedidos</Link></li><li><Link href="/Configuration">Configuração</Link></li></>
+                        }
                     </ul>
                 </li>
                 <li>

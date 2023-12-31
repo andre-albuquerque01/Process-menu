@@ -10,6 +10,7 @@ export default function Search() {
     const product = Product();
     const [data, setData] = useState<string[]>([]);
     const [nameSearch, setNameSearch] = useState('');
+    const [state, setState] = useState<boolean>(false);
 
     const fetchSearchCategory = async (category) => {
         const fetchSearchCategory = await product.fetchSearchCategory(category);
@@ -35,33 +36,43 @@ export default function Search() {
         const categoryParms = params.get('category');
         const searchParms = params.get('search');
 
-
         if ((searchParms === '' && categoryParms !== '') || (searchParms === null && categoryParms !== null)) {
             fetchSearchCategory(categoryParms);
             setNameSearch(`Categoria -> ${categoryParms?.toUpperCase()}`);
+            setState(true)
+            console.log('Categoria');
         } else if ((searchParms !== '' && categoryParms === '') || (searchParms !== null && categoryParms === null)) {
             const upCaseSearchParam = capitalizeFirstLetter(searchParms);
             fetchSearchProduct(upCaseSearchParam);
             setNameSearch(upCaseSearchParam);
+            setState(true)
+            console.log('Search');
         } else {
             fetchAllData();
             setNameSearch('Geral');
             console.log("Foi geral");
         }
     }
-
+    
     useEffect(() => {
         handleIdUrl();
     }, []);
+    
+    useEffect(() => {
+        if(state){
+            handleIdUrl();
+            setState(false)
+        }
+    }, [state]);
 
     return (
         <div className="centralSearch">
             <div className="searchTitle">
                 <p>Pesquisado: {nameSearch}</p>
             </div>
-            <div className="cardProduct">
-                {data && data.length > 0 ? data.map((datas, index) => (
-                    <div className="card" key={index}>
+            {data && data.length > 0 ? data.map((datas, index) => (
+                <div className="cardProduct" key={index}>
+                    <div className="card" >
                         <Link href={`/Itens?id=${datas.id}`} >
                             <div className="imageSearch">
                                 <Image
@@ -89,13 +100,13 @@ export default function Search() {
                                         width={18}
                                         height={18}
                                         alt="Temporizado" />
-                                    {datas.waitTime}
+                                    {datas.waitTime} minutos
                                 </div>
                             </div>
                         </Link>
                     </div>
-                )) : <div className="nothingProdcut"><h1>Nenhum produto encontrado</h1></div>}
-            </div>
+                </div>
+            )) : <div className="nothingProdcut"><h1>Nenhum produto encontrado</h1></div>}
         </div >
     );
 }

@@ -1,10 +1,12 @@
 'use client';
 import Head from "next/head"
 import "./style.css"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Product } from "@/app/lib/Product";
+import { useCookies } from "react-cookie";
 
 export default function CadProduct() {
+    const [cookies] = useCookies(['token', 'userId', 'user']);
     const product = Product();
     const [data, setData] = useState({
         title: '',
@@ -18,6 +20,15 @@ export default function CadProduct() {
         position: '',
         file_name: ''
     });
+
+    const handleLogout = () => {
+        if (cookies.token === undefined)
+            window.location.href = '/User/Login';
+    }
+
+    useEffect(()=>{
+        handleLogout();
+    },[]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;

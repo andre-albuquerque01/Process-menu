@@ -2,19 +2,27 @@
 import "./style.css";
 import Head from "next/head";
 import { User } from "@/app/lib/User";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 export default function EditPassword() {
     const [cookies] = useCookies(['token', 'userId']);
     const id = cookies.userId;
-
-    const user = User();
-
     const [data, setData] = useState({
         newPassword: '',
         confirmpassword: '',
         password: ''
     });
+    const user = User();
+
+    const handleLogout = () => {
+        if (cookies.token === undefined)
+            window.location.href = '/User/Login';
+    }
+
+    useEffect(() => {
+        handleLogout();
+    }, []);
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -26,8 +34,11 @@ export default function EditPassword() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (data.confirmpassword === data.newPassword)
+        if (data.confirmpassword === data.newPassword) {
             await user.fetchUsersPass({ id, body: data });
+        } else {
+            alert("As senhas são diferentes")
+        }
     }
 
     return (

@@ -21,7 +21,7 @@ export const MenuMobile = () => {
     return (
         <div className="menuMobile">
             <div className="menuStart">
-            <h1>Menu</h1>
+                <h1>Menu</h1>
                 <Image
                     src={logout}
                     width={28}
@@ -62,7 +62,7 @@ export const MenuMobile = () => {
                         width={30}
                         height={30}
                         alt="icone de configuração" />
-                    <Link href="/User/Edit">Configuração</Link>
+                    <Link href="/Configuration">Configuração</Link>
                 </li>
                 <li>
                     <Image
@@ -80,7 +80,7 @@ export const MenuMobile = () => {
                         height={28}
                         alt="icone do carrinho"
                         title="Carrinho" />
-                    <Link href="/">Cardapio</Link>
+                    <p>Cardapio</p>
                     <Image
                         src={iconArrowDown}
                         width={30}
@@ -93,13 +93,14 @@ export const MenuMobile = () => {
                 <ul
                     className={`menuCategories ${isSubMenuVisible ? 'active' : ''}`}
                 >
-                    <li><Link href="/">Promoções</Link></li>
-                    <li><Link href="/">Pizza</Link></li>
-                    <li><Link href="/">Sobremesas</Link></li>
-                    <li><Link href="/">Bebidas</Link></li>
-                    <li><Link href="/">Lanches</Link></li>
-                    <li><Link href="/">Jantas</Link></li>
-                    <li><Link href="/">Outros</Link></li>
+                    <li><Link href="/Product/Search?category=promocoes">Promoções</Link></li>
+                    <li><Link href="/Product/Search?category=pizza">Pizza</Link></li>
+                    <li><Link href="/Product/Search?category=sobremesas">Sobremesas</Link></li>
+                    <li><Link href="/Product/Search?category=bebidas">Bebidas</Link></li>
+                    <li><Link href="/Product/Search?category=lanches">Lanches</Link></li>
+                    <li><Link href="/Product/Search?category=almocos">Almoço</Link></li>
+                    <li><Link href="/Product/Search?category=jantas">Jantas</Link></li>
+                    <li><Link href="/Product/Search?category=outros">Outros</Link></li>
                 </ul>
             </ul>
             <div className="logoMenu">

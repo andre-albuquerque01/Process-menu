@@ -41,7 +41,9 @@ export const Index = () => {
                         <Image
                             src={logoTake}
                             className="imageTakeThePhone"
-                            alt="Logo marca da empresa" />
+                            alt="Logo marca da empresa"
+                            title="Inicio"
+                            />
                     </Link>
                 </div>
                 <div className="search">

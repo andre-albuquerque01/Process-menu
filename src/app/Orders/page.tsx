@@ -1,23 +1,29 @@
 "use client";
 import Image from "next/image";
 import "./style.css";
-import pao from "../../../public/pao.jpg";
 import { Order } from "../lib/Order";
 import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 
 export default function BackOrder() {
     const [data, setData] = useState([]);
+    const [cookies] = useCookies(['token', 'userId', 'user']);
     const order = Order();
+
+    const handleLogout = () => {
+        if (cookies.token === undefined)
+            window.location.href = '/User/Login';
+    }
 
     const handleGetOrder = async () => {
         const fetchDataMyOrder = await order.fetchGetByUserOrders();
         setData(fetchDataMyOrder);
-        console.log(fetchDataMyOrder);
     }
 
     useEffect(() => {
         handleGetOrder();
-    }, [])
+        handleLogout();
+    }, []);
 
     const updateDate = (updateAt: string) => {
         const dateUpdate = new Date(Date.parse(updateAt));
@@ -38,7 +44,7 @@ export default function BackOrder() {
             </div>
             {data && data.map((itens) => (
                 <div className="orderCard" key={itens.id}>
-                    <div className="informationOrder" >
+                    <div className="informationOrder">
                         {itens.products && itens.products.map((product) => (
                             <div className="orderInfo" key={product.id}>
                                 <div className="imageOrder">
@@ -58,6 +64,14 @@ export default function BackOrder() {
                         ))}
                     </div>
                     <div className="segPart">
+                        {/* <div className="numberOrder">
+                            <div className="NumberOrder">
+                                Número do pedido:
+                            </div>
+                            <div className="dataNumberOrder">
+                                {itens.numberOrder}
+                            </div>
+                        </div> */}
                         <div className="finishOrder">
                             <div className="finishedOrder">
                                 Concluído em:
@@ -74,6 +88,7 @@ export default function BackOrder() {
                                 R$ {itens.precoTotal}
                             </div>
                         </div>
+
                     </div>
                 </div>
             ))}

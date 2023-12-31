@@ -24,7 +24,7 @@ type User = {
 
 
 export const User = () => {
-    const [cookies, setCookie] = useCookies(['token', 'userId']);
+    const [cookies, setCookie, removeCookie] = useCookies(['token', 'userId', 'user']);
 
     const baseUrl = "http://localhost:8080/auth";
     const token = cookies.token;
@@ -42,6 +42,9 @@ export const User = () => {
             return data;
         } catch (err) {
             console.error(err);
+            removeCookie('token');
+            removeCookie('userId');
+            removeCookie('user');
         }
     }
 
@@ -57,16 +60,21 @@ export const User = () => {
             if (req.ok) {
                 const data = await req.json();
                 setCookie('token', data.token, {
-                    // expires: new Date(Date.now() + 3600),
-                    // secure: true,
-                    // path: "/"
+                    expires: new Date(Date.now() + 3600),
+                    secure: true,
+                    path: "/"
                 });
                 setCookie('userId', data.id, {
-                    // expires: new Date(Date.now() + 3600),
-                    // secure: true,
-                    // path: "/"
+                    expires: new Date(Date.now() + 3600),
+                    secure: true,
+                    path: "/"
                 });
-                window.location.href = "/Car";
+                setCookie('user', data.role, {
+                    expires: new Date(Date.now() + 3600),
+                    secure: true,
+                    path: "/"
+                });
+                window.location.href = "/Configuration";
             } else {
                 window.alert("E-mail ou senha inválido");
             }
@@ -87,6 +95,7 @@ export const User = () => {
             if (req.ok) {
                 console.log("Sucess");
                 alert("Cadastrado com sucesso!")
+                window.location.href = "/User/Login";
             } else {
                 console.log("Error");
             }
@@ -108,7 +117,7 @@ export const User = () => {
             if (req.ok) {
                 console.log("Sucess");
                 alert("E-mail enviado para seu endereço de e-mail");
-                window.location.href = "/User/Login"
+                window.location.href = "/User/Login";
             } else {
                 console.log("Error");
             }
@@ -119,8 +128,6 @@ export const User = () => {
     }
 
     const fetchUsers = async ({ body }: User) => {
-        console.log(body);
-
         try {
             const req = await fetch(`${baseUrl}/updateUser/${user}`, {
                 method: "PUT",
@@ -132,11 +139,16 @@ export const User = () => {
             });
             if (req.ok) {
                 console.log("Sucess");
+                window.location.href = "/Configuration";
             } else {
                 console.log("Error");
+                alert('E-mail já usado ou senha invalida')
             }
         } catch (error) {
             console.error(error);
+            removeCookie('token');
+            removeCookie('userId');
+            removeCookie('user');
         }
     }
 
@@ -152,12 +164,17 @@ export const User = () => {
             });
             if (req.ok) {
                 console.log("Sucess");
+                alert("Senha alterada com sucesso")
+                window.location.href = "/Configuration";
             } else {
                 console.log("Error");
+                alert("Senhas invalidas")
             }
         } catch (error) {
             console.error(error);
-
+            removeCookie('token');
+            removeCookie('userId');
+            removeCookie('user');
         }
     }
 

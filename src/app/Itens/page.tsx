@@ -106,7 +106,7 @@ export default function Itens() {
                                 {productData.waitTime} minutos
                             </div>
                         </div>
-                        <div className="rate">
+                        {/* <div className="rate">
                             <div className="title">
                                 Avaliação
                             </div>
@@ -132,7 +132,7 @@ export default function Itens() {
                                     />
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="obs">
                             <div className="title">
                                 Observação

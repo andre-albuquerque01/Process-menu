@@ -13,9 +13,9 @@ export const Footer = () => {
                 <div className="help">
                     <h3>Ajuda</h3>
                     <ul>
-                        <li><Link href="/">Sobre minha conta</Link></li>
-                        <li><Link href="/">Suporte</Link></li>
-                        <li><Link href="/">Outros</Link></li>
+                        <li><Link href="/Configuration">Configuração</Link></li>
+                        <li><Link href="/Orders">Meus pedidos</Link></li>
+                        <li><Link href="/Car">Carrinho</Link></li>
                     </ul>
                 </div>
                 <div className="midiasSocial">

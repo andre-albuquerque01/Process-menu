@@ -1,0 +1,32 @@
+.centerConfig {
+    height: calc(100vh - 298px);
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    gap: 1.7rem;
+    margin-top: 25px;
+}
+
+.titleConfig {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.styledDiv {
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.styledDiv a {
+    text-decoration: none;
+    color: #000;
+    margin-left: 5px;
+}
+
+.styledDiv a:hover {
+    text-decoration: underline;
+    font-size: 17px;
+    color: #000;
+}

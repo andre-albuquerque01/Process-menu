@@ -10,7 +10,7 @@ type Order = {
     qtdItens: string,
     table: string,
     precoTotal: number,
-    status: string,
+    stats: string,
     impostoTributos: number,
     nfe: string,
     dateOrder: string,
@@ -19,7 +19,7 @@ type Order = {
 }
 
 export const Order = () => {
-    const [cookies] = useCookies(['token', 'userId']);
+    const [cookies, setCookies, removeCookie]  = useCookies(['token', 'userId', 'user']);
     const baseUrl = "http://localhost:8080/order";
     const token = cookies.token;
     const user = cookies.userId;
@@ -37,6 +37,9 @@ export const Order = () => {
             return reqJson;
         } catch (err) {
             console.error(err);
+            removeCookie('token');
+            removeCookie('userId');
+            removeCookie('user');
         }
     }
 
@@ -53,10 +56,13 @@ export const Order = () => {
             return reqJson;
         } catch (err) {
             console.error(err);
+            removeCookie('token');
+            removeCookie('userId');
+            removeCookie('user');
         }
     }
 
-     // Para mostrar o pedido pelo usuário
+    // Para mostrar o pedido pelo usuário
     const fetchGetByUserOrders = async () => {
         try {
             const requisicao = await fetch(`${baseUrl}/userId/${user}`, {
@@ -69,6 +75,9 @@ export const Order = () => {
             return reqJson;
         } catch (err) {
             console.error(err);
+            removeCookie('token');
+            removeCookie('userId');
+            removeCookie('user');
         }
     }
 
@@ -84,10 +93,13 @@ export const Order = () => {
             return reqJson;
         } catch (err) {
             console.error(err);
+            removeCookie('token');
+            removeCookie('userId');
+            removeCookie('user');
         }
     }
 
-    
+
     const fetchCreateOrder = async (body: Order) => {
         try {
             const req = await fetch(`${baseUrl}/register`, {
@@ -100,12 +112,15 @@ export const Order = () => {
             });
             if (req.ok) {
                 console.log("Sucess");
+                window.location.href = "/Car/Confirmation";
             } else {
                 console.log("Error");
             }
         } catch (error) {
             console.error(error);
-
+            removeCookie('token');
+            removeCookie('userId');
+            removeCookie('user');
         }
     }
 
@@ -126,11 +141,13 @@ export const Order = () => {
             }
         } catch (error) {
             console.error(error);
-
+            removeCookie('token');
+            removeCookie('userId');
+            removeCookie('user');
         }
     }
 
-    const fetchUpdateStatus = async ({ id, status }: Order) => {
+    const fetchUpdateStatus = async (id: string, stats: Order) => {
         try {
             const req = await fetch(`${baseUrl}/updateStatus/${id}`, {
                 method: "PATCH",
@@ -138,7 +155,7 @@ export const Order = () => {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
                 },
-                body: status,
+                body: JSON.stringify({ stats }),
             });
             if (req.ok) {
                 console.log("Sucess");
@@ -147,7 +164,9 @@ export const Order = () => {
             }
         } catch (error) {
             console.error(error);
-
+            removeCookie('token');
+            removeCookie('userId');
+            removeCookie('user');
         }
     }
 
@@ -166,7 +185,9 @@ export const Order = () => {
             }
         } catch (error) {
             console.error(error);
-
+            removeCookie('token');
+            removeCookie('userId');
+            removeCookie('user');
         }
     }
 

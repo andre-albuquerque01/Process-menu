@@ -9,7 +9,7 @@ type Product = {
 }
 
 export const Product = () => {
-    const [cookies] = useCookies(['token', 'userId']);
+    const [cookies, setCookies, removeCookie]  = useCookies(['token', 'userId', 'user']);
     const baseUrl = "http://localhost:8080/product";
     const token = cookies.token;
 
@@ -72,13 +72,16 @@ export const Product = () => {
                 body: JSON.stringify(body),
             });
             if (req.ok) {
-                console.log("Sucess");
+                console.log("");
+                window.location.href = "/Product/List";
             } else {
-                console.log("Error");
+                console.log("");
             }
         } catch (error) {
             console.error(error);
-
+            removeCookie('token');
+            removeCookie('userId');
+            removeCookie('user');
         }
     }
 
@@ -95,13 +98,15 @@ export const Product = () => {
                 body: JSON.stringify(file_name),
             });
             if (req.ok) {
-                console.log("Sucess");
+                console.log("");
             } else {
-                console.log("Error");
+                console.log("");
             }
         } catch (error) {
             console.error(error);
-
+            removeCookie('token');
+            removeCookie('userId');
+            removeCookie('user');
         }
     }
 
@@ -118,11 +123,15 @@ export const Product = () => {
             });
             if (req.ok) {
                 console.log("Sucess");
+                window.location.href = "/Product/List";
             } else {
                 console.log("Error");
             }
         } catch (error) {
             console.error(error);
+            removeCookie('token');
+            removeCookie('userId');
+            removeCookie('user');
         }
     }
 
@@ -144,7 +153,9 @@ export const Product = () => {
             }
         } catch (error) {
             console.error(error);
-
+            removeCookie('token');
+            removeCookie('userId');
+            removeCookie('user');
         }
     }
 
@@ -164,7 +175,9 @@ export const Product = () => {
             }
         } catch (error) {
             console.error(error);
-
+            removeCookie('token');
+            removeCookie('userId');
+            removeCookie('user');
         }
     }
 
@@ -186,7 +199,9 @@ export const Product = () => {
             }
         } catch (error) {
             console.error(error);
-
+            removeCookie('token');
+            removeCookie('userId');
+            removeCookie('user');
         }
     }
 
@@ -208,7 +223,9 @@ export const Product = () => {
             }
         } catch (error) {
             console.error(error);
-
+            removeCookie('token');
+            removeCookie('userId');
+            removeCookie('user');
         }
     }
 

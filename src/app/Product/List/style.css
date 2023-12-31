@@ -1,28 +1,28 @@
-.centralSearch {
+.centralSearchAlt {
     display: flex;
     flex-direction: column;
 }
 
-.searchTitle {
+.searchTitleAlt {
     display: flex;
     width: 70%;
-    justify-content: start;
+    justify-content: space-between;
     margin: 12px auto;
 }
 
-.cardProduct a {
+.cardProductAlt a {
     width: 100%;
     display: flex;
-    align-items: center;
+    justify-content: space-between;
     text-decoration: none;
     color: #585858;
 }
 
-.cardProduct a :hover {
-    color: #0011ff;
+.corpCardAlt:hover {
+    color: rgb(25, 0, 255);
 }
 
-.card {
+.cardAlt {
     height: 15%;
     max-width: 60%;
     border: 1px solid #585858;
@@ -33,40 +33,51 @@
     flex: 1;
 }
 
-.imageSearch img {
+.etapa1 {
+    display: flex;
+    align-items: center;
+}
+
+.imageSearchAlt img {
     object-fit: contain;
     width: 200px;
     height: 200px;
     margin-left: 15px;
 }
 
-.corpCard {
+.corpCardAlt {
     padding: 20px;
     font-size: 18px;
 }
 
-.titleCar,
-.subTitle,
-.priceCar,
-.temp {
+.titleCarAlt,
+.subTitleAlt,
+.priceCarAlt,
+.tempAlt {
     padding: 5px;
 }
 
-.temp {
+.tempAlt {
     display: flex;
     align-items: center;
     gap: 5px;
 }
 
-.nothingProdcut {
+.nothingProdcutAlt {
     display: flex;
     justify-content: center;
     align-items: center;
     height: calc(100vh - 298px);
 }
 
+.imageAlt {
+    display: flex;
+    gap: 5px;
+    margin-top: 28px;
+}
+
 @media (max-width: 480px) {
-    .cardProduct a {
+    .cardProductAlt a {
         width: 100%;
         display: flex;
         flex-direction: column;
@@ -74,11 +85,25 @@
         text-decoration: none;
     }
 
-    .searchTitle {
+    .etapa1 {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+    }
+
+    .imageAlt {
+        display: flex;
+        gap: 5px;
+        margin: 20px 0;
+    }
+
+    .searchTitleAlt {
         width: 95%;
     }
 
-    .nothingProdcut {
+    .nothingProdcutAlt {
         text-align: center;
     }
 }
