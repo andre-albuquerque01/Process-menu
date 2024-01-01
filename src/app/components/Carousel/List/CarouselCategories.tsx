@@ -71,7 +71,7 @@ export const CarouselCategories = (props: Product) => {
                         spaceBetween={50}
                         slidesPerView={qtdCarousel}
                     >
-                        {props && props.data.map((carroseul, index) => ((carroseul.categorie === "lanches" && carroseul.position === 'entrada') ?
+                        {props && props.data.map((carroseul, index) => ((carroseul.categorie === "lanches" && carroseul.position === 'entrada' && carroseul.status) ?
                             <SwiperSlide key={index}>
                                 <Link href={`/Itens?id=${carroseul.id}`}>
                                     <Image
@@ -108,7 +108,7 @@ export const CarouselCategories = (props: Product) => {
                         spaceBetween={50}
                         slidesPerView={qtdCarousel}
                     >
-                        {props && props.data.map((carroseul, index) => ((carroseul.categorie === "bebidas" && carroseul.position === 'entrada') ?
+                        {props && props.data.map((carroseul, index) => ((carroseul.categorie === "bebidas" && carroseul.position === 'entrada' && carroseul.status) ?
                             <SwiperSlide key={index}>
                                 <Link href={`/Itens?id=${carroseul.id}`}>
                                     <Image
@@ -145,7 +145,7 @@ export const CarouselCategories = (props: Product) => {
                         spaceBetween={50}
                         slidesPerView={qtdCarousel}
                     >
-                        {props && props.data.map((carroseul, index) => ((carroseul.categorie === "almocos" && carroseul.position === 'entrada') ?
+                        {props && props.data.map((carroseul, index) => ((carroseul.categorie === "almocos" && carroseul.position === 'entrada' && carroseul.status) ?
                             <SwiperSlide key={index}>
                                 <Link href={`/Itens?id=${carroseul.id}`}>
                                     <Image
@@ -182,7 +182,7 @@ export const CarouselCategories = (props: Product) => {
                         spaceBetween={50}
                         slidesPerView={qtdCarousel}
                     >
-                        {props && props.data.map((carroseul, index) => ((carroseul.categorie === "jantas" && carroseul.position === 'entrada') ?
+                        {props && props.data.map((carroseul, index) => ((carroseul.categorie === "jantas" && carroseul.position === 'entrada' && carroseul.status) ?
                             <SwiperSlide key={index}>
                                 <Link href={`/Itens?id=${carroseul.id}`}>
                                     <Image

@@ -35,31 +35,27 @@ export default function Search() {
         const params = new URLSearchParams(window.location.search);
         const categoryParms = params.get('category');
         const searchParms = params.get('search');
-
         if ((searchParms === '' && categoryParms !== '') || (searchParms === null && categoryParms !== null)) {
             fetchSearchCategory(categoryParms);
             setNameSearch(`Categoria -> ${categoryParms?.toUpperCase()}`);
-            setState(true)
-            console.log('Categoria');
+            setState(true);
         } else if ((searchParms !== '' && categoryParms === '') || (searchParms !== null && categoryParms === null)) {
             const upCaseSearchParam = capitalizeFirstLetter(searchParms);
             fetchSearchProduct(upCaseSearchParam);
             setNameSearch(upCaseSearchParam);
-            setState(true)
-            console.log('Search');
+            setState(true);
         } else {
             fetchAllData();
             setNameSearch('Geral');
-            console.log("Foi geral");
         }
     }
-    
+
     useEffect(() => {
         handleIdUrl();
     }, []);
-    
+
     useEffect(() => {
-        if(state){
+        if (state) {
             handleIdUrl();
             setState(false)
         }

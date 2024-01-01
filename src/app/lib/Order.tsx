@@ -19,7 +19,7 @@ type Order = {
 }
 
 export const Order = () => {
-    const [cookies, setCookies, removeCookie]  = useCookies(['token', 'userId', 'user']);
+    const [cookies, setCookies, removeCookie] = useCookies(['token', 'userId', 'user']);
     const baseUrl = "http://localhost:8080/order";
     const token = cookies.token;
     const user = cookies.userId;
@@ -37,9 +37,6 @@ export const Order = () => {
             return reqJson;
         } catch (err) {
             console.error(err);
-            removeCookie('token');
-            removeCookie('userId');
-            removeCookie('user');
         }
     }
 
@@ -56,9 +53,6 @@ export const Order = () => {
             return reqJson;
         } catch (err) {
             console.error(err);
-            removeCookie('token');
-            removeCookie('userId');
-            removeCookie('user');
         }
     }
 
@@ -75,9 +69,6 @@ export const Order = () => {
             return reqJson;
         } catch (err) {
             console.error(err);
-            removeCookie('token');
-            removeCookie('userId');
-            removeCookie('user');
         }
     }
 
@@ -93,9 +84,6 @@ export const Order = () => {
             return reqJson;
         } catch (err) {
             console.error(err);
-            removeCookie('token');
-            removeCookie('userId');
-            removeCookie('user');
         }
     }
 
@@ -118,9 +106,6 @@ export const Order = () => {
             }
         } catch (error) {
             console.error(error);
-            removeCookie('token');
-            removeCookie('userId');
-            removeCookie('user');
         }
     }
 
@@ -141,13 +126,10 @@ export const Order = () => {
             }
         } catch (error) {
             console.error(error);
-            removeCookie('token');
-            removeCookie('userId');
-            removeCookie('user');
         }
     }
 
-    const fetchUpdateStatus = async (id: string, stats: Order) => {
+    const fetchUpdateStatus = async (id: string, body: object) => {
         try {
             const req = await fetch(`${baseUrl}/updateStatus/${id}`, {
                 method: "PATCH",
@@ -155,7 +137,7 @@ export const Order = () => {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
                 },
-                body: JSON.stringify({ stats }),
+                body: JSON.stringify(body),
             });
             if (req.ok) {
                 console.log("Sucess");
@@ -164,9 +146,6 @@ export const Order = () => {
             }
         } catch (error) {
             console.error(error);
-            removeCookie('token');
-            removeCookie('userId');
-            removeCookie('user');
         }
     }
 
@@ -185,9 +164,6 @@ export const Order = () => {
             }
         } catch (error) {
             console.error(error);
-            removeCookie('token');
-            removeCookie('userId');
-            removeCookie('user');
         }
     }
 

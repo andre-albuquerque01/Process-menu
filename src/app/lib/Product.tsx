@@ -9,7 +9,7 @@ type Product = {
 }
 
 export const Product = () => {
-    const [cookies, setCookies, removeCookie]  = useCookies(['token', 'userId', 'user']);
+    const [cookies, setCookies, removeCookie] = useCookies(['token', 'userId', 'user']);
     const baseUrl = "http://localhost:8080/product";
     const token = cookies.token;
 
@@ -79,9 +79,6 @@ export const Product = () => {
             }
         } catch (error) {
             console.error(error);
-            removeCookie('token');
-            removeCookie('userId');
-            removeCookie('user');
         }
     }
 
@@ -104,9 +101,6 @@ export const Product = () => {
             }
         } catch (error) {
             console.error(error);
-            removeCookie('token');
-            removeCookie('userId');
-            removeCookie('user');
         }
     }
 
@@ -129,9 +123,6 @@ export const Product = () => {
             }
         } catch (error) {
             console.error(error);
-            removeCookie('token');
-            removeCookie('userId');
-            removeCookie('user');
         }
     }
 
@@ -153,9 +144,6 @@ export const Product = () => {
             }
         } catch (error) {
             console.error(error);
-            removeCookie('token');
-            removeCookie('userId');
-            removeCookie('user');
         }
     }
 
@@ -175,9 +163,6 @@ export const Product = () => {
             }
         } catch (error) {
             console.error(error);
-            removeCookie('token');
-            removeCookie('userId');
-            removeCookie('user');
         }
     }
 
@@ -199,22 +184,18 @@ export const Product = () => {
             }
         } catch (error) {
             console.error(error);
-            removeCookie('token');
-            removeCookie('userId');
-            removeCookie('user');
         }
     }
 
-    // Para diminuir a quantidade de itens no produto
-    const fetchProductQtd = async ({ id, body }: Product) => {
+    // Para dar alterar o status do produto
+    const fetchUpdateStatus = async (id: Product) => {
         try {
-            const req = await fetch(`${baseUrl}/update/qtd/${id}`, {
+            const req = await fetch(`${baseUrl}/updateStatus/${id}`, {
                 method: "PATCH",
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`,
                 },
-                body: JSON.stringify(body),
             });
             if (req.ok) {
                 console.log("Sucess");
@@ -223,9 +204,27 @@ export const Product = () => {
             }
         } catch (error) {
             console.error(error);
-            removeCookie('token');
-            removeCookie('userId');
-            removeCookie('user');
+        }
+    }
+
+    // Para diminuir a quantidade de itens no produto
+    const fetchProductQtd = async (id: Product, qtd_itens: number) => {
+        try {
+            const req = await fetch(`${baseUrl}/update/qtd/${id}`, {
+                method: "PATCH",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                body: JSON.stringify(qtd_itens),
+            });
+            if (req.ok) {
+                console.log("Sucess");
+            } else {
+                console.log("Error");
+            }
+        } catch (error) {
+            console.error(error);
         }
     }
 
@@ -240,6 +239,7 @@ export const Product = () => {
         fetchAlt,
         fetchDelete,
         fetchLike,
+        fetchUpdateStatus,
         fetchProductQtd
     }
 }

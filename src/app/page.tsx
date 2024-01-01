@@ -4,6 +4,7 @@ import { Categories } from "@/app/components/Categories/Categories";
 import { CarouselCategories } from "./components/Carousel/List/CarouselCategories";
 import { useEffect, useState } from "react";
 import { Product } from "./lib/Product";
+import "./globals.css";
 
 export default function Home() {
   const product = Product();
@@ -20,10 +21,10 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    <div className="indexCarroseul">
       <Categories  />
       <Carousel data={data}/>
       <CarouselCategories data={data}/>
-    </>
+    </div>
   )
 }

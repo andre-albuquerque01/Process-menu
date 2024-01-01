@@ -4,16 +4,42 @@
     min-height: calc(100vh - 295px);
 }
 
+.choiceStatus {
+    gap: 0 5rem;
+}
+
+.choiceStatus button {
+    padding: 4px 14px;
+    background-color: #fff;
+    border: 1px solid #585858;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+.choiceStatus button:hover {
+    border: none;
+    color: #fff;
+    background-color: #00f;
+}
+
+.secondBtn {
+    margin-left: 5px;
+}
+
 .titleMyOrdersList {
     font-size: 19px;
     margin-bottom: 10px;
     font-weight: bold;
 }
 
+.dadOrder {
+    border: 1px solid #585858;
+    margin: 5px 0;
+}
+
 .orderCardList {
     display: flex;
     justify-content: space-around;
-    border: 1px solid #585858;
     margin: 5px 0;
 }
 
@@ -44,8 +70,13 @@
     text-align: center;
 }
 
-.dataNumberOrderList{
+.dataNumberOrderList {
     font-size: 13px;
+}
+
+.numberOrderCard{
+    text-align: center;
+    margin-bottom: 5px;
 }
 
 @media (max-width: 480px) {

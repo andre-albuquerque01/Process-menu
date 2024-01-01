@@ -14,6 +14,8 @@ export default function Alt() {
     const [cookies] = useCookies(['token', 'userId', 'user']);
     const [data, setData] = useState<string[]>([]);
     const [state, setState] = useState<boolean>(false);
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const itemsPerPage = 15;
 
     const handleLogout = () => {
         if (cookies.token === undefined)
@@ -26,6 +28,8 @@ export default function Alt() {
     }
 
     const handleDelete = async (id: string) => {
+        // e.preventDefault();
+        alert('Produto removido')
         await product.fetchDelete(id);
         setState(true)
     }
@@ -42,13 +46,17 @@ export default function Alt() {
         }
     }, [state]);
 
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+
     return (
         <div className="centralSearchAlt">
             <div className="searchTitleAlt">
                 <p>Produtos cadastrados</p>
                 <Link href="/Product/Cad">Cadastrar produto</Link>
             </div>
-            {data && data.length > 0 ? data.map((datas, index) => (
+            {currentItems && currentItems.length > 0 ? currentItems.map((datas, index) => (datas.status && (
                 <div className="cardProductAlt" key={index}>
                     <div className="cardAlt" >
                         <Link href={`/Itens?id=${datas.id}`} >
@@ -84,29 +92,33 @@ export default function Alt() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="imageAlt">
-                                <Link href={`/Product/Edit?id=${datas.id}`}>
-                                    <Image
-                                        src={edit}
-                                        alt="Editar o produto"
-                                        width={28}
-                                        height={28}
-                                        title="Editar o produto"
-                                    />
-                                </Link>
+                        </Link>
+                        <div className="imageAlt">
+                            <Link href={`/Product/Edit?id=${datas.id}`}>
                                 <Image
-                                    src={trash}
-                                    alt="Excluir o produto"
+                                    src={edit}
+                                    alt="Editar o produto"
                                     width={28}
                                     height={28}
-                                    title="Excluir o produto"
-                                    onClick={() => handleDelete(datas.id)}
+                                    title="Editar o produto"
                                 />
-                            </div>
-                        </Link>
+                            </Link>
+                            <Image
+                                src={trash}
+                                alt="Excluir o produto"
+                                width={28}
+                                height={28}
+                                title="Excluir o produto"
+                                onClick={() => handleDelete(datas.id)}
+                            />
+                        </div>
                     </div>
                 </div>
-            )) : <div className="nothingProdcutAlt"><h1>Nenhum produto encontrado</h1></div>}
+            ))) : <div className="nothingProdcutAlt"><h1>Nenhum produto encontrado</h1></div>}
+            <div className="paginationList">
+                <button onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>Anterior</button>
+                <button onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === Math.ceil(data.length / itemsPerPage)}>Próximo</button>
+            </div>
         </div >
     );
 }

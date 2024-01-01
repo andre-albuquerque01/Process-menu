@@ -22,13 +22,15 @@ export default function CadProduct() {
     });
 
     const handleLogout = () => {
-        if (cookies.token === undefined)
+        if (cookies.token === undefined) {
+            alert('Necessário fazer login');
             window.location.href = '/User/Login';
+        }
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         handleLogout();
-    },[]);
+    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;

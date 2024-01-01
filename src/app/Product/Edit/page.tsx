@@ -29,7 +29,9 @@ export default function EditProduct() {
     }
     
     const fetchData = async () => {
-        const fetchData = await product.fetchData();
+        const params = new URLSearchParams(window.location.search);
+        const idParms = params.get('id');
+        const fetchData = await product.fetchData(idParms);
         setData(fetchData);
     }
     

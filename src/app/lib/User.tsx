@@ -42,9 +42,6 @@ export const User = () => {
             return data;
         } catch (err) {
             console.error(err);
-            removeCookie('token');
-            removeCookie('userId');
-            removeCookie('user');
         }
     }
 
@@ -60,19 +57,16 @@ export const User = () => {
             if (req.ok) {
                 const data = await req.json();
                 setCookie('token', data.token, {
-                    expires: new Date(Date.now() + 3600),
-                    secure: true,
-                    path: "/"
+                    // expires: new Date(Date.now() + 3600),
+                    // secure: true,
                 });
                 setCookie('userId', data.id, {
-                    expires: new Date(Date.now() + 3600),
-                    secure: true,
-                    path: "/"
+                    // expires: new Date(Date.now() + 3600),
+                    // secure: true,
                 });
                 setCookie('user', data.role, {
-                    expires: new Date(Date.now() + 3600),
-                    secure: true,
-                    path: "/"
+                    // expires: new Date(Date.now() + 3600),
+                    // secure: true,
                 });
                 window.location.href = "/Configuration";
             } else {
@@ -146,9 +140,6 @@ export const User = () => {
             }
         } catch (error) {
             console.error(error);
-            removeCookie('token');
-            removeCookie('userId');
-            removeCookie('user');
         }
     }
 
@@ -172,9 +163,6 @@ export const User = () => {
             }
         } catch (error) {
             console.error(error);
-            removeCookie('token');
-            removeCookie('userId');
-            removeCookie('user');
         }
     }
 

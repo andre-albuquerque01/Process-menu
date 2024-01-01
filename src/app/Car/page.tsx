@@ -7,6 +7,7 @@ import Head from 'next/head';
 import { useCarContext } from '../context/CarContext';
 import { useCookies } from 'react-cookie';
 import { Order } from '../lib/Order';
+import { Product } from '../lib/Product';
 
 
 export default function Car() {
@@ -16,6 +17,7 @@ export default function Car() {
     const [qtd, setQtd] = useState<number>(0);
     const [waitTime, setWaitTime] = useState<number>(0);
     const order = Order();
+    const product = Product();
     const [data, setData] = useState({
         products: car,
         idUser: cookies.userId,
@@ -43,9 +45,13 @@ export default function Car() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         await order.fetchCreateOrder(data);
+        car.forEach(async car => {
+            await product.fetchProductQtd(car.id, car.qtd_itens);
+
+        });
         setCar([]);
     }
-    
+
     useEffect(() => {
         const dateNow = new Date();
         dateNow.setMinutes(dateNow.getMinutes() - dateNow.getTimezoneOffset());
@@ -130,7 +136,7 @@ export default function Car() {
                             Quantidade de itens: {qtd}
                         </div>
                         <div className="qtdItensPay">
-                            Tempo de espera: {waitTime}
+                            Tempo de espera: {waitTime} min.
                         </div>
                         <div className="tablePay">
                             Mesa: <input type="number" name='table' value={data.table} onChange={handleChange} min="0" required />
@@ -144,7 +150,7 @@ export default function Car() {
                             </div>
                             <div className="metodos">
                                 <div className="pix">
-                                    <input type="radio" name="formPay" id="pix" value={data.formPay} onChange={handleChange} required /><label htmlFor="pix"> Pix</label>
+                                    <input type="radio" name="formPay" id="pix" value='pix' onChange={handleChange} required /><label htmlFor="pix"> Pix</label>
                                 </div>
                             </div>
                         </div>

@@ -65,7 +65,7 @@ export default function Itens() {
             <Head>
                 <title>Items</title>
             </Head>
-            {productData ? (
+            {productData && productData.status ? (
                 <div className="littleItens">
                     <div className="imageItem">
                         <Image

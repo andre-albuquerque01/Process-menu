@@ -4,6 +4,6 @@
     box-sizing: border-box;
 }
 
-.loading {
+.loading, .indexCarroseul {
     min-height: calc(100vh - 265px);
 }

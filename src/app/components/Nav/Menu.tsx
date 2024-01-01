@@ -48,7 +48,17 @@ export const Menu = () => {
                         {isClient && cookies.token === undefined ? (
                             <li><Link href="/User/Login">Login</Link></li>
                         ) :
-                            <><li className="logoutHandle" onClick={handleLogout}><Link href="">Sair</Link></li><li><Link href="/Orders">Meus pedidos</Link></li><li><Link href="/Configuration">Configuração</Link></li></>
+                            <>
+                                <li className="logoutHandle" onClick={handleLogout}>
+                                    <Link href="">Sair</Link>
+                                </li>
+                                <li>
+                                    <Link href="/Orders">Meus pedidos</Link>
+                                </li>
+                                <li>
+                                    <Link href="/Configuration">Configuração</Link>
+                                </li>
+                            </>
                         }
                     </ul>
                 </li>

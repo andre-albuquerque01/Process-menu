@@ -29,8 +29,10 @@ export default function EditUser() {
     });
 
     const handleLogout = () => {
-        if (cookies.token === undefined)
+        if (cookies.token === undefined) {
+            alert('Necessário fazer login');
             window.location.href = '/User/Login';
+        }
     }
 
     const fetchUser = async () => {
@@ -40,7 +42,7 @@ export default function EditUser() {
         }
         setData(value);
     }
-    
+
     useEffect(() => {
         handleLogout();
         fetchUser();

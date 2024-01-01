@@ -73,7 +73,29 @@
 .imageAlt {
     display: flex;
     gap: 5px;
-    margin-top: 28px;
+    align-self: self-start;
+}
+
+.paginationList {
+    display: flex;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    width: 200px;
+    justify-content: space-evenly;
+}
+
+.paginationList button {
+    padding: 4px 14px;
+    background-color: #fff;
+    border: 1px solid #585858;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+.paginationList button:hover {
+    border: none;
+    color: #fff;
+    background-color: #00f;
 }
 
 @media (max-width: 480px) {

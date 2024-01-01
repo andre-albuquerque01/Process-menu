@@ -8,10 +8,12 @@ import "./style.css"
 import { useEffect, useState } from "react"
 import { Menu } from "./Menu"
 import { MenuMobile } from "./MenuMobile"
+import { usePathname } from "next/navigation"
 
 export const Index = () => {
     const [search, setSearch] = useState<string>('');
     const [active, setActive] = useState<boolean>(false);
+    const path = usePathname();
     const toggleCloseMenuIcon = () => setActive(!active);
     const toggleMenu = () => setActive(!active);
 
@@ -33,6 +35,11 @@ export const Index = () => {
         return () => window.removeEventListener("resize", handleResize);
     }, [active]);
 
+    useEffect(() => {
+        if (path !== '/')
+            setActive(false);
+    }, [path])
+
     return (
         <div className="header">
             <nav>
@@ -43,7 +50,7 @@ export const Index = () => {
                             className="imageTakeThePhone"
                             alt="Logo marca da empresa"
                             title="Inicio"
-                            />
+                        />
                     </Link>
                 </div>
                 <div className="search">

@@ -65,6 +65,28 @@
     height: calc(100vh - 298px);
 }
 
+.paginationSearch {
+    display: flex;
+    margin: 0 auto;
+    margin-bottom: 15px;
+    width: 200px;
+    justify-content: space-evenly;
+}
+
+.paginationSearch button {
+    padding: 4px 14px;
+    background-color: #fff;
+    border: 1px solid #585858;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+.paginationSearch button:hover {
+    border: none;
+    color: #fff;
+    background-color: #00f;
+}
+
 @media (max-width: 480px) {
     .cardProduct a {
         width: 100%;

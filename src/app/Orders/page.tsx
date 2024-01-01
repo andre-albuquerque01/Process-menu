@@ -88,7 +88,6 @@ export default function BackOrder() {
                                 R$ {itens.precoTotal}
                             </div>
                         </div>
-
                     </div>
                 </div>
             ))}

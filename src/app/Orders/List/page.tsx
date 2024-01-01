@@ -9,12 +9,19 @@ import { useCookies } from "react-cookie";
 export default function BackOrder() {
     const [data, setData] = useState([]);
     const [state, setState] = useState<boolean>(false);
+    const [statusOrder, setStatusOrder] = useState<string>('Aberto');
     const [cookies] = useCookies(['token', 'userId', 'user']);
+    const [dataOrder, setDataOrder] = useState({
+        status: "Finalizado",
+        update_at: '',
+    });
     const order = Order();
 
     const handleLogout = () => {
-        if (cookies.token === undefined)
+        if (cookies.token === undefined && cookies.user !== 'U') {
             window.location.href = '/User/Login';
+            alert('Necessário fazer login');
+        }
     }
 
     const handleGetOrder = async () => {
@@ -23,15 +30,36 @@ export default function BackOrder() {
     }
 
     const handleFinishOrder = async (id: string) => {
+        const dateNow = new Date();
+        dateNow.setMinutes(dateNow.getMinutes() - dateNow.getTimezoneOffset());
+        dateNow.setHours(dateNow.getHours());
+        const isoDate = dateNow.toISOString();
         const text = 'Confirma a entrega do pedido';
-        const stats = "Finalizado";
 
-        if (confirm(text) == true) {
-            await order.fetchUpdateStatus(id, stats);
-            setState(true)
-        } else {
-            alert('Pedido ainda em produção')
+        if (statusOrder !== 'Finalizado') {
+            setDataOrder((prevProduct) => ({
+                ...prevProduct,
+                update_at: isoDate,
+            }))
+            if (confirm(text) == true) {
+                await order.fetchUpdateStatus(id, dataOrder);
+                setState(true)
+            } else {
+                alert('Pedido ainda em produção')
+            }
         }
+    }
+
+    const handleStatusAberto = () => {
+        setStatusOrder('');
+        setStatusOrder('Aberto');
+        setState(true)
+    }
+
+    const handleStatusClose = () => {
+        setStatusOrder('');
+        setStatusOrder('Finalizado');
+        setState(true)
     }
 
     useEffect(() => {
@@ -44,7 +72,7 @@ export default function BackOrder() {
             handleGetOrder();
             setState(false)
         }
-    }, [state]);
+    }, [state, statusOrder]);
 
     const updateDate = (updateAt: string) => {
         const dateUpdate = new Date(Date.parse(updateAt));
@@ -62,50 +90,68 @@ export default function BackOrder() {
     return (
         <div className="ordersEndList">
             <div className="titleMyOrdersList">Meus pedidos</div>
+            <div className="choiceStatus">
+                <button onClick={handleStatusAberto}>Abertos</button>
+                <button onClick={handleStatusClose} className="secondBtn">Finalizados</button>
+            </div>
             {sortedData.map((itens) => (
-                itens.status === 'Aberto' ? (
-                    <div className="orderCardList" key={itens.id}>
-                        <div className="informationOrderList">
-                            {itens.products &&
-                                itens.products.map((product) => (
-                                    <div className="orderInfoList" key={product.id}>
-                                        <div className="imageOrderList">
-                                            <Image src={product.file_name} width={120} height={120} alt="Imagem do pedido" />
+                itens.status === statusOrder ? (
+                    <div className="dadOrder" key={itens.id}>
+                        < div className="orderCardList" key={itens.id} >
+                            <div className="informationOrderList">
+                                {itens.products &&
+                                    itens.products.map((product) => (
+                                        <div className="orderInfoList" key={product.id}>
+                                            <div className="imageOrderList">
+                                                <Image src={product.file_name} width={120} height={120} alt="Imagem do pedido" />
+                                            </div>
+                                            <div className="descOrderList">
+                                                <div className="titleOrderList">{product.title}</div>
+                                                <div className="priceOrderList">R$ {product.price}</div>
+                                                <div className="statusOrderList">{product.status}</div>
+                                                <div className="qtdOrderList">Quantidade: {product.qtd_itens}</div>
+                                            </div>
                                         </div>
-                                        <div className="descOrderList">
-                                            <div className="titleOrderList">{product.title}</div>
-                                            <div className="priceOrderList">R$ {product.price}</div>
-                                            <div className="statusOrderList">{product.status}</div>
-                                            <div className="qtdOrderList">Quantidade: {product.qtd_itens}</div>
+                                    ))}
+                            </div>
+                            <div className="segPartList">
+                                <div className="finishOrderList">
+                                    <div className="finishedOrderList">Concluído em:</div>
+                                    <div className="dataFinishedOrderList">{updateDate(itens.update_at)}</div>
+                                </div>
+                                <div className="valueTotalOrderList">
+                                    <div className="priceValueTotalList">Valor total:</div>
+                                    <div className="priceValueEndList">R$ {itens.precoTotal}</div>
+                                </div>
+                                {statusOrder !== 'Finalizado' && (
+                                    <div className="editOrderList">
+                                        <div className="editOrderList">
+                                            <Image
+                                                src={check}
+                                                alt="Pedido pronto"
+                                                width={28}
+                                                height={28}
+                                                title="Pedido pronto"
+                                                onClick={() => handleFinishOrder(itens.id)}
+                                            />
                                         </div>
                                     </div>
-                                ))}
+                                )}
+                            </div>
                         </div>
-                        <div className="segPartList">
-                            <div className="finishOrderList">
-                                <div className="finishedOrderList">Concluído em:</div>
-                                <div className="dataFinishedOrderList">{updateDate(itens.update_at)}</div>
+                        <div className="numberOrderCard">
+                            <div className="titleNumberOrder">
+                                Número do pedido
                             </div>
-                            <div className="valueTotalOrderList">
-                                <div className="priceValueTotalList">Valor total:</div>
-                                <div className="priceValueEndList">R$ {itens.precoTotal}</div>
-                            </div>
-                            <div className="editOrderList">
-                                <div className="editOrderList">
-                                    <Image
-                                        src={check}
-                                        alt="Pedido pronto"
-                                        width={28}
-                                        height={28}
-                                        title="Pedido pronto"
-                                        onClick={() => handleFinishOrder(itens.id)}
-                                    />
-                                </div>
+                            <div className="valueNumberOrder">
+                                {itens.numberOrder}
                             </div>
                         </div>
                     </div>
+                    // eslint-disable-next-line react/jsx-key
                 ) : null
-            ))}
-        </div>
+            ))
+            }
+        </div >
     );
 }
