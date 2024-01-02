@@ -169,7 +169,7 @@ export const CarouselCategories = (props: Product) => {
                     <Link
                         href={`/Product/Search?category=jantas`}
                     >
-                        Jantar
+                        Jantas
                         <Image
                             src={arrowRight}
                             alt='icone de seta a direita'

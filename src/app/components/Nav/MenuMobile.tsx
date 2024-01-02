@@ -5,9 +5,9 @@ import iconCar from "../../../../public/carrinho.png"
 import iconOrder from "../../../../public/order.png"
 import iconSettings from "../../../../public/settings.png"
 import logoTake from "../../../../public/takethephone.svg"
-import search from "../../../../public/search.png"
+import searchIcon from "../../../../public/search.png"
 import cardapio from "../../../../public/cardapio.png"
-import iconArrowDown from "../../../../public/arrowDown.png"
+import home from "../../../../public/home.png"
 import logout from "../../../../public/logout.png"
 import Link from "next/link"
 import "./style.css"
@@ -18,6 +18,7 @@ export const MenuMobile = () => {
     const [isSubMenuVisible, setSubMenuVisibility] = useState<boolean>(false);
     const [cookies, setCookies, removeCookie] = useCookies(['token', 'userId', 'user']);
     const [isClient, setIsClient] = useState(false);
+    const [search, setSearch] = useState<string>('');
 
     const handleLogout = () => {
         removeCookie('token');
@@ -25,14 +26,22 @@ export const MenuMobile = () => {
         removeCookie('user');
         window.location.href = '/';
     }
+    const handleChange = (e) => {
+        if (e.key === "Enter") {
+            setSearch(e.target.value);
+            window.location.href = `/Product/Search?search=${search}`;
+        }
+        setSearch(e.target.value);
+    };
+
+    const toggleSubMenu = () => {
+        setSubMenuVisibility(!isSubMenuVisible);
+    };
 
     useEffect(() => {
         setIsClient(true);
     }, []);
 
-    const toggleSubMenu = () => {
-        setSubMenuVisibility(!isSubMenuVisible);
-    };
     return (
         <div className="menuMobile">
             <div className="menuStart">
@@ -40,14 +49,22 @@ export const MenuMobile = () => {
             </div>
             <ul className="firstUla">
                 <li>
-                    <input type="text" name="search" id="search" placeholder="Pesquisar produto" />
+                    <input type="text" name="search" id="search" placeholder="Pesquisar produto" onKeyDown={handleChange} onChange={handleChange} />
                     <button>
                         <Image
-                            src={search}
-                            width={26}
-                            height={26}
+                            src={searchIcon}
+                            width={23}
+                            height={23}
                             alt="icone de busca" />
                     </button>
+                </li>
+                <li>
+                    <Image
+                        src={home}
+                        width={30}
+                        height={30}
+                        alt="icone de inicio" />
+                    <Link href="/">Inicio</Link>
                 </li>
                 {isClient && cookies.token === undefined ? (
                     <li>
@@ -62,8 +79,8 @@ export const MenuMobile = () => {
                     <li onClick={handleLogout} className="logout">
                         <Image
                             src={logout}
-                            width={28}
-                            height={28}
+                            width={30}
+                            height={30}
                             alt="Icone logout"
                             title="Logout" />
                         <Link href="">
@@ -81,22 +98,20 @@ export const MenuMobile = () => {
                 </li>
                 <li>
                     <Image
-                        src={iconSettings}
-                        width={30}
-                        height={30}
-                        alt="icone de configuração" />
-                    <Link href="/Configuration">Configuração</Link>
-                </li>
-
-
-                <li>
-                    <Image
                         src={iconCar}
                         width={28}
                         height={28}
                         alt="icone do carrinho"
                         title="Carrinho" />
                     <Link href="/Car">Carrinho</Link>
+                </li>
+                <li>
+                    <Image
+                        src={iconSettings}
+                        width={30}
+                        height={30}
+                        alt="icone de configuração" />
+                    <Link href="/Configuration">Configuração</Link>
                 </li>
                 <li onClick={toggleSubMenu} className="">
                     <Image

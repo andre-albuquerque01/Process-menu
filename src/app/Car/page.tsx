@@ -7,17 +7,13 @@ import Head from 'next/head';
 import { useCarContext } from '../context/CarContext';
 import { useCookies } from 'react-cookie';
 import { Order } from '../lib/Order';
-import { Product } from '../lib/Product';
-
 
 export default function Car() {
     const [cookies] = useCookies(['token', 'userId']);
     const { car, setCar } = useCarContext();
     const [valueTotal, setValueTotal] = useState<number>(0);
     const [qtd, setQtd] = useState<number>(0);
-    const [waitTime, setWaitTime] = useState<number>(0);
     const order = Order();
-    const product = Product();
     const [data, setData] = useState({
         products: car,
         idUser: cookies.userId,
@@ -33,6 +29,13 @@ export default function Car() {
         update_at: '',
     });
 
+    const handleLogout = () => {
+        if (cookies.token === undefined) {
+            window.location.href = '/User/Login';
+            alert('Necessário fazer login');
+        }
+    }
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setData((prevProduct) => ({
@@ -41,14 +44,9 @@ export default function Car() {
         }));
     };
 
-
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         await order.fetchCreateOrder(data);
-        car.forEach(async car => {
-            await product.fetchProductQtd(car.id, car.qtd_itens);
-
-        });
         setCar([]);
     }
 
@@ -60,19 +58,14 @@ export default function Car() {
 
         let valorTotal: number = 0;
         let qtd: number = 0;
-        let waitTimer: number = 0;
-        let contWaitTime: number = 0;
 
         car.forEach(car => {
             valorTotal += parseFloat(car.price.toString()) * (car.qtd_itens);
             qtd += car.qtd_itens;
-            waitTimer += Number(car.waitTime);
         });
 
-        contWaitTime = (waitTime * qtd) / 1.5;
         setValueTotal(valorTotal);
         setQtd(qtd);
-        setWaitTime(contWaitTime);
 
         setData((prevProduct) => ({
             ...prevProduct,
@@ -81,12 +74,16 @@ export default function Car() {
             create_at: isoDate,
             update_at: isoDate,
         }))
-    }, [car])
+    }, [car]);
 
     const handleRemoveItem = (id: string) => {
         const newCar = car.filter(car => car.id !== id);
         setCar(newCar);
     }
+
+    useEffect(() => {
+        handleLogout();
+    }, []);
 
     return (
         <div className='dadCar'>
@@ -134,9 +131,6 @@ export default function Car() {
                         </div>
                         <div className="qtdItensPay">
                             Quantidade de itens: {qtd}
-                        </div>
-                        <div className="qtdItensPay">
-                            Tempo de espera: {waitTime} min.
                         </div>
                         <div className="tablePay">
                             Mesa: <input type="number" name='table' value={data.table} onChange={handleChange} min="0" required />

@@ -25,6 +25,9 @@ export default function CadProduct() {
         if (cookies.token === undefined) {
             alert('Necessário fazer login');
             window.location.href = '/User/Login';
+        }else if(cookies.user !== "A"){
+            alert('Necessário de autorização');
+            window.location.href = '/';
         }
     }
 

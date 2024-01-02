@@ -6,6 +6,11 @@ import { User } from "@/app/lib/User";
 import { useCookies } from 'react-cookie';
 
 export default function EditUser() {
+    const date = new Date();
+    const year = date.getFullYear() - 10;
+    const month = ("0" + (date.getMonth() + 1)).slice(-2);
+    const day = ("0" + date.getDate()).slice(-2);
+    const dateToday = `${year}-${month}-${day}`;
     const [cookies] = useCookies(['token', 'userId']);
     const user = User();
     const id = cookies.userId;
@@ -108,7 +113,7 @@ export default function EditUser() {
                                 <label htmlFor="cpf">CPF: <span>*</span></label>
                             </div>
                             <div className="inputCpf">
-                                <input type="text" name="cpf" id="cpf" onChange={handleChange} value={data.cpf} required />
+                                <input type="number" name="cpf" id="cpf" onChange={handleChange} value={data.cpf} required />
                             </div>
                         </div>
                         <div className="birthday">
@@ -116,7 +121,7 @@ export default function EditUser() {
                                 <label htmlFor="birthday">Data de nascimento: <span>*</span></label>
                             </div>
                             <div className="inputBirthday">
-                                <input type="date" name="birthday" id="birthday" onChange={handleChange} value={data.birthday} required />
+                                <input type="date" name="birthday" id="birthday" onChange={handleChange} value={data.birthday} min="1890-01-01" max={dateToday} required />
                             </div>
                         </div>
                         <div className="email">
@@ -135,8 +140,6 @@ export default function EditUser() {
                                 <input type="password" name="password" id="password" onChange={handleChange} required />
                             </div>
                         </div>
-                    </div>
-                    <div className="step2">
                         <div className="ddd">
                             <div className="labelUser">
                                 <label htmlFor="ddd">DDD: <span>*</span></label>
@@ -145,6 +148,8 @@ export default function EditUser() {
                                 <input type="number" name="ddd" id="ddd" onChange={handleChange} value={data.ddd} required />
                             </div>
                         </div>
+                    </div>
+                    <div className="step2">
                         <div className="phoneNumber">
                             <div className="labelUser">
                                 <label htmlFor="phoneNumber">Número do celular: <span>*</span></label>

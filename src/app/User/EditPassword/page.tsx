@@ -34,9 +34,12 @@ export default function EditPassword() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (data.confirmpassword === data.newPassword) {
+        if (data.confirmpassword === data.newPassword && data.password !== data.confirmpassword) {
             await user.fetchUsersPass({ id, body: data });
-        } else {
+        } else if (data.password === data.newPassword && data.password === data.confirmpassword) {
+            alert("As senhas são iguais, não faz necessário mudança")
+        }
+        else {
             alert("As senhas são diferentes")
         }
     }

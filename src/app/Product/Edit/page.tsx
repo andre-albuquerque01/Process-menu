@@ -24,8 +24,13 @@ export default function EditProduct() {
     });
 
     const handleLogout = () => {
-        if (cookies.token === undefined)
+        if (cookies.token === undefined) {
+            alert('Necessário fazer login');
             window.location.href = '/User/Login';
+        }else if(cookies.user !== "A"){
+            alert('Necessário de autorização');
+            window.location.href = '/';
+        }
     }
     
     const fetchData = async () => {

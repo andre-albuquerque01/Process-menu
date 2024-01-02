@@ -57,16 +57,19 @@ export const User = () => {
             if (req.ok) {
                 const data = await req.json();
                 setCookie('token', data.token, {
-                    // expires: new Date(Date.now() + 3600),
-                    // secure: true,
+                    path: '/',
+                    expires: new Date(new Date().getTime() + 2 * 60 * 60 * 1000),
+                    secure: true,
                 });
                 setCookie('userId', data.id, {
-                    // expires: new Date(Date.now() + 3600),
-                    // secure: true,
+                    path: '/',
+                    expires: new Date(new Date().getTime() + 2 * 60 * 60 * 1000),
+                    secure: true,
                 });
                 setCookie('user', data.role, {
-                    // expires: new Date(Date.now() + 3600),
-                    // secure: true,
+                    path: '/',
+                    expires: new Date(new Date().getTime() + 2 * 60 * 60 * 1000),
+                    secure: true,
                 });
                 window.location.href = "/Configuration";
             } else {
@@ -92,6 +95,7 @@ export const User = () => {
                 window.location.href = "/User/Login";
             } else {
                 console.log("Error");
+                alert('E-mail inválido ou senhas diferentes');
             }
         } catch (error) {
             console.log("Error");
@@ -113,7 +117,7 @@ export const User = () => {
                 alert("E-mail enviado para seu endereço de e-mail");
                 window.location.href = "/User/Login";
             } else {
-                console.log("Error");
+                alert('E-mail inválido');
             }
         } catch (error) {
             console.error(error);
@@ -134,6 +138,12 @@ export const User = () => {
             if (req.ok) {
                 console.log("Sucess");
                 window.location.href = "/Configuration";
+            } else if (req.status === 403) {
+                removeCookie('token');
+                removeCookie('userId');
+                removeCookie('user');
+                alert('Faça o login novamente.')
+                window.location.href = '/User/Login';
             } else {
                 console.log("Error");
                 alert('E-mail já usado ou senha invalida')
@@ -157,6 +167,12 @@ export const User = () => {
                 console.log("Sucess");
                 alert("Senha alterada com sucesso")
                 window.location.href = "/Configuration";
+            } else if (req.status === 403) {
+                removeCookie('token');
+                removeCookie('userId');
+                removeCookie('user');
+                alert('Faça o login novamente.')
+                window.location.href = '/User/Login';
             } else {
                 console.log("Error");
                 alert("Senhas invalidas")

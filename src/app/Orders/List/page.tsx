@@ -12,15 +12,18 @@ export default function BackOrder() {
     const [statusOrder, setStatusOrder] = useState<string>('Aberto');
     const [cookies] = useCookies(['token', 'userId', 'user']);
     const [dataOrder, setDataOrder] = useState({
-        status: "Finalizado",
+        stats: "Finalizado",
         update_at: '',
     });
     const order = Order();
 
     const handleLogout = () => {
-        if (cookies.token === undefined && cookies.user !== 'U') {
-            window.location.href = '/User/Login';
+        if (cookies.token === undefined) {
             alert('Necessário fazer login');
+            window.location.href = '/User/Login';
+        } else if (cookies.user !== "A" && cookies.user !== "F") {
+            alert('Necessário de autorização');
+            window.location.href = '/';
         }
     }
 
@@ -40,7 +43,7 @@ export default function BackOrder() {
             setDataOrder((prevProduct) => ({
                 ...prevProduct,
                 update_at: isoDate,
-            }))
+            }));
             if (confirm(text) == true) {
                 await order.fetchUpdateStatus(id, dataOrder);
                 setState(true)
@@ -74,18 +77,22 @@ export default function BackOrder() {
         }
     }, [state, statusOrder]);
 
+    function dateIsValid(date) {
+        return !Number.isNaN(new Date(date).getTime());
+    }
+
     const updateDate = (updateAt: string) => {
+        if (!dateIsValid(updateAt)) {
+            console.error('Data inválida:', updateAt);
+            return;
+        }
         const dateUpdate = new Date(Date.parse(updateAt));
-        const formattedDate = ('0' + (dateUpdate.getMonth() + 1)).slice(-2) + '/' +
-            ('0' + dateUpdate.getDate()).slice(-2) + '/' +
-            dateUpdate.getFullYear() + ' ' +
-            ('0' + dateUpdate.getHours()).slice(-2) + ':' +
-            ('0' + dateUpdate.getMinutes()).slice(-2) + ':' +
-            ('0' + dateUpdate.getSeconds()).slice(-2);
+        const formattedDate = dateUpdate.toISOString().split('T')[0].split('-').reverse().join('/') + ' ' +
+            dateUpdate.toISOString().split('T')[1].split('.')[0];
         return formattedDate;
     }
 
-    const sortedData = data.slice().sort((a, b) => new Date(b.update_at) - new Date(a.update_at));
+    const sortedData = data.slice().sort((a, b) => new Date(a.update_at) - new Date(b.update_at) );
 
     return (
         <div className="ordersEndList">
@@ -94,7 +101,7 @@ export default function BackOrder() {
                 <button onClick={handleStatusAberto}>Abertos</button>
                 <button onClick={handleStatusClose} className="secondBtn">Finalizados</button>
             </div>
-            {sortedData.map((itens) => (
+            {sortedData && sortedData.length > 0 && sortedData.map((itens) => (
                 itens.status === statusOrder ? (
                     <div className="dadOrder" key={itens.id}>
                         <div className="orderCardList" key={itens.id} >
@@ -115,10 +122,17 @@ export default function BackOrder() {
                                     ))}
                             </div>
                             <div className="segPartList">
-                                <div className="finishOrderList">
-                                    <div className="finishedOrderList">Concluído em:</div>
-                                    <div className="dataFinishedOrderList">{updateDate(itens.update_at)}</div>
-                                </div>
+                                {itens.status !== 'Aberto' ? (
+                                    <div className="finishOrderList">
+                                        <div className="finishedOrderList">Concluído em:</div>
+                                        <div className="dataFinishedOrderList">{updateDate(itens.update_at)}</div>
+                                    </div>
+                                ) : (
+                                    <div className="finishOrderList">
+                                        <div className="finishedOrderList">Aberto em:</div>
+                                        <div className="dataFinishedOrderList">{updateDate(itens.update_at)}</div>
+                                    </div>
+                                )}
                                 <div className="valueTotalOrderList">
                                     <div className="priceValueTotalList">Valor total:</div>
                                     <div className="priceValueEndList">R$ {itens.precoTotal}</div>

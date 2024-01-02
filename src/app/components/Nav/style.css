@@ -116,7 +116,7 @@ li:hover>.insideList {
     }
 
     .logout{
-        margin-left: 10px;
+        margin-left: 6px;
     }
 
     .imageTakeThePhone {
@@ -193,7 +193,7 @@ li:hover>.insideList {
 
     .menuMobile {
         visibility: visible;
-        position: absolute;
+        position: fixed;
         z-index: 4;
         background-color: #fefefe;
         top: 0;
@@ -211,7 +211,7 @@ li:hover>.insideList {
         justify-content: flex-start;
         align-items: flex-start;
         color: #000;
-        min-height: 250px;
+        min-height: 290px;
         width: 100%;
         margin-top: 20px;
     }

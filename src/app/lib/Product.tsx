@@ -17,8 +17,12 @@ export const Product = () => {
     const fetchProduct = async () => {
         try {
             const requisicao = await fetch(`${baseUrl}/`);
-            const reqJson = await requisicao.json();
-            return reqJson;
+            if (requisicao.ok) {
+                const reqJson = await requisicao.json();
+                return reqJson;
+            } else {
+                console.error('Erro');
+            }
         } catch (err) {
             console.error(err);
 
@@ -29,8 +33,12 @@ export const Product = () => {
     const fetchSearchProduct = async (name: Product) => {
         try {
             const requisicao = await fetch(`${baseUrl}/searchProduct/${name}`);
-            const reqJson = await requisicao.json();
-            return reqJson;
+            if (requisicao.ok) {
+                const reqJson = await requisicao.json();
+                return reqJson;
+            } else {
+                console.error('Erro');
+            }
         } catch (err) {
             console.error(err);
 
@@ -41,8 +49,12 @@ export const Product = () => {
     const fetchSearchCategory = async (category: Product) => {
         try {
             const requisicao = await fetch(`${baseUrl}/searchCategory/${category}`);
-            const reqJson = await requisicao.json();
-            return reqJson;
+            if (requisicao.ok) {
+                const reqJson = await requisicao.json();
+                return reqJson;
+            } else {
+                console.error('Erro');
+            }
         } catch (err) {
             console.error(err);
 
@@ -53,8 +65,12 @@ export const Product = () => {
     const fetchData = async (id: Product) => {
         try {
             const requisicao = await fetch(`${baseUrl}/findProduct/${id}`);
-            const reqJson = await requisicao.json();
-            return reqJson;
+            if (requisicao.ok) {
+                const reqJson = await requisicao.json();
+                return reqJson;
+            } else {
+                console.error('Erro');
+            }
         } catch (err) {
             console.error(err);
         }
@@ -74,8 +90,13 @@ export const Product = () => {
             if (req.ok) {
                 console.log("");
                 window.location.href = "/Product/List";
+            } else if (req.status === 403) {
+                removeCookie('token');
+                removeCookie('userId');
+                removeCookie('user');
+                window.location.href = '/User/Login';
             } else {
-                console.log("");
+                alert(`Erro`);
             }
         } catch (error) {
             console.error(error);
@@ -96,8 +117,11 @@ export const Product = () => {
             });
             if (req.ok) {
                 console.log("");
-            } else {
-                console.log("");
+            } else if (req.status === 403) {
+                removeCookie('token');
+                removeCookie('userId');
+                removeCookie('user');
+                window.location.href = '/User/Login';
             }
         } catch (error) {
             console.error(error);
@@ -118,8 +142,11 @@ export const Product = () => {
             if (req.ok) {
                 console.log("Sucess");
                 window.location.href = "/Product/List";
-            } else {
-                console.log("Error");
+            } else if (req.status === 403) {
+                removeCookie('token');
+                removeCookie('userId');
+                removeCookie('user');
+                window.location.href = '/User/Login';
             }
         } catch (error) {
             console.error(error);
@@ -139,8 +166,11 @@ export const Product = () => {
             });
             if (req.ok) {
                 console.log("Sucess");
-            } else {
-                console.log("Error");
+            } else if (req.status === 403) {
+                removeCookie('token');
+                removeCookie('userId');
+                removeCookie('user');
+                window.location.href = '/User/Login';
             }
         } catch (error) {
             console.error(error);
@@ -158,8 +188,11 @@ export const Product = () => {
             });
             if (req.ok) {
                 console.log("Sucess");
-            } else {
-                console.log("Error");
+            } else if (req.status === 403) {
+                removeCookie('token');
+                removeCookie('userId');
+                removeCookie('user');
+                window.location.href = '/User/Login';
             }
         } catch (error) {
             console.error(error);
@@ -199,8 +232,11 @@ export const Product = () => {
             });
             if (req.ok) {
                 console.log("Sucess");
-            } else {
-                console.log("Error");
+            } else if (req.status === 403) {
+                removeCookie('token');
+                removeCookie('userId');
+                removeCookie('user');
+                window.location.href = '/User/Login';
             }
         } catch (error) {
             console.error(error);

@@ -23,6 +23,14 @@ export const Order = () => {
     const baseUrl = "http://localhost:8080/order";
     const token = cookies.token;
     const user = cookies.userId;
+    let redirectToLogin = false;
+    if (typeof window !== 'undefined') {
+        redirectToLogin = cookies.token === undefined;
+    }
+
+    if (redirectToLogin) {
+        window.location.href = '/User/Login';
+    }
 
     // Para mostrar todos os pedidos
     const fetchGetAllOrders = async () => {
@@ -33,8 +41,16 @@ export const Order = () => {
                     'Authorization': `Bearer ${token}`,
                 }
             });
-            const reqJson = await requisicao.json();
-            return reqJson;
+            if (requisicao.ok) {
+                const reqJson = await requisicao.json();
+                return reqJson;
+            } else if (requisicao.status === 403) {
+                removeCookie('token');
+                removeCookie('userId');
+                removeCookie('user');
+                alert('Faça o login novamente.')
+                window.location.href = '/User/Login';
+            }
         } catch (err) {
             console.error(err);
         }
@@ -49,8 +65,16 @@ export const Order = () => {
                     'Authorization': `Bearer ${token}`,
                 }
             });
-            const reqJson = await requisicao.json();
-            return reqJson;
+            if (requisicao.ok) {
+                const reqJson = await requisicao.json();
+                return reqJson;
+            } else if (requisicao.status === 403) {
+                removeCookie('token');
+                removeCookie('userId');
+                removeCookie('user');
+                alert('Faça o login novamente.')
+                window.location.href = '/User/Login';
+            }
         } catch (err) {
             console.error(err);
         }
@@ -65,8 +89,16 @@ export const Order = () => {
                     'Authorization': `Bearer ${token}`,
                 }
             });
-            const reqJson = await requisicao.json();
-            return reqJson;
+            if (requisicao.ok) {
+                const reqJson = await requisicao.json();
+                return reqJson;
+            } else if (requisicao.status === 403) {
+                removeCookie('token');
+                removeCookie('userId');
+                removeCookie('user');
+                alert('Faça o login novamente.')
+                window.location.href = '/User/Login';
+            }
         } catch (err) {
             console.error(err);
         }
@@ -80,13 +112,20 @@ export const Order = () => {
                     'Authorization': `Bearer ${token}`,
                 }
             });
-            const reqJson = await requisicao.json();
-            return reqJson;
+            if (requisicao.ok) {
+                const reqJson = await requisicao.json();
+                return reqJson;
+            } else if (requisicao.status === 403) {
+                removeCookie('token');
+                removeCookie('userId');
+                removeCookie('user');
+                alert('Faça o login novamente.')
+                window.location.href = '/User/Login';
+            }
         } catch (err) {
             console.error(err);
         }
     }
-
 
     const fetchCreateOrder = async (body: Order) => {
         try {
@@ -99,10 +138,14 @@ export const Order = () => {
                 body: JSON.stringify(body),
             });
             if (req.ok) {
-                console.log("Sucess");
+                alert('Pedido realizado com sucesso');
                 window.location.href = "/Car/Confirmation";
-            } else {
-                console.log("Error");
+            } else if (req.status === 403) {
+                removeCookie('token');
+                removeCookie('userId');
+                removeCookie('user');
+                alert('Faça o login novamente.')
+                window.location.href = '/User/Login';
             }
         } catch (error) {
             console.error(error);
@@ -121,8 +164,12 @@ export const Order = () => {
             });
             if (req.ok) {
                 console.log("Sucess");
-            } else {
-                console.log("Error");
+            } else if (req.status === 403) {
+                removeCookie('token');
+                removeCookie('userId');
+                removeCookie('user');
+                alert('Faça o login novamente.')
+                window.location.href = '/User/Login';
             }
         } catch (error) {
             console.error(error);
@@ -141,8 +188,12 @@ export const Order = () => {
             });
             if (req.ok) {
                 console.log("Sucess");
-            } else {
-                console.log("Error");
+            } else if (req.status === 403) {
+                removeCookie('token');
+                removeCookie('userId');
+                removeCookie('user');
+                alert('Faça o login novamente.')
+                window.location.href = '/User/Login';
             }
         } catch (error) {
             console.error(error);
@@ -159,8 +210,12 @@ export const Order = () => {
             });
             if (req.ok) {
                 console.log("Sucess");
-            } else {
-                console.log("Error");
+            } else if (req.status === 403) {
+                removeCookie('token');
+                removeCookie('userId');
+                removeCookie('user');
+                alert('Faça o login novamente.')
+                window.location.href = '/User/Login';
             }
         } catch (error) {
             console.error(error);

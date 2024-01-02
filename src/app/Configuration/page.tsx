@@ -5,20 +5,23 @@ import Image from "next/image";
 import list from "../../../public/list.png"
 import edit from "../../../public/edit.png"
 import { useCookies } from "react-cookie";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Configuration() {
     const [cookies] = useCookies(['token', 'userId', 'user']);
+    const [isClient, setIsClient] = useState(false);
+
 
     const handleLogout = () => {
         if (cookies.token === undefined)
             window.location.href = '/User/Login';
     }
 
-    useEffect(()=>{
+    useEffect(() => {
+        setIsClient(true);
         handleLogout();
-    },[]);
-    
+    }, []);
+
     return (
         <div className="centerConfig">
             <div className="titleConfig">
@@ -46,7 +49,7 @@ export default function Configuration() {
                     Alterar senha
                 </Link>
             </div>
-            {cookies.user !== 'U' ? (
+            {isClient && cookies.user !== 'U' ? (
                 <><div className="configProduct styledDiv">
                     <Image
                         src={list}

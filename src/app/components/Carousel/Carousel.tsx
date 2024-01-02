@@ -27,7 +27,7 @@ export const Carousel = (props: Product) => {
         modules={[Navigation, Pagination, A11y, Autoplay]}
         spaceBetween={50}
         slidesPerView={1}
-        autoplay
+        autoplay={true}
         loop={true}
         navigation
         pagination={{ clickable: true }}

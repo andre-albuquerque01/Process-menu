@@ -11,6 +11,11 @@ type User = {
 
 export default function CadUser() {
     const user = User();
+    const date = new Date();
+    const year = date.getFullYear() - 10;
+    const month = ("0" + (date.getMonth() + 1)).slice(-2); 
+    const day = ("0" + date.getDate()).slice(-2);
+    const dateToday = `${year}-${month}-${day}`;
 
     const [isChecked, setIsChecked] = useState<boolean>(false);
     const [data, setData] = useState({
@@ -81,7 +86,7 @@ export default function CadUser() {
                                 <label htmlFor="firstName">Nome: <span>*</span></label>
                             </div>
                             <div className="inputFirst">
-                                <input type="text" name="firstName" id="firstName" onChange={handleChange} value={data.firstName} required />
+                                <input type="text" name="firstName" id="firstName" onChange={handleChange} value={data.firstName} placeholder="Brasil" required />
                             </div>
                         </div>
                         <div className="lastName">
@@ -89,15 +94,15 @@ export default function CadUser() {
                                 <label htmlFor="lastName">Sobrenome: <span>*</span></label>
                             </div>
                             <div className="inputLast">
-                                <input type="text" name="lastName" id="lastName" onChange={handleChange} value={data.lastName} required />
+                                <input type="text" name="lastName" id="lastName" onChange={handleChange} value={data.lastName} placeholder="Patria" required />
                             </div>
                         </div>
                         <div className="cpf">
                             <div className="labelUser">
-                                <label htmlFor="cpf">CPF: <span>*</span></label>
+                                <label htmlFor="cpf">CPF: <span>*</span> (Sem traço ou ponto)</label>
                             </div>
                             <div className="inputCpf">
-                                <input type="text" name="cpf" id="cpf" onChange={handleChange} value={data.cpf} required />
+                                <input type="number" name="cpf" id="cpf" onChange={handleChange} value={data.cpf} placeholder="00000000000" required />
                             </div>
                         </div>
                         <div className="birthday">
@@ -105,7 +110,7 @@ export default function CadUser() {
                                 <label htmlFor="birthday">Data de nascimento: <span>*</span></label>
                             </div>
                             <div className="inputBirthday">
-                                <input type="date" name="birthday" id="birthday" onChange={handleChange} value={data.birthday} required />
+                                <input type="date" name="birthday" id="birthday" onChange={handleChange} value={data.birthday} min="1890-01-01" max={dateToday} required />
                             </div>
                         </div>
                         <div className="email">
@@ -113,7 +118,7 @@ export default function CadUser() {
                                 <label htmlFor="email">Email: <span>*</span></label>
                             </div>
                             <div className="inputEmail">
-                                <input type="email" name="email" id="email" onChange={handleChange} value={data.email} required />
+                                <input type="email" name="email" id="email" onChange={handleChange} value={data.email} placeholder="brasil@gmail.com" required />
                             </div>
                         </div>
                         <div className="password">
@@ -139,15 +144,15 @@ export default function CadUser() {
                                 <label htmlFor="ddd">DDD: <span>*</span></label>
                             </div>
                             <div className="inputddd">
-                                <input type="number" name="ddd" id="ddd" onChange={handleChange} value={data.ddd} required />
+                                <input type="number" name="ddd" id="ddd" onChange={handleChange} value={data.ddd} placeholder="00" required />
                             </div>
                         </div>
                         <div className="phoneNumber">
                             <div className="labelUser">
-                                <label htmlFor="phoneNumber">Número do celular: <span>*</span></label>
+                                <label htmlFor="phoneNumber">Número do celular: <span>*</span> (Sem traços)</label>
                             </div>
                             <div className="inputPhoneNumber">
-                                <input type="number" name="phoneNumber" id="phoneNumber" onChange={handleChange} value={data.phoneNumber} required />
+                                <input type="number" name="phoneNumber" id="phoneNumber" onChange={handleChange} value={data.phoneNumber} placeholder="000000000" required />
                             </div>
                         </div>
                         <div className="cep">
@@ -155,7 +160,7 @@ export default function CadUser() {
                                 <label htmlFor="addressUser.cep">CEP: <span>*</span></label>
                             </div>
                             <div className="inputCep">
-                                <input type="number" name="addressUser.cep" id="addressUser.cep" onChange={handleChange} value={data.addressUser.cep} required />
+                                <input type="number" name="addressUser.cep" id="addressUser.cep" onChange={handleChange} value={data.addressUser.cep} placeholder="00000000" required />
                             </div>
                         </div>
                         <div className="endereco">

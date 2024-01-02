@@ -3,14 +3,26 @@ import Link from "next/link";
 import "./style.css";
 import Head from "next/head";
 import { User } from "@/app/lib/User";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 
 export default function Login() {
+    const [cookies] = useCookies(['token', 'userId', 'user']);
     const log = User();
     const [data, setData] = useState({
         email: '',
         password: ''
     });
+
+    const handleLogout = () => {
+        if (cookies.token !== undefined) {
+            window.location.href = '/Configuration';
+        }
+    }
+
+    useEffect(() => {
+        handleLogout();
+    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
