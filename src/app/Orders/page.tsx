@@ -27,8 +27,8 @@ export default function BackOrder() {
 
     const updateDate = (updateAt: string) => {
         const dateUpdate = new Date(Date.parse(updateAt));
-        const formattedDate = ('0' + (dateUpdate.getMonth() + 1)).slice(-2) + '/' +
-            ('0' + dateUpdate.getDate()).slice(-2) + '/' +
+        const formattedDate = ('0' + dateUpdate.getDate()).slice(-2) + '/' +
+            ('0' + (dateUpdate.getMonth() + 1)).slice(-2) + '/' +
             dateUpdate.getFullYear() + ' ' +
             ('0' + dateUpdate.getHours()).slice(-2) + ':' +
             ('0' + dateUpdate.getMinutes()).slice(-2) + ':' +
@@ -64,14 +64,6 @@ export default function BackOrder() {
                         ))}
                     </div>
                     <div className="segPart">
-                        {/* <div className="numberOrder">
-                            <div className="NumberOrder">
-                                Número do pedido:
-                            </div>
-                            <div className="dataNumberOrder">
-                                {itens.numberOrder}
-                            </div>
-                        </div> */}
                         <div className="finishOrder">
                             <div className="finishedOrder">
                                 Concluído em:

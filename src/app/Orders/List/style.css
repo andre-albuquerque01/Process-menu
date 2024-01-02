@@ -74,9 +74,12 @@
     font-size: 13px;
 }
 
-.numberOrderCard{
+.orderEnd{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
     text-align: center;
-    margin-bottom: 5px;
+    margin: 10px 0;
 }
 
 @media (max-width: 480px) {
@@ -87,4 +90,8 @@
     .segPartList {
         width: 30%;
     }
+
+    /* .orderEnd{
+        flex-direction: column;
+    } */
 }

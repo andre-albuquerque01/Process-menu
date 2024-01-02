@@ -56,7 +56,7 @@ export default function BackOrder() {
         setState(true)
     }
 
-    const handleStatusClose = () => {
+    const handleStatusClose = (e) => {
         setStatusOrder('');
         setStatusOrder('Finalizado');
         setState(true)
@@ -97,7 +97,7 @@ export default function BackOrder() {
             {sortedData.map((itens) => (
                 itens.status === statusOrder ? (
                     <div className="dadOrder" key={itens.id}>
-                        < div className="orderCardList" key={itens.id} >
+                        <div className="orderCardList" key={itens.id} >
                             <div className="informationOrderList">
                                 {itens.products &&
                                     itens.products.map((product) => (
@@ -139,16 +139,35 @@ export default function BackOrder() {
                                 )}
                             </div>
                         </div>
-                        <div className="numberOrderCard">
-                            <div className="titleNumberOrder">
-                                Número do pedido
+                        <div className="descOrderEnd">
+                            {itens.products &&
+                                itens.products.map((product) => (
+                                    <div className="orderInfoList" key={product.id}>
+                                        <div className="descOrderList">
+                                            <div className="descOrderList">Descrição: {product.observation}</div>
+                                        </div>
+                                    </div>
+                                ))}
+                        </div>
+                        <div className="orderEnd">
+                            <div className="numberOrderCard">
+                                <div className="titleNumberOrder">
+                                    Número do pedido
+                                </div>
+                                <div className="valueNumberOrder">
+                                    {itens.numberOrder}
+                                </div>
                             </div>
-                            <div className="valueNumberOrder">
-                                {itens.numberOrder}
+                            <div className="tableOrderCard">
+                                <div className="titleTableOrder">
+                                    Número da mesa
+                                </div>
+                                <div className="valueTableOrder">
+                                    {itens.table}
+                                </div>
                             </div>
                         </div>
                     </div>
-                    // eslint-disable-next-line react/jsx-key
                 ) : null
             ))
             }

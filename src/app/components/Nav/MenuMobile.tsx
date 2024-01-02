@@ -59,36 +59,36 @@ export const MenuMobile = () => {
                         <Link href="/User/Login">Login</Link>
                     </li>
                 ) : (
-                    <>
-                        <li onClick={handleLogout} className="logout">
-                            <Image
-                                src={logout}
-                                width={28}
-                                height={28}
-                                alt="Icone logout"
-                                title="Logout" />
-                            <Link href="">
-                                Sair
-                            </Link>
-                        </li>
-                        <li>
-                            <Image
-                                src={iconOrder}
-                                width={30}
-                                height={30}
-                                alt="icone de pedido" />
-                            <Link href="/Orders">Meus pedidos</Link>
-                        </li>
-                        <li>
-                            <Image
-                                src={iconSettings}
-                                width={30}
-                                height={30}
-                                alt="icone de configuração" />
-                            <Link href="/Configuration">Configuração</Link>
-                        </li>
-                    </>
+                    <li onClick={handleLogout} className="logout">
+                        <Image
+                            src={logout}
+                            width={28}
+                            height={28}
+                            alt="Icone logout"
+                            title="Logout" />
+                        <Link href="">
+                            Sair
+                        </Link>
+                    </li>
                 )}
+                <li>
+                    <Image
+                        src={iconOrder}
+                        width={30}
+                        height={30}
+                        alt="icone de pedido" />
+                    <Link href="/Orders">Meus pedidos</Link>
+                </li>
+                <li>
+                    <Image
+                        src={iconSettings}
+                        width={30}
+                        height={30}
+                        alt="icone de configuração" />
+                    <Link href="/Configuration">Configuração</Link>
+                </li>
+
+
                 <li>
                     <Image
                         src={iconCar}
@@ -116,18 +116,18 @@ export const MenuMobile = () => {
                     /> */}
                 </li>
             </ul>
-                <ul className="categoriaMenu"
-                    // className={`menuCategories ${isSubMenuVisible ? 'active' : ''}`}
-                >
-                    <li><Link href="/Product/Search?category=promocoes">Promoções</Link></li>
-                    <li><Link href="/Product/Search?category=pizza">Pizza</Link></li>
-                    <li><Link href="/Product/Search?category=sobremesas">Sobremesas</Link></li>
-                    <li><Link href="/Product/Search?category=bebidas">Bebidas</Link></li>
-                    <li><Link href="/Product/Search?category=lanches">Lanches</Link></li>
-                    <li><Link href="/Product/Search?category=almocos">Almoço</Link></li>
-                    <li><Link href="/Product/Search?category=jantas">Jantas</Link></li>
-                    <li><Link href="/Product/Search?category=outros">Outros</Link></li>
-                </ul>
+            <ul className="categoriaMenu"
+            // className={`menuCategories ${isSubMenuVisible ? 'active' : ''}`}
+            >
+                <li><Link href="/Product/Search?category=promocoes">Promoções</Link></li>
+                <li><Link href="/Product/Search?category=pizza">Pizza</Link></li>
+                <li><Link href="/Product/Search?category=sobremesas">Sobremesas</Link></li>
+                <li><Link href="/Product/Search?category=bebidas">Bebidas</Link></li>
+                <li><Link href="/Product/Search?category=lanches">Lanches</Link></li>
+                <li><Link href="/Product/Search?category=almocos">Almoço</Link></li>
+                <li><Link href="/Product/Search?category=jantas">Jantas</Link></li>
+                <li><Link href="/Product/Search?category=outros">Outros</Link></li>
+            </ul>
             <div className="logoMenu">
                 <Image
                     src={logoTake}

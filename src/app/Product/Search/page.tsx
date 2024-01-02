@@ -11,7 +11,8 @@ export default function Search() {
     const [data, setData] = useState<string[]>([]);
     const [nameSearch, setNameSearch] = useState('');
     const [state, setState] = useState<boolean>(false);
-
+    const [query, setQuery] = useState('');
+    
     const fetchSearchCategory = async (category) => {
         const fetchSearchCategory = await product.fetchSearchCategory(category);
         setData(fetchSearchCategory);
@@ -51,8 +52,17 @@ export default function Search() {
     }
 
     useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        setQuery(params.toString());
+    });
+    
+    useEffect(() => {
         handleIdUrl();
     }, []);
+
+    useEffect(() => {
+        handleIdUrl();
+    }, [query]);
 
     useEffect(() => {
         if (state) {
