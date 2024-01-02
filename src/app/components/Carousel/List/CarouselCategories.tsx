@@ -1,7 +1,6 @@
 'use client'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, A11y } from 'swiper/modules';
-import pao from '../../../../../public/pao.jpg'
 import arrowRight from '../../../../../public/arrowRight.png'
 import 'swiper/css';
 import 'swiper/css/navigation';

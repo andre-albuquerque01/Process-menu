@@ -18,7 +18,7 @@ type Product = {
   position: string;
 }
 
-export const Carousel = (props: Product) => {
+export const Carousel = async (props: Product) => {
 
   return (
     <div className='carroseul'>
