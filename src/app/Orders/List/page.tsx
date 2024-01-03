@@ -96,7 +96,7 @@ export default function BackOrder() {
 
     return (
         <div className="ordersEndList">
-            <div className="titleMyOrdersList">Meus pedidos</div>
+            <div className="titleMyOrdersList">Lista de pedidos</div>
             <div className="choiceStatus">
                 <button onClick={handleStatusAberto}>Abertos</button>
                 <button onClick={handleStatusClose} className="secondBtn">Finalizados</button>

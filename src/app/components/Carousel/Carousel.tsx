@@ -24,12 +24,12 @@ export const Carousel = (props: Product) => {
     <div className='carroseul'>
       <Swiper
         // install Swiper modules
-        modules={[Navigation, Pagination, A11y, Autoplay]}
+        modules={[ Pagination, A11y, Autoplay]}
         spaceBetween={50}
         slidesPerView={1}
         autoplay={true}
         loop={true}
-        navigation
+        // navigation
         pagination={{ clickable: true }}
       >
         {props && props.data.map((carroseul, index) => (( carroseul.position === 'carrossel' && carroseul.status) ?

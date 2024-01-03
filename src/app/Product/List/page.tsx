@@ -21,7 +21,7 @@ export default function Alt() {
         if (cookies.token === undefined) {
             alert('Necessário fazer login');
             window.location.href = '/User/Login';
-        }else if(cookies.user !== "A"){
+        } else if (cookies.user !== "A") {
             alert('Necessário de autorização');
             window.location.href = '/';
         }
@@ -85,7 +85,7 @@ export default function Alt() {
                                         {datas.subTitle}
                                     </div>
                                     <div className="priceCarAlt" title="Preço do produto">
-                                        {datas.price}
+                                        R$ {datas.price}
                                     </div>
                                     <div className="tempAlt" title="Tempo de espera">
                                         <Image

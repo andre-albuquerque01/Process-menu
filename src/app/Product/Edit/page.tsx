@@ -136,6 +136,7 @@ export default function EditProduct() {
                                 <option value="sobremesas">Sobremesas</option>
                                 <option value="bebidas">Bebidas</option>
                                 <option value="lanches">Lanches</option>
+                                <option value="almocos">Almoço</option>
                                 <option value="jantas">Jantas</option>
                                 <option value="outros">Outros</option>
                             </select>
