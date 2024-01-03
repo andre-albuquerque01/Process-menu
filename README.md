@@ -1,37 +1,33 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+E-commerce for restaurants
+=========================
 
-## Getting Started
+Aplicativo para restaurante, com cardápio que inclui pagamento e possibilidade de fazer pedidos no restaurante.
 
-First, run the development server:
+Visão Geral do Projeto
+-----------------------
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**O produto:**
+Projete um aplicativo de vendas móvel para um restaurante.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Duração do projeto:**
+3 meses
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**O objetivo:**
+Ajudar os clientes a terem uma experiência melhor no estabelecimento e facilitar a forma como fazem pedidos.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+**Minha função:**
+Gerenciar o projeto, estando envolvido em todas as funções.
 
-## Learn More
+**Responsabilidades:**
+Construir protótipo; realizar o desenvolvimento; e modelar o banco de dados.
 
-To learn more about Next.js, take a look at the following resources:
+Arquitetura do Sistema
+----------------------
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Baseado em microserviços.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Utilizando Java e Spring Boot para a construção das API's RESTful.
 
-## Next step
--  Deploy on Vercel
+Utilizando Next.Js, React e Typescript para consumir as API's.
 
-But easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Utilizando MongoDB para a persistência dos dados.
